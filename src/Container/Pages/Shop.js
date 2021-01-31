@@ -40,7 +40,7 @@ const Shop = (props) => {
                                 >
                                     {product.productPictures.map((picture) => (
                                         <img
-                                            src={`http://localhost:2000/public/${picture.img}`}
+                                            src={`http://139.59.92.185:2000/public/${picture.img}`}
                                             alt="HR"
                                         />
                                     ))}
