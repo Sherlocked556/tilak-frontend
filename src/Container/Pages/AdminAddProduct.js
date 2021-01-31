@@ -7,22 +7,22 @@ export default function AdminAddProduct(props) {
   const options = [
     {
       key: "jhula",
-      value: "5ff3877e588be20ea7b78ab3",
+      value: "6016becd6f6a9d3f7156381d",
       text: "Jhula",
     },
     {
       key: "vastra",
-      value: "5ff38832588be20ea7b78ab6",
+      value: "6016bf6a6f6a9d3f7156381e",
       text: "Vastra",
     },
     {
       key: "bistra",
-      value: "5ff388c1588be20ea7b78abb",
+      value: "6016bfc96f6a9d3f7156381f",
       text: "Bistra",
     },
     {
       key: "aabhushan",
-      value: "5ff389b3588be20ea7b78ac0",
+      value: "6016c0146f6a9d3f71563820",
       text: "Aabhushan",
     },
   ];

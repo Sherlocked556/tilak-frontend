@@ -41,7 +41,7 @@ const Product = (props) => {
                 <div className="productpic">
                     <img
                         className="ppic"
-                        src={`http://167.99.4.205:2000/public/${product.productDetails.productPictures[0].img}`}
+                        src={`https://api.tilakshringar.com/public/${product.productDetails.productPictures[0].img}`}
                         alt="HR"
                     ></img>
                     <div className="productSimilar">

@@ -61,7 +61,7 @@ function Blogs() {
                             <div className="carrd" key={blog._id}>
                                 <div className="imagee">
                                     <img
-                                        src={`http://167.99.4.205:2000/public/${blog.coverImg}`}
+                                        src={`https://api.tilakshringar.com/public/${blog.coverImg}`}
                                         alt="HR"
                                     />
                                 </div>
