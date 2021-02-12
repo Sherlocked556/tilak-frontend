@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.css'
 import Home from './Container/Pages/Home';
-import { BrowserRouter as Router , Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Shop from './Container/Pages/Shop';
 import About from './Container/Pages/About';
 import Query from './Container/Pages/Query';
@@ -21,7 +21,7 @@ import AdminReseller from './Container/Pages/AdminReseller';
 import ResellerOrder from './Container/Pages/ResellerOrder';
 import ResellerNotification from './Container/Pages/ResellerNotification';
 import ResellerEarning from './Container/Pages/ResellerEarning';
-import { getInitialData , updateCart } from './actions';
+import { getInitialData, updateCart } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
 import result from './Container/Pages/result';
 import PrivacyPolicy from './Container/Pages/PrivacyPolicy';
@@ -29,20 +29,22 @@ import ShippingPolicy from './Container/Pages/ShippingPolicy';
 import Terms from './Container/Pages/Terms';
 import LoginSign from './Container/Pages/LoginSign';
 import LoginNextPage from './Container/Pages/LoginNextPage';
+import ScrollToTop from './Container/scrollToTop';
 function App() {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth)
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(getInitialData());
-  } , []);
-  useEffect(()=> {
+  }, []);
+  useEffect(() => {
     dispatch(updateCart());
   }, []);
 
   return (
     <Router>
-    <div className="App">
+      <ScrollToTop />
+
       <Switch>
         <Route path="/" exact component={Home}></Route>
         <Route path="/shop" component={Shop}></Route>
@@ -62,15 +64,15 @@ function App() {
         <Route path="/orderSummary" component={orderSummary}></Route>
         <Route path="/resellerOrder" component={ResellerOrder}></Route>
         <Route path="/resellerEarning" component={ResellerEarning}></Route>
-        <Route path="/ResellerNotification" component ={ResellerNotification}></Route>
+        <Route path="/ResellerNotification" component={ResellerNotification}></Route>
         <Route path="/result" component={result}></Route>
         <Route path="/privacypolicy" component={PrivacyPolicy}></Route>
         <Route path="/shippingandreturninfo" component={ShippingPolicy}></Route>
-        <Route path ="/termsandcondition" component={Terms}></Route>
+        <Route path="/termsandcondition" component={Terms}></Route>
         <Route path="/loginSign" component={LoginSign}></Route>
         <Route path="/loginNext" component={LoginNextPage}></Route>
-        </Switch>
-    </div>
+      </Switch>
+
     </Router>
 
   );

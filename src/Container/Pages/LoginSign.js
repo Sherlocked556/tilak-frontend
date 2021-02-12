@@ -4,6 +4,7 @@ import Index2 from '../../Container/Side Nav Bar/Index2';
 import Footer from '../Footer/Footer';
 import './LoginSign.css';
 import {AiOutlineGooglePlus} from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 function LoginSign() {
     return (
@@ -49,7 +50,7 @@ function LoginSign() {
                         <input type="text" placeholder="Password"></input>
                     </div>
                     <p className="forgetPass">Forgot Password?</p>
-                    <button className="loginButton">LOGIN</button>
+                    <Link to="/loginNext"><button className="loginButton">LOGIN</button></Link>
                 </div>
             </div>
             <Footer />

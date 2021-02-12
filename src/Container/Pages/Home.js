@@ -5,6 +5,7 @@ import Search from "../Search Button/Search";
 import "./Home.css";
 import Footer from "../Footer/Footer";
 import Header from "../Top Nav Bar/Header";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -14,12 +15,12 @@ function Home() {
       <Search />
       <h2 id="focus">we focus on...</h2>
       <div className="cardsl1">
-        <div className="cardNew"><a href="/result">
+        <div className="cardNew"><Link to="/result">
           <img src={require('../category_IDOLS.jpg')} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>IDOLS</h2>
           </div>
-        </a>
+        </Link>
         </div>
         <div className="card2">
           <img src={require('../gcard1.jpg')} alt="HR" />
@@ -138,30 +139,30 @@ function Home() {
       <div className="cards">
         <div className="rcard1">
           <span>
-            <a href="/shop" style={{ color: "#4D4D4D" }}>
+            <Link to="/shop" style={{ color: "#4D4D4D" }}>
               SHOP
-            </a>
+            </Link>
           </span>
         </div>
         <div className="rcard2">
           <span>
-            <a href="/about" style={{ color: "#4D4D4D" }}>
+            <Link to="/about" style={{ color: "#4D4D4D" }}>
               ABOUT
-            </a>
+            </Link>
           </span>
         </div>
         <div className="rcard3">
           <span>
-            <a href="/categories" style={{ color: "#4D4D4D" }}>
+            <Link to="/categories" style={{ color: "#4D4D4D" }}>
               CATEGORIES
-            </a>
+            </Link>
           </span>
         </div>
         <div className="rcard4">
           <span>
-            <a href="/query" style={{ color: "#4D4D4D" }}>
+            <Link to="/query" style={{ color: "#4D4D4D" }}>
               QUERY
-            </a>
+            </Link>
           </span>
         </div>
       </div>

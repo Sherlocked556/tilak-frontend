@@ -80,10 +80,10 @@ const Shop = (props) => {
                         </div>
                     ))
                 ) : (
-                    <div className="nullProducts">
-                        <h2>No Products</h2>
-                    </div>
-                )}
+                        <div className="nullProducts">
+                            <h2>No Products</h2>
+                        </div>
+                    )}
             </div>
         );
     };
@@ -177,16 +177,16 @@ const Shop = (props) => {
             <div className="cards">
                 <div className="rrcard3">
                     <span>
-                        <a href="/categories" style={{ color: "#4D4D4D" }}>
+                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
                             CATEGORIES
-                        </a>
+                        </Link>
                     </span>
                 </div>
                 <div className="rrcard4">
                     <span>
-                        <a href="/query" style={{ color: "#4D4D4D" }}>
+                        <Link to="/query" style={{ color: "#4D4D4D" }}>
                             QUERY
-                        </a>
+                        </Link>
                     </span>
                 </div>
             </div>

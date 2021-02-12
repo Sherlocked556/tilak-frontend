@@ -3,6 +3,7 @@ import Header from '../../Container/Top Nav Bar/Header';
 import Footer from '../Footer/Footer';
 import AdminProfile from './AdminProfile';
 import './AdminBilling.css'
+import {Link} from 'react-router-dom'
 function emptyOpen() {
     document.querySelector('.adminBillingPopUp').style.display = 'flex';
 }
@@ -20,9 +21,9 @@ function AdminBilling() {
             </div>
             <div className="adminBox">
                 <div className="adminNav">
-                    <h6 className="adminProducts"><a href="/Admin" style={{ color: '#4D4D4D' }}>PRODUCTS</a></h6>
-                    <h6 className="adminBilling"><a href="/AdminBilling" style={{ color: '#4D4D4D' }}>BILLING</a></h6>
-                    <h6 className="adminReseller"><a href="/AdminReseller" style={{ color: '#4D4D4D' }}>RESELLERS</a></h6>
+                    <h6 className="adminProducts"><Link to="/Admin" style={{ color: '#4D4D4D' }}>PRODUCTS</Link></h6>
+                    <h6 className="adminBilling"><Link to="/AdminBilling" style={{ color: '#4D4D4D' }}>BILLING</Link></h6>
+                    <h6 className="adminReseller"><Link to="/AdminReseller" style={{ color: '#4D4D4D' }}>RESELLERS</Link></h6>
                 </div>
                 <div className="productLine">
                     <hr id="billingLine1"></hr>

@@ -3,6 +3,7 @@ import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import "./orderSummary.css";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
 function orderSummary() {
         return (
                 <div>
@@ -52,7 +53,7 @@ function orderSummary() {
                                                 <p id="bagTotal">Bag Total(in rupees):</p>
                                                 <p id="bagTotalValue">600.00</p>
                                         </div>
-                                        <a href='/payment'><button id="confirmPayButton">Confirm and Pay</button></a>
+                                        <Link to='/payment'><button id="confirmPayButton">Confirm and Pay</button></Link>
                                 </div>
                         </div>
 
@@ -95,10 +96,10 @@ function orderSummary() {
                         <hr className='quend' />
                         <div className='cardss'>
                                 <div className='rcardd1'>
-                                        <span><a href='/shop' style={{ color: '#4D4D4D' }}>SHOP</a></span>
+                                        <span><Link to='/shop' style={{ color: '#4D4D4D' }}>SHOP</Link></span>
                                 </div>
                                 <div className='rcard3'>
-                                        <span><a href='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</a></span>
+                                        <span><Link to='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</Link></span>
                                 </div>
                         </div>
 

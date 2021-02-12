@@ -5,6 +5,7 @@ import ResellerProfile from './ResellerProfile';
 import './ResellerEarning.css'
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { AiOutlineCheckSquare } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 function ResellerEarning() {
     return (
         <div>
@@ -15,9 +16,9 @@ function ResellerEarning() {
             </div>
             <div className="adminBox">
                 <div className="adminNav">
-                    <h6 className="ResllerOrder"><a href="/ResellerOrder" style={{ color: '#4D4D4D' }}>ORDERS</a></h6>
-                    <h6 className="ResellerEarning"><a href="/ResellerEarning" style={{ color: '#4D4D4D' }}>EARNINGS</a></h6>
-                    <h6 className="ResellerNotification"><a href="/ResellerNotification" style={{ color: '#4D4D4D' }}>NOTIFICATIONS</a></h6>
+                    <h6 className="ResllerOrder"><Link to="/ResellerOrder" style={{ color: '#4D4D4D' }}>ORDERS</Link></h6>
+                    <h6 className="ResellerEarning"><Link to="/ResellerEarning" style={{ color: '#4D4D4D' }}>EARNINGS</Link></h6>
+                    <h6 className="ResellerNotification"><Link to="/ResellerNotification" style={{ color: '#4D4D4D' }}>NOTIFICATIONS</Link></h6>
                 </div>
                 <div className="productLine">
                     <hr id="EarningLine1"></hr>

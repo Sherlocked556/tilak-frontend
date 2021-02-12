@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer';
 import Index3 from '../Side Nav Bar/Index3';
 import './About.css';
 import { MdLocationOn } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 function About() {
@@ -14,7 +15,7 @@ function About() {
             <div className='bheadandadd'>
                 {/* <div className='bhead'><img src={require("../Top Nav Bar/02-01.png")}></img></div> */}
                 <MdLocationOn id='loc' viewBox='4 4 15.5 20' />
-                <a href="https://www.google.com/maps/search/Agrasen+Chowk+Near+SBI+bank,+Sri+GangaNagar++335001/@29.9171895,73.8665255,13z/data=!3m1!4b1"><p>Agrasen Chowk Near SBI bank, Sri GangaNagar  335001</p></a>
+                <a to="https://www.google.com/maps/search/Agrasen+Chowk+Near+SBI+bank,+Sri+GangaNagar++335001/@29.9171895,73.8665255,13z/data=!3m1!4b1"><p>Agrasen Chowk Near SBI bank, Sri GangaNagar  335001</p></a>
             </div>
             <h2 className='aboutheadline'>about us...</h2>
             <div className="imageAboutUs">
@@ -91,16 +92,16 @@ function About() {
             </div>
             <div className='cards'>
                 <div className='rcard1'>
-                    <span><a href='/shop' style={{ color: '#4D4D4D' }}>SHOP</a></span>
+                    <span><Link to='/shop' style={{ color: '#4D4D4D' }}>SHOP</Link></span>
                 </div>
                 <div className='rcard2'>
-                    <span><a href='/about' style={{ color: '#4D4D4D' }}>ABOUT</a></span>
+                    <span><Link to='/about' style={{ color: '#4D4D4D' }}>ABOUT</Link></span>
                 </div>
                 <div className='rcard3'>
-                    <span><a href='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</a></span>
+                    <span><Link to='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</Link></span>
                 </div>
                 <div className='rcard4'>
-                    <span><a href='/query' style={{ color: '#4D4D4D' }}>QUERY</a></span>
+                    <span><Link to='/query' style={{ color: '#4D4D4D' }}>QUERY</Link></span>
                 </div>
             </div>
             <Footer />

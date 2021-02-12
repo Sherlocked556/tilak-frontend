@@ -4,6 +4,7 @@ import Index2 from '../../Container/Side Nav Bar/Index2';
 import Footer from '../Footer/Footer';
 import Aboutme from './Aboutme';
 import './myProfile.css';
+import { Link } from 'react-router-dom';
 
 function myProfile(){
     let name="Vasudeva Krishna"
@@ -19,9 +20,9 @@ function myProfile(){
             </div>
             <div className="profileBox2"> 
                 <div className="boxNav">
-                    <h6 className="myProfile" ><a href="/myprofile" style={{color:'#4D4D4D'}}>MY PROFILE</a></h6>
-                    <h6 className="myOrders" ><a href="/profile" style={{color:'#4D4D4D'}}>MY ORDERS</a></h6>
-                    <h6 className="myAddress" ><a href='/address' style={{color:'#4D4D4D'}}>MY ADDRESS</a></h6>
+                    <h6 className="myProfile" ><Link to="/myprofile" style={{color:'#4D4D4D'}}>MY PROFILE</Link></h6>
+                    <h6 className="myOrders" ><Link to="/profile" style={{color:'#4D4D4D'}}>MY ORDERS</Link></h6>
+                    <h6 className="myAddress" ><Link to='/address' style={{color:'#4D4D4D'}}>MY ADDRESS</Link></h6>
                 </div>
                 <div className="forline">
                     <hr id='line2'/>
@@ -59,10 +60,10 @@ function myProfile(){
             <hr id='linee'></hr>
             <div className='cardss'>
                 <div className='rcardd1'>
-                <span><a href='/shop' style={{color:'#4D4D4D'}}>SHOP</a></span>
+                <span><Link to='/shop' style={{color:'#4D4D4D'}}>SHOP</Link></span>
                 </div>
                 <div className='rcard3'>
-                <span><a href='/categories' style={{color:'#4D4D4D'}}>CATEGORIES</a></span>
+                <span><Link to='/categories' style={{color:'#4D4D4D'}}>CATEGORIES</Link></span>
                 </div>
                 
             </div>

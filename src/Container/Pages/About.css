@@ -36,9 +36,9 @@
 .aboutheadline {
   /* margin-top: 3.953vw; */
   margin-top: 0.953vw;
-  width: 21vw;
+  width: 13vw;
   margin-left: 21.889vw;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  font: normal normal normal 3.124vw/4.88vw Acme;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -77,10 +77,10 @@
   margin-top: 2.928vw;
   /* width: 16.837vw;
   height: 2.562vw; */
-  width: 40.837vw;
-  height: 6.562vw;
+  width: 22.837vw;
+  height: 4.562vw;
   text-align: left;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  font: normal normal normal 3.124vw/4.88vw Acme;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

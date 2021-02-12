@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import './Cart.css'
@@ -60,17 +61,17 @@ const Cart = (props) => {
                         <p id="bagTotal">Bag Total(in rupees):</p>
                         <p id="bagTotalValue">600.00</p>
                     </div>
-                    <a href='/orderSummary'><button className='RefProceedButton'>Proceed</button></a>
+                    <Link to='/orderSummary'><button className='RefProceedButton'>Proceed</button></Link>
 
                 </div>
             </div>
             <hr className='quend' />
             <div className='cardss'>
                 <div className='rcardd1'>
-                    <span><a href='/shop' style={{ color: '#4D4D4D' }}>SHOP</a></span>
+                    <span><Link to='/shop' style={{ color: '#4D4D4D' }}>SHOP</Link></span>
                 </div>
                 <div className='rcard3'>
-                    <span><a href='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</a></span>
+                    <span><Link to='/categories' style={{ color: '#4D4D4D' }}>CATEGORIES</Link></span>
                 </div>
             </div>
 

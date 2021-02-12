@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import './Categories.css';
 import {useSelector,useDispatch} from 'react-redux';
 import {getAllCategory} from '../../actions'
+import { Link } from 'react-router-dom';
 
 const Categories = (props) => {
     const category = useSelector(state => state.category)
@@ -19,7 +20,7 @@ const Categories = (props) => {
             myCategories.push(
             <div key = {category.name}>
                 {
-                category.parentId?<a href={category.slug}>{category.name}</a>:
+                category.parentId?<Link to={category.slug}>{category.name}</Link>:
                 <div className="card1">
                 <img src={`http://139.59.92.185:2000${category.categoryImage}`} alt='HR'/>
                     <div className="figCaption" style={{ textAlign: "right" }}>
@@ -89,10 +90,10 @@ const Categories = (props) => {
             </div>
             <div className='abqucard'>
                 <div className='abcard'>
-                    <span><a href='/about' style={{ color: '#4D4D4D' }}>ABOUT</a></span>
+                    <span><a to='/about' style={{ color: '#4D4D4D' }}>ABOUT</a></span>
                 </div>
                 <div className='qucard'>
-                    <span><a href='/query' style={{ color: '#4D4D4D' }}>QUERY</a></span>
+                    <span><a to='/query' style={{ color: '#4D4D4D' }}>QUERY</a></span>
                 </div>
             </div> */}
             <Footer />

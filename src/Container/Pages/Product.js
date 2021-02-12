@@ -13,6 +13,7 @@ import { MdAttachFile } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProductDetailsById } from "../../actions";
 import { addToCart } from "../../actions";
+import { Link } from "react-router-dom";
 
 var price = 300;
 const Product = (props) => {
@@ -236,16 +237,16 @@ const Product = (props) => {
             <div className="cardss">
                 <div className="rcardd1">
                     <span>
-                        <a href="/shop" style={{ color: "#4D4D4D" }}>
+                        <Link to="/shop" style={{ color: "#4D4D4D" }}>
                             SHOP
-                        </a>
+                        </Link>
                     </span>
                 </div>
                 <div className="rcard3">
                     <span>
-                        <a href="/categories" style={{ color: "#4D4D4D" }}>
+                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
                             CATEGORIES
-                        </a>
+                        </Link>
                     </span>
                 </div>
             </div>

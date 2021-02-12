@@ -3,6 +3,7 @@ import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import axios from "../../helpers/axios";
 import "./payment.css";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -82,7 +83,7 @@ const Payment = () => {
             currency: "INR",
         });
 
-        window.location.href = result.data.redirect_uri;
+        window.location.to = result.data.redirect_uri;
     }
 
     return (
@@ -181,16 +182,16 @@ const Payment = () => {
             <div className="cardss">
                 <div className="rcardd1">
                     <span>
-                        <a href="/shop" style={{ color: "#4D4D4D" }}>
+                        <Link to="/shop" style={{ color: "#4D4D4D" }}>
                             SHOP
-                        </a>
+                        </Link>
                     </span>
                 </div>
                 <div className="rcard3">
                     <span>
-                        <a href="/categories" style={{ color: "#4D4D4D" }}>
+                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
                             CATEGORIES
-                        </a>
+                        </Link>
                     </span>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import "./Blog.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../helpers/axios";
+import { Link } from "react-router-dom";
 
 function open() {
     document.querySelector(".popUp").style.display = "flex";
@@ -136,16 +137,16 @@ function Blogs() {
             <div className="cardss">
                 <div className="rcardd1">
                     <span>
-                        <a href="/shop" style={{ color: "#4D4D4D" }}>
+                        <Link to="/shop" style={{ color: "#4D4D4D" }}>
                             SHOP
-                        </a>
+                        </Link>
                     </span>
                 </div>
                 <div className="rcard3">
                     <span>
-                        <a href="/categories" style={{ color: "#4D4D4D" }}>
+                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
                             CATEGORIES
-                        </a>
+                        </Link>
                     </span>
                 </div>
             </div>

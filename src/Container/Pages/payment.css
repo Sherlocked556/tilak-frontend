@@ -2,55 +2,55 @@
   width: 64.056vw;
   height: 2.050vw;
   margin-top: 2.050vw;
-  margin-left: 17.962vw;
+  margin-left: 23.962vw;
   display: flex;
 }
 
 .mycartPayment {
   width: 5.490vw;
   height: 2.050vw;
-  font: normal normal normal 1.464vw/2.196vw Poppins;
+  font: normal normal normal 1.3vw/1.83vw Poppins;
   color: #4d4d4d;
 }
 
 .mycartPaymentLine {
   margin-left: 0.805vw;
-  width: 18.228vw;
-  border:2px solid #4d4d4d;
-  margin-top: 1.042vw;
-  margin-right: 0;
+    width: 12.228vw;
+    border: 2px solid #4d4d4d;
+    margin-top: 0.9vw;
+    margin-right: 0;
 }
 
 .orderPayment {
   width: 9.444vw;
   height: 2.050vw;
-  font: normal normal normal 1.464vw/2.196vw Poppins;
+  font: normal normal normal 1.3vw/2.196vw Poppins;
   color: #4d4d4d;
   margin-left: 0.805vw;
 }
 
 .orderPaymentLine {
-  width: 19.839vw;
-  margin-left: 0.805vw;
-  border: 2px solid #4d4d4d;
-  margin-top: 1.042vw;
-  margin-right: 0;
+  width: 12.839vw;
+    margin-left: 0.805vw;
+    border: 2px solid #4d4d4d;
+    margin-top: 1.042vw;
+    margin-right: 0;
 }
 
 .finalPayment {
   width: 6.515vw;
   height: 2.050vw;
-  font: normal normal normal 1.464vw/2.196vw Poppins;
+  font: normal normal normal 1.3vw/2.196vw Poppins;
   color: #4d4d4d;
   margin-left: 0.805vw;
 }
 
 .paymentHeadline {
-  width: 23.324vw;
-  height: 6.587vw;
+  width: 14.324vw;
+  height: 5.587vw;
   margin-left: 10.176vw;
   margin-top: 2.855vw;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  font: normal normal normal 3.124vw/4.88vw Acme;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
