@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import Index2 from '../../Container/Side Nav Bar/Index2';
 import Search from '../Search Button/Search';
 import './Terms.css'
+import { Link } from 'react-router-dom';
 function Terms() {
     return (
         <div>
@@ -32,10 +33,10 @@ function Terms() {
             <hr className='quend'/>
             <div className='cardss'>
                 <div className='rcardd1'>
-                <span><a href='/shop' style={{color:'#4D4D4D'}}>SHOP</a></span>
+                <span><Link to='/shop' style={{color:'#4D4D4D'}}>SHOP</Link></span>
                 </div>
                 <div className='rcard3'>
-                <span><a href='/categories' style={{color:'#4D4D4D'}}>CATEGORIES</a></span>
+                <span><Link to='/categories' style={{color:'#4D4D4D'}}>CATEGORIES</Link></span>
                 </div>
                 
             </div>

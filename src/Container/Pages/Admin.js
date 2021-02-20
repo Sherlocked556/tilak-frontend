@@ -11,6 +11,7 @@ import "./Admin.css";
 import AdminAddProduct from "./AdminAddProduct";
 import AdminAddBlog from "./AdminAddBlog";
 import axios from "../../helpers/axios";
+import { Link } from "react-router-dom";
 
 function openProduct() {
     document.querySelector(".AdminPopUp").style.display = "flex";
@@ -75,19 +76,19 @@ function Admin() {
             <div className="adminBox">
                 <div className="adminNav">
                     <h6 className="adminProducts">
-                        <a href="/Admin" style={{ color: "#4D4D4D" }}>
+                        <Link to="/Admin" style={{ color: "#4D4D4D" }}>
                             PRODUCTS
-                        </a>
+                        </Link>
                     </h6>
                     <h6 className="adminBilling">
-                        <a href="/AdminBilling" style={{ color: "#4D4D4D" }}>
+                        <Link to="/AdminBilling" style={{ color: "#4D4D4D" }}>
                             BILLING
-                        </a>
+                        </Link>
                     </h6>
                     <h6 className="adminReseller">
-                        <a href="/AdminReseller" style={{ color: "#4D4D4D" }}>
+                        <Link to="/AdminReseller" style={{ color: "#4D4D4D" }}>
                             RESELLERS
-                        </a>
+                        </Link>
                     </h6>
                 </div>
                 <div className="productLine">

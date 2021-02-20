@@ -1,14 +1,14 @@
 .blogHeadline {
   margin-top: 10.5vw;
   margin-left: 21.889vw;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  font: normal normal normal 3.124vw/4.88vw Acme;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
-  width: 23.060vw;
-  height: 8.053vw;
+  width: 14.06vw;
+  height: 5.053vw;
 }
 .containerr {
   display: grid;

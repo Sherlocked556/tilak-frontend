@@ -4,7 +4,7 @@ import DropDown from './DropDown';
 import { BsPersonPlus } from "react-icons/bs";
 import { BiCopyright} from 'react-icons/bi';
 import styled from 'styled-components';
-
+import {Link} from 'react-router-dom'
 const Div = styled.div`
 margin-left:0;
 @media (max-width:700px){
@@ -68,26 +68,26 @@ const Header = () =>{
                     <div id="hamburgline3"/>
                 </StyledBurger>
                 <div className='hamburg' >
-                    <a href='/' style={{color:'#4D4D4D'}}><ul className="left"><img src={require("../newLogo.png")} alt='HR'/></ul></a>
+                    <Link to='/' style={{color:'#4D4D4D'}}><ul className="left"><img src={require("../newLogo.png")} alt='HR'/></ul></Link>
                     <hr id='navlineee'></hr>
                     <ul className="mid">
-                        <li><a href='/shop' style={{color:'#4D4D4D'}}>Shop</a></li>
-                        <li><a href='/about' style={{color:'#4D4D4D'}}>About</a></li>
-                        <li><a href="/categories" style={{color:'#4D4D4D'}}>Categories</a></li>
-                        <li><a href='/query' style={{color:'#4D4D4D'}}>Query</a></li>
-                        <li><a href='/blogs' style={{color:'#4D4D4D'}}>Blogs</a></li>
+                        <li><Link to='/shop' style={{color:'#4D4D4D'}}>Shop</Link></li>
+                        <li><Link to='/about' style={{color:'#4D4D4D'}}>About</Link></li>
+                        <li><Link to="/categories" style={{color:'#4D4D4D'}}>Categories</Link></li>
+                        <li><Link to='/query' style={{color:'#4D4D4D'}}>Query</Link></li>
+                        <li><Link to='/blogs' style={{color:'#4D4D4D'}}>Blogs</Link></li>
                     </ul>
                     <div className='foot'>Tilak Shringar | <BiCopyright/> &nbsp; All rights reserved 2020</div>
                 </div>
                 <div className="right">
                 <div><DropDown /></div>
                 <div className="cart">
-                    <p className="cartname">< a href='/cart' style={{color:'#4D4D4D'}}>Cart</a></p>
-                    <p className="quantity" style={{color:"white"}}><a href='/cart' style={{color:'white'}}>{quant}</a></p>
+                    <p className="cartname">< Link to='/cart' style={{color:'#4D4D4D'}}>Cart</ Link></p>
+                    <p className="quantity" style={{color:"white"}}><Link to='/cart' style={{color:'white'}}>{quant}</Link></p>
                 </div>
-                <div className="user">
+                <div className="user"> <Link to="loginSign">
                     <img src={require("./Profile.png")}></img>
-                    {/* <BsPersonPlus className="icon"/> */}
+                    {/* <BsPersonPlus className="icon"/> */}</Link>
                 </div>
                 </div>
             </ Div>

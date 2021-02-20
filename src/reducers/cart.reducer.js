@@ -1,26 +1,27 @@
-import { cartConstants } from '../actions/constants';
+import { cartConstants } from "../actions/constants";
 
 const initState = {
-    cartItems: {
-        // 123: {
-        //     _id: 123,
-        //     name: 'Shri Krishna Choli',
-        //     img: 'some.jpg',
-        //     price: 200,
-        //     description: 'abcd'
-        //     qty: 1
-        // }
-    }
+    cartItems: [],
 };
 
-export default ( state = initState, action) => {
-    switch(action.type){
-        case cartConstants.ADD_TO_CART:
-            state = {
+export default (state = initState, action) => {
+    switch (action.type) {
+        case cartConstants.ADD_TO_CART_SUCCESS:
+            return (state = {
                 ...state,
-                cartItems: action.payload.cartItems
-            }
-            break;
+                cartItems: action.payload,
+            });
+
+        case cartConstants.FETCH_CART_SUCCESS:
+            return (state = {
+                ...state,
+                cartItems: action.payload,
+            });
+
+        case cartConstants.UPDATE_CART_SUCCESS:
+
+        default:
+            return state;
     }
     return state;
-}
+};

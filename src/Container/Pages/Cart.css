@@ -14,23 +14,23 @@
 .mycartLineTo {
   border: 2px solid #cdcdcd;
   margin-left: 0.805vw;
-  width: 18.228vw;
-  margin-top: 1.042vw;
+  width: 12.228vw;
+  margin-top: 0.8vw;
   margin-right: 0;
 }
 .orderPaymentChange {
   color: #cdcdcd;
   width: 9.444vw;
   height: 2.05vw;
-  font: normal normal normal 1.464vw/2.196vw Poppins;
+  font: normal normal normal 1.3vw/2.196vw Poppins;
   margin-left: 0.805vw;
 }
 .myCartHeadline {
-  width: 21.376vw;
-  height: 6.808vw;
+  width: 12.376vw;
+  height: 4.808vw;
   margin-left: 10.176vw;
   margin-top: 2.855vw;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  font: normal normal normal 3.124vw/4.88vw Acme;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,24 +1,21 @@
-import axios from '../helpers/axios'
-import { categoryConstants } from './constants';
-export const getAllCategory = () =>{
-    return async dispatch=>{
-        dispatch({type:categoryConstants.GET_ALL_CATEGORIES_REQUEST})
-        const res = await axios.get('category/getcategory');
-        console.log(res);
-        if(res.status===200){
-            const {categoryList} = res.data;
+import axios from "../helpers/axios";
+import { categoryConstants } from "./constants";
+export const getAllCategory = () => {
+    return async (dispatch) => {
+        dispatch({ type: categoryConstants.GET_ALL_CATEGORIES_REQUEST });
+        const res = await axios.get("category/getcategory");
+        // console.log(res);
+        if (res.status === 200) {
+            const { categoryList } = res.data;
             dispatch({
-                type:categoryConstants.GET_ALL_CATEGORIES_SUCCESS,
-                payload: {categories:categoryList}
+                type: categoryConstants.GET_ALL_CATEGORIES_SUCCESS,
+                payload: { categories: categoryList },
             });
-
-                 
-            
-        }else{
+        } else {
             dispatch({
-                type:categoryConstants.GET_ALL_CATEGORIES_FAILURE,
-                payload:{error:res.data.error}
-            })
+                type: categoryConstants.GET_ALL_CATEGORIES_FAILURE,
+                payload: { error: res.data.error },
+            });
         }
-    }
-}
+    };
+};

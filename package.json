@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^3.9.0",
     "axios": "^0.20.0",
+    "axios-auth-refresh": "^3.1.0",
     "date-fns": "^2.16.1",
     "formik": "^2.2.6",
     "react": "^16.13.1",

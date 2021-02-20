@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import './Shop.css';
 import { TiHeartFullOutline } from "react-icons/ti";
 import { BiCartAlt } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 
 function result() {
@@ -29,7 +30,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p1info'>
-                        <p2 id='product1i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product1i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price1'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -42,7 +43,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p2info'>
-                        <p2 id='product2i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product2i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price2'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -55,7 +56,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p3info'>
-                        <p2 id='product3i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product3i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price3'>Rs. 300/-</p2>
                     </div></div>
             </div>
@@ -70,7 +71,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p1info'>
-                        <p2 id='product1i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product1i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price1'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -83,7 +84,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p2info'>
-                        <p2 id='product2i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product2i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price2'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -96,7 +97,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p3info'>
-                        <p2 id='product3i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product3i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price3'>Rs. 300/-</p2>
                     </div></div>
             </div>
@@ -111,7 +112,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p1info'>
-                        <p2 id='product1i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product1i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price1'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -124,7 +125,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p2info'>
-                        <p2 id='product2i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product2i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price2'>Rs. 300/-</p2>
                     </div></div>
                 <div style={{ display: "grid", height: "30vw", width: "24.158vw", marginLeft: "1.5vw" }}>
@@ -137,7 +138,7 @@ function result() {
                         </div>
                     </div>
                     <div className='p3info'>
-                        <p2 id='product3i'><a href='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</a></p2>
+                        <p2 id='product3i'><Link to='/product' style={{ color: '#4D4D4D' }}>Product Name will be written in maximum of two lines</Link></p2>
                         <p2 id='price3'>Rs. 300/-</p2>
                     </div></div>
             </div>
@@ -145,10 +146,10 @@ function result() {
             <button className="shoploadMore">Load More </button>
             <div className='cards'>
                 <div className='rrcard3'>
-                    <span><a href="/categories" style={{ color: '#4D4D4D' }}>CATEGORIES</a></span>
+                    <span><Link to="/categories" style={{ color: '#4D4D4D' }}>CATEGORIES</Link></span>
                 </div>
                 <div className='rrcard4'>
-                    <span><a href="/query" style={{ color: '#4D4D4D' }}>QUERY</a></span>
+                    <span><Link to="/query" style={{ color: '#4D4D4D' }}>QUERY</Link></span>
                 </div>
             </div>
             <Footer />
