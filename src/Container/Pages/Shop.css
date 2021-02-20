@@ -66,12 +66,12 @@
 }
 
 .ii1 {
-  margin-left: 0.5vw;
+  /* margin-left: 0.5vw; */
   width: 2.343vw;
   height: 2.343vw;
   background: #cdcdcd 0% 0% no-repeat padding-box;
   opacity: 1;
-  transform: translateY(22.694vw);
+  /* transform: translateY(22.694vw); */
 }
 .product1:hover .ii1 {
   transform: translateY(0);

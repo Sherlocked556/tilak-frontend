@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import axios from "../../helpers/axios";
 import "./payment.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "../../actions/cart.action";
 
 const Payment = () => {
+    const { cartItems } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    var amount = 0;
+
     const [paymentMethod, setPaymentMethod] = useState("");
-    const [amount, setAmount] = useState(600);
+    // const [amount, setAmount] = useState(0);
     const [currency, setCurrency] = useState("INR");
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            dispatch(fetchCart());
+        }
+    }, []);
+
+    console.log(cartItems);
+
+    for (let index = 0; index < cartItems.length; index++) {
+        amount += cartItems[index].product.price * cartItems[index].quantity;
+    }
 
     const changePaymentMethod = (e) => {
         const { name } = e.target;
@@ -31,6 +49,18 @@ const Payment = () => {
     };
 
     const displayRazorpay = async () => {
+        // let amount = 0;
+
+        // for (let index = 0; index < cartItems.length; index++) {
+        //     amount +=
+        //         cartItems[index].product.price * cartItems[index].quantity;
+        // }
+
+        if (cartItems.length === 0) {
+            alert("Cannot order an empty cart!!");
+            return;
+        }
+
         const res = await loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -40,20 +70,27 @@ const Payment = () => {
             return;
         }
 
-        const result = await axios.post("/createOrder", {
+        const result = await axios.post("/createOrder/razorpay", {
             paymentMethod,
             currency: "INR",
         });
+
+        console.log(result.data);
 
         if (!result) {
             console.error("Server error.");
             return;
         }
 
-        const { amount, id: order_id, currency } = result.data;
+        const {
+            totalAmount: amount,
+            paymentData: { orderId: order_id, currency: currency },
+        } = result.data.order;
+
+        console.log(amount, order_id, currency);
 
         const options = {
-            key: "rzp_test_i7F44AtOei6anE", // Enter the Key ID generated from the Dashboard
+            key: "rzp_test_i7F44AtOei6anE",
             amount: amount.toString(),
             currency: "INR",
             name: "Test Name",
@@ -67,9 +104,11 @@ const Payment = () => {
                     razorpaySignature: response.razorpay_signature,
                 };
 
-                const result = await axios.post("/addOrder", data);
+                const result = await axios.get(
+                    `/addOrder/razorpay?orderCreationId=${order_id}&razorpayPaymentId=${response.razorpay_payment_id}&razorpayOrderId=${response.razorpay_order_id}&razorpaySignature=${response.razorpay_signature}`
+                );
 
-                alert(result.data.success);
+                alert(result.data);
             },
         };
 
@@ -78,13 +117,29 @@ const Payment = () => {
     };
 
     const displayPaypal = async () => {
-        const result = await axios.post("/createOrder", {
+        // let amount = 0;
+
+        // for (let index = 0; index < cartItems.length; index++) {
+        //     amount +=
+        //         cartItems[index].product.price * cartItems[index].quantity;
+        // }
+
+        if (cartItems.length === 0) {
+            alert("Cannot order an empty cart!!");
+            return;
+        }
+
+        const result = await axios.post("/addOrder/paypal", {
             paymentMethod,
             currency: "INR",
         });
 
-        window.location.to = result.data.redirect_uri;
-    }
+        console.log(result.data);
+
+        window.location.replace(result.data.redirect_uri);
+    };
+
+    console.log(amount);
 
     return (
         <div>
@@ -151,7 +206,14 @@ const Payment = () => {
                             <p id="bagTotal">Bag Total(in rupees):</p>
                             <p id="bagTotalValue">{amount}</p>
                         </div>
-                        <button id="confirmPayButton" onClick={paymentMethod === "razor" ? displayRazorpay : displayPaypal}>
+                        <button
+                            id="confirmPayButton"
+                            onClick={
+                                paymentMethod === "razor"
+                                    ? displayRazorpay
+                                    : displayPaypal
+                            }
+                        >
                             Confirm and Pay
                         </button>
                     </div>
