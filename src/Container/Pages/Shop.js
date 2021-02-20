@@ -52,7 +52,7 @@ const Shop = (props) => {
                                 >
                                     {product.productPictures.map((picture) => (
                                         <img
-                                            src={`https://api.tilakshringar.com//public/${picture.img}`}
+                                            src={`https://api.tilakshringar.com/public/${picture.img}`}
                                             key={picture.img}
                                             alt="HR"
                                         />

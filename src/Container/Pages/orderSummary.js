@@ -103,7 +103,7 @@ function OrderSummary() {
                                     height: "100%",
                                     maxWidth: "100%",
                                 }}
-                                src={`https://api.tilakshringar.com//public/${item.product.productPictures[0].img}`}
+                                src={`https://api.tilakshringar.com/public/${item.product.productPictures[0].img}`}
                                 alt="Product Image"
                             />
                         </div>
