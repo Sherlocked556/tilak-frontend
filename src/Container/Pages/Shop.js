@@ -9,10 +9,15 @@ import { BiCartAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../actions";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import CurrencyConverter from "./CurrencyConvert";
 
 const Shop = (props) => {
     const product = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart);
+    const { currency } = useSelector((state) => state.currency);
+
     const dispatch = useDispatch();
 
     const handleAddToCart = (product) => {
@@ -20,7 +25,7 @@ const Shop = (props) => {
         console.log(product);
     };
 
-    console.log(cart);
+    console.log(product);
 
     const renderProducts = () => {
         return (
@@ -91,7 +96,22 @@ const Shop = (props) => {
                                         {product.name}
                                     </p>
                                 </Link>
-                                <h2 id="price1">Rs. {product.price}/-</h2>
+                                {currency === "INR" && (
+                                    <h2 id="price1">Rs. {product.price}/-</h2>
+                                )}
+
+                                {currency !== "INR" && (
+                                    <h2 id="price1">
+                                        {currency}.
+                                        <CurrencyConverter
+                                            from={"INR"}
+                                            to={currency}
+                                            value={product.price * 1.05}
+                                            precision={2}
+                                        />
+                                        /-
+                                    </h2>
+                                )}
                             </div>
                         </div>
                     ))
@@ -129,6 +149,7 @@ const Shop = (props) => {
                 </div>
             </div>
             <Footer />
+            <ToastContainer />
         </div>
     );
 };

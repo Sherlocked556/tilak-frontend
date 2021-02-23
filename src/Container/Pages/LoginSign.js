@@ -8,6 +8,7 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../../actions";
+import { ToastContainer } from "react-toastify";
 
 const LoginSign = (props) => {
     const [redirect, setRedirect] = useState(false);
@@ -16,7 +17,6 @@ const LoginSign = (props) => {
     const auth = useSelector((state) => state.auth);
     const history = useHistory();
 
-    
     const from = props.location.state || { from: { pathname: "/" } };
     console.log(from);
 
@@ -152,16 +152,16 @@ const LoginSign = (props) => {
                         </Formik>
                     </div>
 
-                    <p className="orHeading">or</p>
+                    {/* <p className="orHeading">or</p> */}
                     {/* <label className="containerCheck">
                         Save this information for easy access
                         <input type="checkbox"></input>
                         <span className="checkMark"></span>
                     </label> */}
-                    <div className="SignGoogle">
+                    {/* <div className="SignGoogle">
                         <AiOutlineGooglePlus className="googleIcon" />
                         <p>Sign in with Google</p>
-                    </div>
+                    </div> */}
                 </div>
                 <p className="betweenOR">or</p>
                 <div className="firstLoginBox">
@@ -244,6 +244,7 @@ const LoginSign = (props) => {
                 </div>
             </div>
             <Footer />
+            <ToastContainer />
         </div>
     );
 };

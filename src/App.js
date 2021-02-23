@@ -35,6 +35,7 @@ import Terms from "./Container/Pages/Terms";
 import LoginSign from "./Container/Pages/LoginSign";
 import LoginNextPage from "./Container/Pages/LoginNextPage";
 import ScrollToTop from "./Container/scrollToTop";
+import AdminBlogs from "./Container/Pages/AdminBlogs";
 
 const isLoggedIn = () => {
     if (localStorage.getItem("access-token")) {
@@ -69,9 +70,9 @@ function App() {
     useEffect(() => {
         dispatch(getInitialData());
     }, []);
-    useEffect(() => {
-        dispatch(updateCart());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(updateCart());
+    // }, []);
 
     return (
         <Router>
@@ -109,6 +110,10 @@ function App() {
                 <PrivateRoute
                     path="/adminReseller"
                     component={AdminReseller}
+                ></PrivateRoute>
+                <PrivateRoute
+                    path="/adminBlogs"
+                    component={AdminBlogs}
                 ></PrivateRoute>
                 <PrivateRoute
                     path="/payment"

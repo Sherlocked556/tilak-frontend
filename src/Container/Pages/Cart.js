@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCart } from "../../actions/cart.action";
+import { clearFromCart, fetchCart } from "../../actions/cart.action";
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import "./Cart.css";
+import CurrencyConverter from "./CurrencyConvert";
 
 const Cart = (props) => {
     const cart = useSelector((state) => state.cart);
+    const { currency } = useSelector((state) => state.currency);
+
     const cartItems = cart.cartItems;
 
     const dispatch = useDispatch();
@@ -55,9 +58,38 @@ const Cart = (props) => {
                             <div className="detailsoftheProduct1">
                                 <p className="nameoftheProductGiven">
                                     {item.product.name}
+                                    <span
+                                        className="editTheAddress"
+                                        style={{ float: "right" }}
+                                        onClick={() =>
+                                            dispatch(clearFromCart(item))
+                                        }
+                                    >
+                                        {" "}
+                                        Delete{" "}
+                                    </span>
                                 </p>
                                 <p className="priceoftheGivenProduct">
-                                    Rs. {item.product.price}/-
+                                    {currency === "INR" && (
+                                        <h2 id="price1">
+                                            Rs. {item.product.price}/-
+                                        </h2>
+                                    )}
+
+                                    {currency !== "INR" && (
+                                        <h2 id="price1">
+                                            {currency}.
+                                            <CurrencyConverter
+                                                from={"INR"}
+                                                to={currency}
+                                                value={
+                                                    item.product.price * 1.05
+                                                }
+                                                precision={2}
+                                            />
+                                            /-
+                                        </h2>
+                                    )}
                                 </p>
                                 <div className="tagsOfGivenProduct">
                                     <p
@@ -110,8 +142,21 @@ const Cart = (props) => {
                         <p className="discountMoney">00.00</p>
                     </div>
                     <div className="bagTotalPrice">
-                        <p id="bagTotal">Bag Total(in rupees):</p>
-                        <p id="bagTotalValue">{totalPrice}</p>
+                        <p id="bagTotal">Bag Total(in {currency}):</p>
+                        {currency === "INR" && (
+                            <p id="bagTotalValue">{totalPrice}</p>
+                        )}
+
+                        {currency !== "INR" && (
+                            <p id="bagTotalValue">
+                                <CurrencyConverter
+                                    from={"INR"}
+                                    to={currency}
+                                    value={totalPrice * 1.05}
+                                    precision={2}
+                                />
+                            </p>
+                        )}
                     </div>
                     <Link to="/orderSummary">
                         <button className="RefProceedButton">Proceed</button>

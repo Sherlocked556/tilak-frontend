@@ -1,5 +1,6 @@
 import axios from "../helpers/axios";
 import { categoryConstants } from "./constants";
+
 export const getAllCategory = () => {
     return async (dispatch) => {
         dispatch({ type: categoryConstants.GET_ALL_CATEGORIES_REQUEST });
@@ -18,4 +19,33 @@ export const getAllCategory = () => {
             });
         }
     };
+};
+
+export const addCategory = (name, categoryImg) => async (dispatch) => {
+    dispatch({
+        type: categoryConstants.ADD_NEW_CATEGORY_REQUEST,
+    });
+
+    try {
+        const formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("categoryImage", categoryImg);
+
+        const response = await axios.post("/category/create", formData, {
+            headers: {
+                "content-type": "multipart/form-data",
+            },
+        });
+
+        dispatch({
+            type: categoryConstants.ADD_NEW_CATEGORY_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: categoryConstants.ADD_NEW_CATEGORY_FAILURE,
+            payload: { error },
+        });
+    }
 };

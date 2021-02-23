@@ -6,15 +6,20 @@ import "./payment.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../actions/cart.action";
+import CurrencyConverter from "./CurrencyConvert";
+import { fx } from "money";
 
-const Payment = () => {
+const Payment = (props) => {
     const { cartItems } = useSelector((state) => state.cart);
+    const { currency } = useSelector((state) => state.currency);
+
     const dispatch = useDispatch();
     var amount = 0;
 
     const [paymentMethod, setPaymentMethod] = useState("");
     // const [amount, setAmount] = useState(0);
-    const [currency, setCurrency] = useState("INR");
+    // const [currency, setCurrency] = useState("INR");
+    const { orderAddress } = props.location;
 
     useEffect(() => {
         if (cartItems.length === 0) {
@@ -72,7 +77,7 @@ const Payment = () => {
 
         const result = await axios.post("/createOrder/razorpay", {
             paymentMethod,
-            currency: "INR",
+            currency,
         });
 
         console.log(result.data);
@@ -84,15 +89,19 @@ const Payment = () => {
 
         const {
             totalAmount: amount,
-            paymentData: { orderId: order_id, currency: currency },
+            paymentData: { orderId: order_id, currency: currencyRes },
         } = result.data.order;
 
-        console.log(amount, order_id, currency);
+        console.log(amount, order_id, currencyRes);
+
+        if (currencyRes != "INR") {
+            amount = await fx.convert(amount, { from: "INR", to: currencyRes });
+        }
 
         const options = {
             key: "rzp_test_i7F44AtOei6anE",
             amount: amount.toString(),
-            currency: "INR",
+            currency: currencyRes,
             name: "Test Name",
             description: "Test Transaction",
             order_id: order_id,
@@ -129,7 +138,7 @@ const Payment = () => {
             return;
         }
 
-        const result = await axios.post("/addOrder/paypal", {
+        const result = await axios.post("/createOrder/paypal", {
             paymentMethod,
             currency: "INR",
         });
@@ -139,7 +148,7 @@ const Payment = () => {
         window.location.replace(result.data.redirect_uri);
     };
 
-    console.log(amount);
+    console.log(orderAddress);
 
     return (
         <div>
@@ -203,40 +212,63 @@ const Payment = () => {
                             <p id="discountPriceValue">00.00</p>
                         </div>
                         <div className="bagTotalPrice">
-                            <p id="bagTotal">Bag Total(in rupees):</p>
-                            <p id="bagTotalValue">{amount}</p>
+                            <p id="bagTotal">Bag Total(in {currency}):</p>
+                            {currency === "INR" && (
+                                <p id="bagTotalValue">{amount}</p>
+                            )}
+
+                            {currency !== "INR" && (
+                                <div id="bagTotalValue">
+                                    <CurrencyConverter
+                                        from={"INR"}
+                                        to={currency}
+                                        value={amount * 1.05}
+                                        precision={2}
+                                    />
+                                </div>
+                            )}
                         </div>
-                        <button
-                            id="confirmPayButton"
-                            onClick={
-                                paymentMethod === "razor"
-                                    ? displayRazorpay
-                                    : displayPaypal
-                            }
-                        >
-                            Confirm and Pay
-                        </button>
+                        {currency && (
+                            <button
+                                id="confirmPayButton"
+                                onClick={
+                                    paymentMethod === "razor"
+                                        ? displayRazorpay
+                                        : displayPaypal
+                                }
+                            >
+                                Confirm and Pay
+                            </button>
+                        )}
                     </div>
-                    <div className="userDetails">
-                        <div className="userName">
-                            <p id="nameHeading">Name:</p>
-                            <p id="nameOfPerson">Mohit Gopal</p>
+                    {orderAddress && (
+                        <div className="userDetails">
+                            <div className="userName">
+                                <p id="nameHeading">Name:</p>
+                                <p id="nameOfPerson">{orderAddress.name}</p>
+                            </div>
+                            <div className="addressDetail">
+                                <p id="useraddressDetail">My Address:</p>
+                                <p className="addressLineDetail">
+                                    {orderAddress.address}
+                                    <br />
+                                    {orderAddress.locality}
+                                    <br />
+                                    {orderAddress.pinCode}
+                                </p>
+                            </div>
+                            <div className="landmarkDetails">
+                                <p id="landmarkHeading">Landmark:</p>
+                                <p id="locationUser">{orderAddress.landmark}</p>
+                            </div>
+                            <div className="contactDetails">
+                                <p id="contactHeading">Contact Number:</p>
+                                <p id="phoneNoUser">
+                                    {orderAddress.mobileNumber}
+                                </p>
+                            </div>
                         </div>
-                        <div className="addressDetail">
-                            <p id="useraddressDetail">My Address:</p>
-                            <p className="addressLineDetail">
-                                Address Line 1 Address line 2 Address line 3
-                            </p>
-                        </div>
-                        <div className="landmarkDetails">
-                            <p id="landmarkHeading">Landmark:</p>
-                            <p id="locationUser">Location</p>
-                        </div>
-                        <div className="contactDetails">
-                            <p id="contactHeading">Contact Number:</p>
-                            <p id="phoneNoUser">9876543210</p>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
 
