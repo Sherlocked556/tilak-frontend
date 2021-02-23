@@ -1,22 +1,34 @@
-import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
-import './DropDown.css'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Dropdown } from "semantic-ui-react";
+import { setCurrency } from "../../actions/currency.action";
+import "./DropDown.css";
 
 const countryOptions = [
-  {key: 'eu', value: 'eu', flag: 'eu', text: 'Europeanunion'},
-  {key: 'in', value: 'in', flag: 'in', text: 'India'},
-  {key: 'uk', value: 'uk', flag: 'uk', text: 'United Kingdom'},
-  {key: 'us', value: 'us', flag: 'us', text: 'United States'}
-]
+    { key: "eu", value: "EUR", flag: "eu", text: "Europeanunion" },
+    { key: "in", value: "INR", flag: "in", text: "India" },
+    { key: "uk", value: "GBP", flag: "uk", text: "United Kingdom" },
+    { key: "us", value: "USD", flag: "us", text: "United States" },
+];
 
-const DropdownExampleSearchSelection = () => (
-  <Dropdown id='dropdown'
-    placeholder='Select Country'
-    fluid
-    search
-    selection
-    options={countryOptions}
-  />
-)
+const DropdownExampleSearchSelection = () => {
+    const dispatch = useDispatch();
+    const { currency } = useSelector((state) => state.currency);
 
-export default DropdownExampleSearchSelection
+    return (
+        <Dropdown
+            id="dropdown"
+            placeholder="Select Country"
+            fluid
+            search
+            selection
+            value={currency}
+            options={countryOptions}
+            onChange={(e, { value }) => {
+                dispatch(setCurrency(value));
+            }}
+        />
+    );
+};
+
+export default DropdownExampleSearchSelection;

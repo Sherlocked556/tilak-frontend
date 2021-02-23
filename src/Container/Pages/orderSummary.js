@@ -1,15 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import "./orderSummary.css";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart } from "../../actions/cart.action";
+import { clearFromCart, fetchCart } from "../../actions/cart.action";
 import AddNewAddressModal from "./AddNewAddresModal";
+import { deleteAddress, fetchAddress } from "../../actions/address.action";
+import CurrencyConverter from "./CurrencyConvert";
 
 function OrderSummary() {
     const { cartItems } = useSelector((state) => state.cart);
+    const { address } = useSelector((state) => state.address);
+    const { currency } = useSelector((state) => state.currency);
+
+    const [orderAddress, setOrderAddress] = useState();
+
+    let userAddress = [];
+
+    if (address[0]) {
+        userAddress = address[0].address;
+    }
 
     const dispatch = useDispatch();
 
@@ -17,6 +29,7 @@ function OrderSummary() {
         if (cartItems.length === 0) {
             dispatch(fetchCart());
         }
+        dispatch(fetchAddress());
     }, []);
 
     let totalPrice = 0;
@@ -25,6 +38,8 @@ function OrderSummary() {
         totalPrice +=
             cartItems[index].product.price * cartItems[index].quantity;
     }
+
+    console.log(userAddress);
 
     return (
         <div>
@@ -44,27 +59,57 @@ function OrderSummary() {
                     <p className="selectDeliveryHeading">
                         Select delivery address
                     </p>
-                    <div className="userDetailAddressBox">
-                        <div className="customerNameBox">
-                            <p className="customerNameOrderSummary">Name:</p>
-                            <p className="customerFullName">Mohit Gopal</p>
-                            <AiOutlineCheckCircle id="addressTickIcon" />
-                        </div>
-                        <div className="customerAddressBox"></div>
-                        <div className="customerLandmarkBox">
-                            <p className="customerLandmarkDetail">Landmark:</p>
-                            <p className="customerLocationDetail">Location</p>
-                        </div>
-                        <div className="phoneNoCustomerBox">
-                            <p className="customerContactHeading">
-                                Contact Number:
-                            </p>
-                            <p className="customerContactNoDetail">
-                                9876543210
-                            </p>
-                            <p className="editTheAddress">Edit</p>
-                        </div>
-                    </div>
+                    {userAddress &&
+                        userAddress.map((address) => (
+                            <div
+                                className="userDetailAddressBox"
+                                onClick={() => setOrderAddress(address)}
+                                key={address._id}
+                            >
+                                <div className="customerNameBox">
+                                    <p className="customerNameOrderSummary">
+                                        Name:
+                                    </p>
+                                    <p className="customerFullName">
+                                        {address.name}
+                                    </p>
+                                    {orderAddress &&
+                                        orderAddress._id === address._id && (
+                                            <AiOutlineCheckCircle id="addressTickIcon" />
+                                        )}
+                                </div>
+                                <div className="customerAddressBox">
+                                    <p>{address.address}</p>
+                                    <p>{address.locality}</p>
+                                    <p>{address.pinCode}</p>
+                                </div>
+                                <div className="customerLandmarkBox">
+                                    <p className="customerLandmarkDetail">
+                                        Landmark:
+                                    </p>
+                                    <p className="customerLocationDetail">
+                                        {address.landmark}
+                                    </p>
+                                </div>
+                                <div className="phoneNoCustomerBox">
+                                    <p className="customerContactHeading">
+                                        Contact Number:
+                                    </p>
+                                    <p className="customerContactNoDetail">
+                                        {address.mobileNumber}
+                                    </p>
+                                    <p
+                                        className="editTheAddress"
+                                        onClick={() =>
+                                            dispatch(deleteAddress(address._id))
+                                        }
+                                    >
+                                        Delete
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+
                     <div
                         className=""
                         style={{
@@ -84,11 +129,41 @@ function OrderSummary() {
                         <p id="discountPriceValue">00.00</p>
                     </div>
                     <div className="bagTotalPrice">
-                        <p id="bagTotal">Bag Total(in rupees):</p>
-                        <p id="bagTotalValue">{totalPrice}</p>
+                        <p id="bagTotal">Bag Total(in {currency}):</p>
+                        {currency === "INR" && (
+                            <p id="bagTotalValue">{totalPrice}</p>
+                        )}
+
+                        {currency !== "INR" && (
+                            <p id="bagTotalValue">
+                                <CurrencyConverter
+                                    from={"INR"}
+                                    to={currency}
+                                    value={totalPrice * 1.05}
+                                    precision={2}
+                                />
+                            </p>
+                        )}
                     </div>
-                    <Link to="/payment">
-                        <button id="confirmPayButton">Confirm and Pay</button>
+                    <Link
+                        to={{
+                            pathname: "/payment",
+                            orderAddress: orderAddress,
+                        }}
+                    >
+                        {orderAddress && cartItems.length > 0 && (
+                            <button id="confirmPayButton">
+                                Confirm and Pay
+                            </button>
+                        )}
+
+                        {(!cartItems || cartItems.length <= 0) && (
+                            <p id="priceSummaryHeading">No Items in Cart</p>
+                        )}
+
+                        {!orderAddress && (
+                            <p id="priceSummaryHeading">Select an Address</p>
+                        )}
                     </Link>
                 </div>
             </div>
@@ -110,10 +185,38 @@ function OrderSummary() {
                         <div className="detailsoftheProduct1">
                             <p className="nameoftheProductGiven">
                                 {item.product.name}
+                                <span
+                                    className="editTheAddress"
+                                    style={{ float: "right" }}
+                                    onClick={() =>
+                                        dispatch(clearFromCart(item))
+                                    }
+                                >
+                                    {" "}
+                                    Delete{" "}
+                                </span>
                             </p>
                             <p className="priceoftheGivenProduct">
-                                Rs. {item.product.price}/-{" "}
+                                {currency === "INR" && (
+                                    <span id="price1">
+                                        Rs. {item.product.price}/-
+                                    </span>
+                                )}
+
+                                {currency !== "INR" && (
+                                    <span id="price1">
+                                        {currency}.
+                                        <CurrencyConverter
+                                            from={"INR"}
+                                            to={currency}
+                                            value={item.product.price * 1.05}
+                                            precision={2}
+                                        />
+                                        /-
+                                    </span>
+                                )}
                             </p>
+
                             <div className="tagsOfGivenProduct">
                                 <p
                                     style={{
@@ -146,6 +249,7 @@ function OrderSummary() {
                                     Lorem ipsum dolor sit amet, consetetur{" "}
                                 </p>
                             </div>
+                            {/* <p className="editTheAddress">Delete</p> */}
                         </div>
                     </div>
                 ))}

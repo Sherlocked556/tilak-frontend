@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axios from "../helpers/axios";
 import { authConstants } from "./constants";
 
@@ -19,10 +20,17 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
             type: authConstants.USER_REGISTER_SUCCESS,
             payload: response.data,
         });
+
+        toast.success("User Successfully Register. Please proceed to login", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     } catch (error) {
         console.log(error);
 
         dispatch({ type: authConstants.USER_REGISTER_FAILURE, payload: error });
+        toast.error("Failed to Register User", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     }
 };
 

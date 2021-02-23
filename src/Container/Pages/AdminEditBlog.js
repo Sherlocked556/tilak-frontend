@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input } from "semantic-ui-react";
 import axios from "../../helpers/axios";
 import TextEditor from "./TextEditor";
 import { useDispatch, useSelector } from "react-redux";
-import { addBlog } from "../../actions/blog.action";
+import { addBlog, updateBlog } from "../../actions/blog.action";
 
-export default function AdminAddBlog(props) {
+export default function AdminEditBlog(props) {
     const dispatch = useDispatch();
     const blog = useSelector((state) => state.blogs);
+
+    console.log(props);
 
     const [title, setTitle] = useState("");
     const [coverImg, setCoverImg] = useState("");
     const [content, setContent] = useState("");
 
+    useEffect(() => {
+        if (props.title) {
+            setTitle(props.title);
+            setContent(props.content);
+        }
+    }, [props]);
+
     const handleEditorChange = (content, editor) => {
         setContent(content);
     };
 
-    const handleBlogSubmit = () => {
-        dispatch(addBlog({ title, coverImg, content }));
+    const handleBlogSubmit = (blogId) => {
+        // console.log(content);
+        dispatch(updateBlog({ title, content, blogId }));
     };
 
-    console.log(blog);
+    console.log(title);
 
     return (
         <div>
@@ -30,7 +40,7 @@ export default function AdminAddBlog(props) {
                     <div className="adminClose" onClick={props.closeProduct}>
                         +
                     </div>
-                    <p className="adminPopHeading">Add Blog</p>
+                    <p className="adminPopHeading">Edit Blog</p>
                 </div>
                 <div className="detailBlogFill" style={{ padding: "1em" }}>
                     <div className="productDetailsCol">
@@ -47,23 +57,20 @@ export default function AdminAddBlog(props) {
                                     onChange={({ target }) =>
                                         setTitle(target.value)
                                     }
+                                    value={title}
                                 />
 
-                                <Input
-                                    type="file"
-                                    label="Cover Image"
-                                    name="coverImg"
-                                    onChange={({ target }) =>
-                                        setCoverImg(target.files[0])
-                                    }
+                                <TextEditor
+                                    onChange={handleEditorChange}
+                                    value={content}
                                 />
-
-                                <TextEditor onChange={handleEditorChange} />
 
                                 <Button
                                     primary
                                     style={{ marginTop: "1em" }}
-                                    onClick={handleBlogSubmit}
+                                    onClick={() =>
+                                        handleBlogSubmit(props.blogId)
+                                    }
                                 >
                                     Submit
                                 </Button>

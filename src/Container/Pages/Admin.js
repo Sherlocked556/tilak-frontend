@@ -5,13 +5,22 @@ import AdminProfile from "./AdminProfile";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { AiOutlineCheckSquare } from "react-icons/ai";
 import "./Admin.css";
 import AdminAddProduct from "./AdminAddProduct";
 import AdminAddBlog from "./AdminAddBlog";
 import axios from "../../helpers/axios";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    deleteProductById,
+    getAllProducts,
+    GetProductDetailsById,
+    updateProducts,
+} from "../../actions";
+import AdminAddCategory from "./AdminAddCategory";
+import AdminEditProduct from "./AdminEditProduct";
 
 function openProduct() {
     document.querySelector(".AdminPopUp").style.display = "flex";
@@ -20,51 +29,119 @@ function closeProduct() {
     document.querySelector(".AdminPopUp").style.display = "none";
 }
 
-function openBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "flex";
+function openCategory() {
+    document.querySelector(".AdminCategoryPopUp").style.display = "flex";
 }
-function closeBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "none";
+function closeCategory() {
+    document.querySelector(".AdminCategoryPopUp").style.display = "none";
 }
 
-function Admin() {
-    const [products, setProducts] = useState([]);
 
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.post("/product/getProducts", {});
+const Admin = () => {
+    const dispatch = useDispatch();
+    let { products } = useSelector((state) => state.product);
+    const { productDetails } = useSelector((state) => state.product);
 
-            // console.log(response.data);
+    const [updateList, setUpdateList] = useState([]);
+    const [toBeEdited, setToBeEdited] = useState({});
+    // const [productList, setProductList] = useState([]);
 
-            if (response.data) {
-                setProducts([...products, ...response.data.products]);
-            }
-        } catch (error) {
-            console.log(error);
+    const handleProductDelete = async (id) => {
+        dispatch(deleteProductById(id));
+    };
+
+    const openEditProduct = (product) => {
+        setToBeEdited(product);
+        dispatch(GetProductDetailsById({ params: {productId: product._id} }));
+
+        document.querySelector(".AdminEditPopUp").style.display = "flex";
+    };
+    const closeEditProduct = () => {
+        document.querySelector(".AdminEditPopUp").style.display = "none";
+    };
+
+    const handleQuantityUpdate = (id, inc) => {
+        if (updateList.find((item) => item._id === id)) {
+            setUpdateList(
+                updateList.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            quantity:
+                                inc === true
+                                    ? item.quantity + 1
+                                    : item.quantity - 1,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
+        } else {
+            setUpdateList(
+                products.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            quantity:
+                                inc === true
+                                    ? item.quantity + 1
+                                    : item.quantity - 1,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
         }
     };
 
-    const handleProductDelete = async (id) => {
-        try {
-            const response = await axios.delete(
-                `/product/deleteProductById/${id}`
+    const handleAvailableUpdate = (id, isAvail) => {
+        if (updateList.find((item) => item._id === id)) {
+            setUpdateList(
+                updateList.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            availability: isAvail,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
             );
-
-            const remainingProducts = products.filter((product) => product._id !== id);
-
-            console.log(remainingProducts);
-
-            setProducts(remainingProducts);
-        } catch (error) {
-            console.log(error);
+        } else {
+            setUpdateList(
+                products.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            availability: isAvail,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
         }
+    };
+
+    const handleProductUpdate = () => {
+        dispatch(updateProducts(updateList));
     };
 
     useEffect(() => {
-        fetchProducts();
+        console.log("HELLO ADMIN");
+
+        // getAllProducts();
+        dispatch(getAllProducts());
     }, []);
 
-    console.log(products);
+    console.log(updateList);
+
+    if (updateList.length > 0) {
+        products = updateList;
+    }
 
     return (
         <div>
@@ -90,22 +167,39 @@ function Admin() {
                             RESELLERS
                         </Link>
                     </h6>
+                    <h6 className="adminBlogs">
+                        <Link to="/AdminBlogs" style={{ color: "#4D4D4D" }}>
+                            BLOGS
+                        </Link>
+                    </h6>
                 </div>
                 <div className="productLine">
                     <hr id="adminLine2" />
                     <hr id="adminLine" />
                 </div>
                 <div className="categoryProductBtn">
-                    <button className="categoryBtn">ADD CATEOGRY</button>
+                    <button className="categoryBtn" onClick={openCategory}>
+                        ADD CATEOGRY
+                    </button>
                     <button className="productBtn" onClick={openProduct}>
                         ADD PRODUCT
                     </button>
-                    <button className="productBtn" onClick={openBlog}>
-                        ADD BLOG
-                    </button>
-                    <p className="productNumber">43,240 products in total</p>
+                    
+                    {products && (
+                        <p className="productNumber">
+                            {products.length} products in total
+                        </p>
+                    )}
                 </div>
                 <div className="SearchDrop"></div>
+                <div className="categoryProductBtn">
+                    <button
+                        className="productBtn"
+                        onClick={handleProductUpdate}
+                    >
+                        APPLY CHANGES
+                    </button>
+                </div>
                 <div className="AdminProductDetails">
                     <hr
                         style={{
@@ -167,6 +261,7 @@ function Admin() {
                     <hr id="AdminLine"></hr>
                     <div className="productDetailOuterBox">
                         {products &&
+                            products.length > 0 &&
                             products.map((product) => (
                                 <div
                                     className="productDetailsAdmin"
@@ -181,20 +276,52 @@ function Admin() {
                                         )}
                                     </p>
                                     <span className="quantityIncDec">
-                                        <FiMinusCircle id="minusIcon" />
+                                        <FiMinusCircle
+                                            id="minusIcon"
+                                            onClick={() =>
+                                                handleQuantityUpdate(
+                                                    product._id,
+                                                    false
+                                                )
+                                            }
+                                        />
                                         <p className="quantityNo">
                                             {product.quantity}
                                         </p>
-                                        <FiPlusCircle id="plusIcon" />
+                                        <FiPlusCircle
+                                            id="plusIcon"
+                                            onClick={() =>
+                                                handleQuantityUpdate(
+                                                    product._id,
+                                                    true
+                                                )
+                                            }
+                                        />
                                     </span>
                                     <div className="dressName">
                                         {product.name}
                                     </div>
                                     <span className="productStatus">
-                                        <AiOutlineCloseSquare id="closeSquare" />
-                                        <AiOutlineCheckSquare id="checkSquare" />
+                                        <AiOutlineCloseSquare
+                                            id="closeSquare"
+                                            onClick={() =>
+                                                handleAvailableUpdate(
+                                                    product._id,
+                                                    false
+                                                )
+                                            }
+                                        />
+                                        <AiOutlineCheckSquare
+                                            id="checkSquare"
+                                            onClick={() =>
+                                                handleAvailableUpdate(
+                                                    product._id,
+                                                    true
+                                                )
+                                            }
+                                        />
                                         <p className="StatusAva">
-                                            {product.quantity > 0
+                                            {product.availability
                                                 ? "Available"
                                                 : "Unavailable"}
                                         </p>
@@ -204,6 +331,10 @@ function Admin() {
                                         onClick={() =>
                                             handleProductDelete(product._id)
                                         }
+                                    />
+                                    <MdEdit
+                                        id="editButton"
+                                        onClick={() => openEditProduct(product)}
                                     />
                                 </div>
                             ))}
@@ -215,10 +346,17 @@ function Admin() {
             <div className="AdminPopUp">
                 <AdminAddProduct closeProduct={closeProduct} />
             </div>
-            <div className="AdminBlogPopUp">
-                <AdminAddBlog closeProduct={closeBlog} />
+            
+            <div className="AdminCategoryPopUp">
+                <AdminAddCategory closeProduct={closeCategory} />
+            </div>
+            <div className="AdminEditPopUp">
+                <AdminEditProduct
+                    closeProduct={closeEditProduct}
+                    product={toBeEdited}
+                />
             </div>
         </div>
     );
-}
+};
 export default Admin;
