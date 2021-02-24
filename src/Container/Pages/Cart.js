@@ -23,8 +23,9 @@ const Cart = (props) => {
 
     if (cartItems.length > 0) {
         for (let index = 0; index < cartItems.length; index++) {
-            totalPrice +=
-                cartItems[index].product.price * cartItems[index].quantity;
+            if (cartItems[index].product)
+                totalPrice +=
+                    cartItems[index].product.price * cartItems[index].quantity;
         }
     }
 
