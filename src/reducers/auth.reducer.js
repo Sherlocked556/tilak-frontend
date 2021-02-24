@@ -51,6 +51,7 @@ export default (state = initState, action) => {
                 ...state,
                 loading: false,
                 user: action.payload,
+                error: null,
             });
 
         case authConstants.USER_LOGIN_SUCCESS:
@@ -58,6 +59,7 @@ export default (state = initState, action) => {
                 ...state,
                 loading: false,
                 user: action.payload,
+                error: null,
             });
 
         case authConstants.USER_LOGOUT_SUCCESS:
@@ -65,6 +67,7 @@ export default (state = initState, action) => {
                 ...state,
                 loading: false,
                 user: action.payload,
+                error: null,
             });
 
         default:

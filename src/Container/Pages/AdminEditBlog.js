@@ -14,11 +14,13 @@ export default function AdminEditBlog(props) {
     const [title, setTitle] = useState("");
     const [coverImg, setCoverImg] = useState("");
     const [content, setContent] = useState("");
+    const [description, setDescription] = useState("");
 
     useEffect(() => {
         if (props.title) {
             setTitle(props.title);
             setContent(props.content);
+            setDescription(props.description);
         }
     }, [props]);
 
@@ -28,10 +30,10 @@ export default function AdminEditBlog(props) {
 
     const handleBlogSubmit = (blogId) => {
         // console.log(content);
-        dispatch(updateBlog({ title, content, blogId }));
+        dispatch(updateBlog({ title, content, blogId, description }));
     };
 
-    console.log(title);
+    console.log(description);
 
     return (
         <div>
@@ -46,7 +48,7 @@ export default function AdminEditBlog(props) {
                     <div className="productDetailsCol">
                         {blog && (
                             <Form loading={blog.loading}>
-                                <Input
+                                <Form.Input
                                     type="text"
                                     label="Blog Title"
                                     placeholder="Enter Blog Title here"
@@ -60,10 +62,26 @@ export default function AdminEditBlog(props) {
                                     value={title}
                                 />
 
-                                <TextEditor
-                                    onChange={handleEditorChange}
-                                    value={content}
+                                <Form.Input
+                                    type="text"
+                                    label="Blog Description"
+                                    placeholder="Enter Blog Title here"
+                                    style={{
+                                        marginBottom: "1em",
+                                        marginRight: "1em",
+                                    }}
+                                    value={description}
+                                    onChange={({ target }) =>
+                                        setDescription(target.value)
+                                    }
                                 />
+
+                                <Form.Field>
+                                    <TextEditor
+                                        onChange={handleEditorChange}
+                                        value={content}
+                                    />
+                                </Form.Field>
 
                                 <Button
                                     primary

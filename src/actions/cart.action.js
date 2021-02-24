@@ -22,16 +22,22 @@ export const addToCart = (product) => {
                 payload: response.data.cartItems,
             });
             toast.success("Product Successfully added to cart", {
-                position: toast.POSITION.BOTTOM_LEFT
-              });
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
         } catch (error) {
             dispatch({
                 type: cartConstants.ADD_TO_CART_FAILURE,
                 payload: { error: error },
             });
-            toast.error("Error in added product to cart", {
-                position: toast.POSITION.BOTTOM_LEFT
-              });
+            if (error.response) {
+                toast.error(error.response.data.message, {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                });
+            } else {
+                toast.error("Error in adding product to cart", {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                });
+            }
         }
     };
 };

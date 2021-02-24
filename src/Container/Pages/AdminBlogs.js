@@ -12,6 +12,7 @@ import { Table } from "semantic-ui-react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import AdminAddBlog from "./AdminAddBlog";
 import AdminEditBlog from "./AdminEditBlog";
+import { ToastContainer } from "react-toastify";
 
 function openBlog() {
     document.querySelector(".AdminBlogPopUp").style.display = "flex";
@@ -41,7 +42,7 @@ const AdminBlogs = () => {
         document.querySelector(".AdminEditBlogPopUp").style.display = "none";
     };
 
-    console.log(blogs);
+    console.log(toBeEdited);
 
     return (
         <div>
@@ -138,10 +139,13 @@ const AdminBlogs = () => {
                 <AdminEditBlog
                     title={toBeEdited.title}
                     content={toBeEdited.content}
+                    description={toBeEdited.description}
                     blogId={toBeEdited._id}
                     closeProduct={closeEditBlog}
                 />
             </div>
+
+            <ToastContainer />
         </div>
     );
 };

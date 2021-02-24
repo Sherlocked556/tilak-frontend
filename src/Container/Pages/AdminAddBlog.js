@@ -12,13 +12,14 @@ export default function AdminAddBlog(props) {
     const [title, setTitle] = useState("");
     const [coverImg, setCoverImg] = useState("");
     const [content, setContent] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleEditorChange = (content, editor) => {
         setContent(content);
     };
 
     const handleBlogSubmit = () => {
-        dispatch(addBlog({ title, coverImg, content }));
+        dispatch(addBlog({ title, coverImg, content, description }));
     };
 
     console.log(blog);
@@ -36,12 +37,12 @@ export default function AdminAddBlog(props) {
                     <div className="productDetailsCol">
                         {blog && (
                             <Form loading={blog.loading}>
-                                <Input
+                                <Form.Input
                                     type="text"
                                     label="Blog Title"
                                     placeholder="Enter Blog Title here"
                                     style={{
-                                        marginBottom: "2em",
+                                        marginBottom: "1em",
                                         marginRight: "1em",
                                     }}
                                     onChange={({ target }) =>
@@ -49,7 +50,20 @@ export default function AdminAddBlog(props) {
                                     }
                                 />
 
-                                <Input
+                                <Form.Input
+                                    type="text"
+                                    label="Blog Description"
+                                    placeholder="Enter Blog Title here"
+                                    style={{
+                                        marginBottom: "1em",
+                                        marginRight: "1em",
+                                    }}
+                                    onChange={({ target }) =>
+                                        setDescription(target.value)
+                                    }
+                                />
+
+                                <Form.Input
                                     type="file"
                                     label="Cover Image"
                                     name="coverImg"
@@ -58,7 +72,9 @@ export default function AdminAddBlog(props) {
                                     }
                                 />
 
-                                <TextEditor onChange={handleEditorChange} />
+                                <Form.Field>
+                                    <TextEditor onChange={handleEditorChange} />
+                                </Form.Field>
 
                                 <Button
                                     primary
