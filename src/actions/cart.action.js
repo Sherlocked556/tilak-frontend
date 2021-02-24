@@ -10,6 +10,13 @@ export const addToCart = (product) => {
                 type: cartConstants.ADD_TO_CART_REQUEST,
             });
 
+            if (
+                !localStorage.getItem("access-token") ||
+                localStorage.getItem("access-token") === ""
+            ) {
+                throw new Error("To add a product to cart, Please login");
+            }
+
             const response = await axios.post("user/cart/addtocart", {
                 product: product._id,
                 quantity: 1,
