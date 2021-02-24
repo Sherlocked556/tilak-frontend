@@ -28,9 +28,15 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
         console.log(error);
 
         dispatch({ type: authConstants.USER_REGISTER_FAILURE, payload: error });
-        toast.error("Failed to Register User", {
-            position: toast.POSITION.BOTTOM_LEFT,
-        });
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in added product to cart", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     }
 };
 

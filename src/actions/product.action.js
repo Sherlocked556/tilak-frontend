@@ -1,5 +1,6 @@
 import axios from "../helpers/axios";
 import { productConstants } from "./constants";
+import { toast } from "react-toastify";
 
 export const getProductsBySlug = (slug) => {
     return async (dispatch) => {
@@ -41,8 +42,8 @@ export const GetProductDetailsById = (payload) => {
 };
 
 export const getAllProducts = () => async (dispatch) => {
+    dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
     try {
-        dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
 
         const response = await axios.post("/product/getProducts");
 
@@ -98,6 +99,10 @@ export const updateProducts = (updateProducts) => async (dispatch) => {
             type: productConstants.UPDATE_PRODUCT_SUCCESS,
             payload: response.data,
         });
+
+        toast.success("Product Updated Successfully", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     } catch (error) {
         console.log(error);
 
@@ -105,6 +110,16 @@ export const updateProducts = (updateProducts) => async (dispatch) => {
             type: productConstants.UPDATE_PRODUCT_FAILURE,
             payload: { error: error },
         });
+
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in updating Products", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     }
 };
 
@@ -140,11 +155,25 @@ export const addProduct = (data, isVariant) => async (dispatch) => {
             type: productConstants.ADD_PRODUCT_SUCCESS,
             payload: response.data.product,
         });
+
+        toast.success("Product Added Successfully", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     } catch (error) {
         dispatch({
             type: productConstants.ADD_PRODUCT_FAILURE,
             payload: { error: error },
         });
+
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in adding product", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     }
 };
 
@@ -192,6 +221,10 @@ export const updateProductById = (data) => async (dispatch) => {
             type: productConstants.UPDATE_BY_ID_PRODUCT_SUCCESS,
             payload: response.data.update,
         });
+
+        toast.success("Product Updated Successfully", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     } catch (error) {
         console.log(error);
 
@@ -199,5 +232,15 @@ export const updateProductById = (data) => async (dispatch) => {
             type: productConstants.UPDATE_BY_ID_PRODUCT_FAILURE,
             payload: { error: error },
         });
+
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in updating Product", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     }
 };

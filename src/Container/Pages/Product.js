@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Container/Top Nav Bar/Header";
 import Index2 from "../../Container/Side Nav Bar/Index2";
 import Search from "../Search Button/Search";
@@ -14,11 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetProductDetailsById } from "../../actions";
 import { addToCart } from "../../actions";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import CurrencyConverter from "./CurrencyConvert";
 
 var price = 300;
 const Product = (props) => {
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
+    const [viewImage, setViewImage] = useState(null);
+    const { currency } = useSelector((state) => state.currency);
+
     useEffect(() => {
         const { productId } = props.match.params;
         const payload = {
@@ -29,6 +34,22 @@ const Product = (props) => {
         dispatch(GetProductDetailsById(payload));
     }, []);
 
+    useEffect(() => {
+        if (product.productDetails._id) {
+            setViewImage({
+                image: product.productDetails.productPictures[0],
+                index: 0,
+            });
+        }
+    }, [product]);
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
+        console.log(product);
+    };
+
+    console.log(viewImage);
+
     return (
         <div>
             <Header />
@@ -38,88 +59,176 @@ const Product = (props) => {
             </div>
             <div className="breadcrumbs">Breadcrumb</div>
             <h3 className="productheadlineee">the product...</h3>
-            <div className="productss">
-                <div className="productpic">
-                    <img
-                        className="ppic"
-                        src={`https://api.tilakshringar.com/public/${product.productDetails.productPictures[0].img}`}
-                        alt="HR"
-                    ></img>
-                    <div className="productSimilar">
-                        <div className="leftSlide">
-                            <IoIosArrowBack id="Arrow" />
+            {product.productDetails._id && (
+                <div className="productss">
+                    <div className="productpic">
+                        {!viewImage && (
+                            <img
+                                className="ppic"
+                                src={`https://api.tilakshringar.com/public/${product.productDetails.productPictures[0].img}`}
+                                alt="HR"
+                            ></img>
+                        )}
+
+                        {viewImage && (
+                            <img
+                                className="ppic"
+                                src={`https://api.tilakshringar.com/public/${viewImage.image.img}`}
+                                alt="HR"
+                            ></img>
+                        )}
+
+                        <div className="productSimilar">
+                            <div className="leftSlide">
+                                <IoIosArrowBack
+                                    id="Arrow"
+                                    onClick={() => {
+                                        if (
+                                            viewImage.index ===
+                                            product.productDetails
+                                                .productPictures.length -
+                                                1
+                                        ) {
+                                            setViewImage({
+                                                image:
+                                                    product.productDetails
+                                                        .productPictures[0],
+                                                index: 0,
+                                            });
+                                        } else {
+                                            setViewImage({
+                                                image:
+                                                    product.productDetails
+                                                        .productPictures[
+                                                        viewImage.index + 1
+                                                    ],
+                                                index: viewImage.index + 1,
+                                            });
+                                        }
+                                    }}
+                                />
+                            </div>
+                            {product.productDetails.productPictures &&
+                                product.productDetails.productPictures.map(
+                                    (image, index) => (
+                                        <div
+                                            className="similarImage1"
+                                            key={index + 1}
+                                            onClick={() =>
+                                                setViewImage({ image, index })
+                                            }
+                                        >
+                                            <img
+                                                src={`https://api.tilakshringar.com/public/${image.img}`}
+                                                height="100"
+                                                width="100"
+                                            />
+                                        </div>
+                                    )
+                                )}
+
+                            <div className="rightSlide">
+                                <IoIosArrowForward
+                                    id="Arrow"
+                                    onClick={() => {
+                                        if (viewImage.index === 0) {
+                                            setViewImage({
+                                                image:
+                                                    product.productDetails
+                                                        .productPictures[
+                                                        product.productDetails
+                                                            .productPictures
+                                                            .length - 1
+                                                    ],
+                                                index:
+                                                    product.productDetails
+                                                        .productPictures
+                                                        .length - 1,
+                                            });
+                                        } else {
+                                            setViewImage({
+                                                image:
+                                                    product.productDetails
+                                                        .productPictures[
+                                                        viewImage.index - 1
+                                                    ],
+                                                index: viewImage.index - 1,
+                                            });
+                                        }
+                                    }}
+                                />
+                            </div>
                         </div>
-                        <div className="similarImage1"></div>
-                        <div className="similarImage2"></div>
-                        <div className="similarImage3"></div>
-                        <div className="rightSlide">
-                            <IoIosArrowForward id="Arrow" />
+                    </div>
+                    <div className="productdes" style={{ marginLeft: "150px" }}>
+                        <p>{product.productDetails.name}</p>
+                        <div className="icon2">
+                            <TiHeartFullOutline id="iconn2" />
+                        </div>
+                        <div className="icon1">
+                            <BiCartAlt
+                                id="iconn1"
+                                onClick={() => {
+                                    handleAddToCart(product.productDetails);
+                                    // props.history.push("/cart");
+                                }}
+                            />
+                        </div>
+                        <div style={{ display: "flex" }}>
+                            {currency === "INR" && (
+                                <span className="cost">
+                                    Rs. {product.productDetails.price}/-
+                                </span>
+                            )}
+
+                            {currency !== "INR" && (
+                                <span className="cost">
+                                    {currency}.
+                                    <CurrencyConverter
+                                        from={"INR"}
+                                        to={currency}
+                                        value={
+                                            product.productDetails.price * 1.05
+                                        }
+                                        precision={2}
+                                    />
+                                    /-
+                                </span>
+                            )}
+
+                            {/* <span className="cost">
+                                Rs. {product.productDetails.price}/-
+                            </span> */}
+                            <AiFillStar
+                                style={{
+                                    marginTop: "3.29vw",
+                                    height: "1.830vw",
+                                    width: "1.684vw",
+                                    color: "#FFFF00",
+                                    marginLeft: "1.245vw",
+                                }}
+                            />
+                            <p
+                                style={{
+                                    marginTop: "2.928vw",
+                                    font:
+                                        "normal normal normal 1.757vw/2.562vw Poppins",
+                                    marginLeft: "0.512vw",
+                                }}
+                            >
+                                0.0
+                            </p>
+                        </div>
+                        <span className="tags">Tags:</span>
+                        <p2>choli, white, small,</p2>
+                        <div className="descriptions">
+                            <span>Description:</span>
+                            <p>{product.productDetails.description}</p>
                         </div>
                     </div>
                 </div>
-                <div className="productdes">
-                    <p>{product.productDetails.name}</p>
-                    <div className="icon2">
-                        <TiHeartFullOutline id="iconn2" />
-                    </div>
-                    <div className="icon1">
-                        <BiCartAlt
-                            id="iconn1"
-                            onClick={() => {
-                                const {
-                                    _id,
-                                    name,
-                                    price,
-                                    description,
-                                } = product.productDetails;
-                                const img =
-                                    product.productDetails.productPictures[0]
-                                        .img;
-                                dispatch(
-                                    addToCart({
-                                        _id,
-                                        name,
-                                        price,
-                                        img,
-                                        description,
-                                    })
-                                );
-                                props.history.push("/cart");
-                            }}
-                        />
-                    </div>
-                    <div style={{ display: "flex" }}>
-                        <span className="cost">
-                            Rs. {product.productDetails.price}/-
-                        </span>
-                        <AiFillStar
-                            style={{
-                                marginTop: "3.29vw",
-                                height: "1.830vw",
-                                width: "1.684vw",
-                                color: "#FFFF00",
-                                marginLeft: "1.245vw",
-                            }}
-                        />
-                        <p
-                            style={{
-                                marginTop: "2.928vw",
-                                font:
-                                    "normal normal normal 1.757vw/2.562vw Poppins",
-                                marginLeft: "0.512vw",
-                            }}
-                        >
-                            0.0
-                        </p>
-                    </div>
-                    <span className="tags">Tags:</span>
-                    <p2>choli, white, small,</p2>
-                    <div className="descriptions">
-                        <span>Description:</span>
-                        <p>{product.productDetails.description}</p>
-                    </div>
-                </div>
-            </div>
+            )}
+
             <div id="reviewBox">
                 <div className="reviewsHeading"> Reviews:</div>
                 <div className="fiveStar">
@@ -251,6 +360,7 @@ const Product = (props) => {
                 </div>
             </div>
             <Footer />
+            <ToastContainer />
         </div>
     );
 };

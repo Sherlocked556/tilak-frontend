@@ -9,18 +9,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../helpers/axios";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
-
-function open() {
-    document.querySelector(".popUp").style.display = "flex";
-}
-function close() {
-    document.querySelector(".popUp").style.display = "none";
-}
+import dayjs from "dayjs";
 
 function Blogs() {
     let [blogs, setBlogs] = useState([]);
     let [selected, setSelected] = useState();
 
+    let [openedBlog, setOpenedBlog] = useState(null);
     // let blogs = [];
 
     const open = (id) => {
@@ -48,6 +43,15 @@ function Blogs() {
         }
     };
 
+    const open = (blog) => {
+        setOpenedBlog(blog);
+
+        document.querySelector(".popUp").style.display = "flex";
+    };
+    const close = () => {
+        document.querySelector(".popUp").style.display = "none";
+    };
+
     useEffect(() => {
         fetchBlogs();
     }, []);
@@ -65,7 +69,7 @@ function Blogs() {
             <div className="containerr">
                 <div className="containerr1">
                     {blogs &&
-                        blogs.map((blog) => (
+                        blogs.map((blog, index) => (
                             <div className="carrd" key={blog._id}>
                                 <div className="imagee">
                                     <img
@@ -75,82 +79,16 @@ function Blogs() {
                                 </div>
                                 <div className="contentt">
                                     <h1>{blog.title}</h1>
-                                    <p
-                                        dangerouslySetInnerHTML={{
-                                            __html: blog.content,
-                                        }}
-                                    ></p>
+                                    <p>{blog.description}</p>
                                     <button
                                         id="button"
-                                        onClick={() => open(blog._id)}
+                                        onClick={() => open({ blog, index })}
                                     >
                                         Read More
                                     </button>
                                 </div>
                             </div>
                         ))}
-                </div>
-                <div className="containerr2">
-                    <div className="carrd">
-                        <div className="imagee">
-                            <img
-                                src="https://www.wallpapertip.com/wmimgs/44-442882_laddu-gopal-wallpaper.jpg"
-                                alt="HR"
-                            />
-                        </div>
-                        <div className="contentt">
-                            <h1>Dress | My Blog</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua.
-                            </p>
-                            <button id="button" onClick={open}>
-                                Read More
-                            </button>
-                        </div>
-                    </div>
-                    <div className="carrd">
-                        <div className="imagee">
-                            <img
-                                src="https://www.wallpapertip.com/wmimgs/44-442882_laddu-gopal-wallpaper.jpg"
-                                alt="HR"
-                            />
-                        </div>
-                        <div className="contentt">
-                            <h1>Dress | My Blog</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua.
-                            </p>
-                            <button id="button" onClick={open}>
-                                Read More
-                            </button>
-                        </div>
-                    </div>
-                    <div className="carrd">
-                        <div className="imagee">
-                            <img
-                                src="https://www.wallpapertip.com/wmimgs/44-442882_laddu-gopal-wallpaper.jpg"
-                                alt="HR"
-                            />
-                        </div>
-                        <div className="contentt">
-                            <h1>Dress | My Blog</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua.
-                            </p>
-                            <button id="button" onClick={open}>
-                                Read More
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 <button className="loadMoreButton">Load More</button>
             </div>
@@ -174,8 +112,8 @@ function Blogs() {
             </div>
             <Footer />
             <div className="popUp">
-                <div className="popUpcontent">
-                    {selected && (
+                {openedBlog && (
+                    <div className="popUpcontent">
                         <div>
                             <div className="headerPopup">
                                 <div className="headerTop">
@@ -183,149 +121,87 @@ function Blogs() {
                                         +
                                     </div>
                                     <div className="previousNext">
-                                        <span className="previousButton">
+                                        <span
+                                            className="previousButton"
+                                            onClick={() => {
+                                                if (openedBlog.index > 0) {
+                                                    setOpenedBlog({
+                                                        blog:
+                                                            blogs[
+                                                                openedBlog.index -
+                                                                    1
+                                                            ],
+                                                        index:
+                                                            openedBlog.index -
+                                                            1,
+                                                    });
+                                                }
+                                            }}
+                                        >
                                             <IoIosArrowBack id="backArrow" />
                                             <p>Previous</p>
                                         </span>
-                                        <div className="blogLogo">
-                                            {selected.title}
-                                        </div>
-                                        <span className="nextButton">
+                                        <div className="blogLogo">LOGO</div>
+                                        <span
+                                            className="nextButton"
+                                            onClick={() => {
+                                                if (
+                                                    openedBlog.index <
+                                                    blogs.length - 1
+                                                ) {
+                                                    setOpenedBlog({
+                                                        blog:
+                                                            blogs[
+                                                                openedBlog.index +
+                                                                    1
+                                                            ],
+                                                        index:
+                                                            openedBlog.index +
+                                                            1,
+                                                    });
+                                                }
+                                            }}
+                                        >
                                             <p>Next</p>
                                             <IoIosArrowForward id="backArrow" />
                                         </span>
                                     </div>
                                 </div>
                                 <hr id="blogline"></hr>
-                                {/* <div className="articleName">
-                                    {selected.title}
-                                </div> */}
+                                <div className="articleName">
+                                    {openedBlog.blog.title}
+                                </div>
                                 <div className="blogDress">
-                                    {/* <p id="dressName">Dresses</p> */}
+                                    <p id="dressName">
+                                        {openedBlog.blog.description}
+                                    </p>
                                     <p id="dressDate">
-                                        {" "}
-                                        {format(
-                                            new Date(selected.createdAt),
-                                            "do MMMM yyyy"
-                                        )}
+                                        {dayjs(openedBlog.blog.createdAt)
+                                            .format(`DD
+                                            MMMM YYYY`)}{" "}
                                     </p>
                                 </div>
                             </div>
-                            <div className="blogImage1">
-                                <img
-                                    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=840&q=80"
-                                    alt="RELOAD"
-                                ></img>
-                            </div>
-
                             <div
-                                style={{ margin: "4em" }}
-                                dangerouslySetInnerHTML={{
-                                    __html: selected.content,
+                                className="
+                            "
+                                style={{
+                                    paddingRight: "4em",
+                                    marginRight: "4em",
+                                    paddingLeft: "4em",
+                                    marginLeft: "4em",
                                 }}
-                            ></div>
-
-                            {/* <p className="mainHeading1">
-                                Any main heading can be in bold.
-                            </p>
-                            <p className="paraOne">
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.{" "}
-                                <br />
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.{" "}
-                                <br />
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.{" "}
-                                <br />
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.
-                            </p>
-                            <div className="blogImage2">
-                                <img
-                                    src="https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                    alt="reload"
-                                ></img>
+                            >
+                                <div
+                                    className=""
+                                    dangerouslySetInnerHTML={{
+                                        __html: openedBlog.blog.content,
+                                    }}
+                                ></div>
                             </div>
-                            <p className="mainHeading2">
-                                Any main heading can be in bold.
-                            </p>
-                            <p className="paraTwo">
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.{" "}
-                                <br />
-                                Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam
-                                erat, sed diam voluptua. At vero eos et accusam
-                                et justo duo dolores et ea rebum. Stet clita
-                                kasd gubergren, no sea takimata sanctus est
-                                Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam
-                                nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat, sed diam voluptua.
-                                At vero eos et accusam et justo duo dolores et
-                                ea rebum. Stet clita kasd gubergren, no sea
-                                takimata sanctus est Lorem ipsum dolor sit
-                            </p> */}
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     );

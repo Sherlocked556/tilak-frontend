@@ -1,5 +1,6 @@
 import axios from "../helpers/axios";
 import { categoryConstants } from "./constants";
+import { toast } from "react-toastify";
 
 export const getAllCategory = () => {
     return async (dispatch) => {
@@ -42,10 +43,23 @@ export const addCategory = (name, categoryImg) => async (dispatch) => {
             type: categoryConstants.ADD_NEW_CATEGORY_SUCCESS,
             payload: response.data,
         });
+
+        toast.success("Category Successfully added", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
     } catch (error) {
         dispatch({
             type: categoryConstants.ADD_NEW_CATEGORY_FAILURE,
             payload: { error },
         });
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in adding new Category", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     }
 };

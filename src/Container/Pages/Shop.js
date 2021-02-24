@@ -12,6 +12,7 @@ import { addToCart } from "../../actions";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CurrencyConverter from "./CurrencyConvert";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 const Shop = (props) => {
     const product = useSelector((state) => state.product);
@@ -123,35 +124,49 @@ const Shop = (props) => {
             </div>
         );
     };
-    return (
-        <div>
-            <Header />
-            <Index2 />
-            <div className="shop">
-                <Search />
-            </div>
-            <h2 className="shopheadlinee">our products...</h2>
-            {renderProducts()}
-            <div className="cards">
-                <div className="rrcard3">
-                    <span>
-                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
-                            CATEGORIES
-                        </Link>
-                    </span>
+
+    console.log(product.loading);
+
+    if (product.loading) {
+        return (
+            <Dimmer active={product.loading}>
+                <Loader />
+            </Dimmer>
+        );
+    } else {
+        return (
+            <div>
+                <Header />
+                <Index2 />
+                <Dimmer active={cart.loading}>
+                    <Loader />
+                </Dimmer>
+                <div className="shop">
+                    <Search />
                 </div>
-                <div className="rrcard4">
-                    <span>
-                        <Link to="/query" style={{ color: "#4D4D4D" }}>
-                            QUERY
-                        </Link>
-                    </span>
+                <h2 className="shopheadlinee">our products...</h2>
+                {renderProducts()}
+                <div className="cards">
+                    <div className="rrcard3">
+                        <span>
+                            <Link to="/categories" style={{ color: "#4D4D4D" }}>
+                                CATEGORIES
+                            </Link>
+                        </span>
+                    </div>
+                    <div className="rrcard4">
+                        <span>
+                            <Link to="/query" style={{ color: "#4D4D4D" }}>
+                                QUERY
+                            </Link>
+                        </span>
+                    </div>
                 </div>
+                <Footer />
+                <ToastContainer />
             </div>
-            <Footer />
-            <ToastContainer />
-        </div>
-    );
+        );
+    }
 };
 
 export default Shop;

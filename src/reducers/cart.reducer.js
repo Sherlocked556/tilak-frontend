@@ -12,6 +12,7 @@ export default (state = initState, action) => {
             return (state = {
                 ...state,
                 cartItems: action.payload,
+                loading: false,
             });
 
         case cartConstants.ADD_TO_CART_REQUEST:
@@ -31,6 +32,7 @@ export default (state = initState, action) => {
             return (state = {
                 ...state,
                 cartItems: action.payload,
+                loading: false,
             });
 
         case cartConstants.FETCH_CART_REQUEST:
