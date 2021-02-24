@@ -7,28 +7,12 @@ import "./Blog.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../helpers/axios";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 function Blogs() {
     let [blogs, setBlogs] = useState([]);
-    let [selected, setSelected] = useState();
-
     let [openedBlog, setOpenedBlog] = useState(null);
-    // let blogs = [];
-
-    const open = (id) => {
-        const findBlog = blogs.find((blog) => blog._id === id);
-
-        setSelected(findBlog);
-
-        document.querySelector(".popUp").style.display = "flex";
-    };
-
-    const close = () => {
-        document.querySelector(".popUp").style.display = "none";
-    };
 
     const fetchBlogs = async () => {
         try {
