@@ -15,19 +15,19 @@ function About() {
             <div className='bheadandadd'>
                 {/* <div className='bhead'><img src={require("../Top Nav Bar/02-01.png")}></img></div> */}
                 <MdLocationOn id='loc' viewBox='4 4 15.5 20' />
-                <a to="https://www.google.com/maps/search/Agrasen+Chowk+Near+SBI+bank,+Sri+GangaNagar++335001/@29.9171895,73.8665255,13z/data=!3m1!4b1"><p>Agrasen Chowk Near SBI bank, Sri GangaNagar  335001</p></a>
+                <a href="https://www.google.com/maps/search/Agrasen+Chowk+Near+SBI+bank,+Sri+GangaNagar++335001/@29.9171895,73.8665255,13z/data=!3m1!4b1" target='#' style={{cursor:'pointer'}}><p>Agrasen Chowk Near SBI bank, Sri GangaNagar  335001</p></a>
             </div>
             <h2 className='aboutheadline'>about us...</h2>
             <div className="imageAboutUs">
                 <img src={require("../TilakAbout.jpg")} alt=""></img>
             </div>
-            <p className="aboutUsPara">We are a group of Lord Krishna devotees who aim to bring you the latest designer Krishna clothes and accessories. We commenced our journey in 2013, seven years back, and employed housewives in GangaNagar, Gujrat to make them feel empowered. This financial independence for housewives is our giving back to society. Each piece of cloth, accessory, ornament, and idols is crafted with at most dedication and devotion. By sitting in your comfort zone, at your home you get mesmerizing artifacts to dress up your Laddu Gopal and Radha Rani with elegance. You can view different products at one place on our user-friendly interface to with high- resolution images to make your hassle-free shopping experience worthwhile.</p>
+            <p className="aboutUsPara">We are a group of Lord Krishna devotees who aim to bring you the latest designer Krishna clothes and accessories. We commenced our journey in 2013, seven years back, and employed housewives in Sri Ganganagar, Rajasthan to make them feel empowered. This financial independence for housewives is our giving back to society. Each piece of cloth, accessory, ornament, and idols is crafted with at most dedication and devotion. By sitting in your comfort zone, at your home you get mesmerizing artifacts to dress up your Laddu Gopal and Radha Rani with elegance. You can view different products at one place on our user-friendly interface to with high- resolution images to make your hassle-free shopping experience worthwhile.</p>
             <p className="memoryOf">in the memory of...</p>
             <div className="memoryImage">
                 <img src={require('../memoryImage.jpg')} alt=""></img>
             </div>
             <div className="yearMemory">
-                <p className="nameBold">Late Sunita Devi</p>
+                <p className="nameBold">Late SMT. Sunita Devi</p>
                 <p className="yearofMemory"> (1957-2012)</p>
             </div>
 
