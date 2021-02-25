@@ -1,26 +1,79 @@
-import { cartConstants } from '../actions/constants';
+import { cartConstants } from "../actions/constants";
 
 const initState = {
-    cartItems: {
-        // 123: {
-        //     _id: 123,
-        //     name: 'Shri Krishna Choli',
-        //     img: 'some.jpg',
-        //     price: 200,
-        //     description: 'abcd'
-        //     qty: 1
-        // }
-    }
+    cartItems: [],
+    error: null,
+    loading: false,
 };
 
-export default ( state = initState, action) => {
-    switch(action.type){
-        case cartConstants.ADD_TO_CART:
-            state = {
+export default (state = initState, action) => {
+    switch (action.type) {
+        case cartConstants.ADD_TO_CART_SUCCESS:
+            return (state = {
                 ...state,
-                cartItems: action.payload.cartItems
-            }
-            break;
+                cartItems: action.payload,
+                loading: false,
+            });
+
+        case cartConstants.ADD_TO_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case cartConstants.ADD_TO_CART_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error,
+                loading: false,
+            };
+
+        case cartConstants.FETCH_CART_SUCCESS:
+            return (state = {
+                ...state,
+                cartItems: action.payload,
+                loading: false,
+            });
+
+        case cartConstants.FETCH_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case cartConstants.FETCH_CART_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error,
+                loading: false,
+            };
+
+        case cartConstants.CLEAR_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case cartConstants.CLEAR_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                cartItems: state.cartItems.filter(
+                    (item) => item.product._id !== action.payload._id
+                ),
+            };
+
+        case cartConstants.CLEAR_FROM_CART_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error,
+                loading: false,
+            };
+
+        // case cartConstants.UPDATE_CART_SUCCESS:
+
+        default:
+            return state;
     }
     return state;
-}
+};

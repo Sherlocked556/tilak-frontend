@@ -5,13 +5,24 @@ import AdminProfile from "./AdminProfile";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { AiOutlineCheckSquare } from "react-icons/ai";
 import "./Admin.css";
 import AdminAddProduct from "./AdminAddProduct";
 import AdminAddBlog from "./AdminAddBlog";
 import axios from "../../helpers/axios";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    deleteProductById,
+    getAllProducts,
+    GetProductDetailsById,
+    updateProducts,
+} from "../../actions";
+import AdminAddCategory from "./AdminAddCategory";
+import AdminEditProduct from "./AdminEditProduct";
+import { ToastContainer } from "react-toastify";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 function openProduct() {
     document.querySelector(".AdminPopUp").style.display = "flex";
@@ -20,205 +31,351 @@ function closeProduct() {
     document.querySelector(".AdminPopUp").style.display = "none";
 }
 
-function openBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "flex";
+function openCategory() {
+    document.querySelector(".AdminCategoryPopUp").style.display = "flex";
 }
-function closeBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "none";
+function closeCategory() {
+    document.querySelector(".AdminCategoryPopUp").style.display = "none";
 }
 
-function Admin() {
-    const [products, setProducts] = useState([]);
+const Admin = () => {
+    const dispatch = useDispatch();
+    let { products } = useSelector((state) => state.product);
+    const { productDetails, loading } = useSelector((state) => state.product);
 
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.post("/product/getProducts", {});
+    const [updateList, setUpdateList] = useState([]);
+    const [toBeEdited, setToBeEdited] = useState({});
+    // const [productList, setProductList] = useState([]);
 
-            // console.log(response.data);
+    const handleProductDelete = async (id) => {
+        dispatch(deleteProductById(id));
+    };
 
-            if (response.data) {
-                setProducts([...products, ...response.data.products]);
-            }
-        } catch (error) {
-            console.log(error);
+    const openEditProduct = (product) => {
+        setToBeEdited(product);
+        dispatch(GetProductDetailsById({ params: { productId: product._id } }));
+
+        document.querySelector(".AdminEditPopUp").style.display = "flex";
+    };
+    const closeEditProduct = () => {
+        document.querySelector(".AdminEditPopUp").style.display = "none";
+    };
+
+    const handleQuantityUpdate = (id, inc) => {
+        if (updateList.find((item) => item._id === id)) {
+            setUpdateList(
+                updateList.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            quantity:
+                                inc === true
+                                    ? item.quantity + 1
+                                    : item.quantity - 1,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
+        } else {
+            setUpdateList(
+                products.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            quantity:
+                                inc === true
+                                    ? item.quantity + 1
+                                    : item.quantity - 1,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
         }
     };
 
-    const handleProductDelete = async (id) => {
-        try {
-            const response = await axios.delete(
-                `/product/deleteProductById/${id}`
+    const handleAvailableUpdate = (id, isAvail) => {
+        if (updateList.find((item) => item._id === id)) {
+            setUpdateList(
+                updateList.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            availability: isAvail,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
             );
-
-            const remainingProducts = products.filter((product) => product._id !== id);
-
-            console.log(remainingProducts);
-
-            setProducts(remainingProducts);
-        } catch (error) {
-            console.log(error);
+        } else {
+            setUpdateList(
+                products.map((item) => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            availability: isAvail,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
         }
+    };
+
+    const handleProductUpdate = () => {
+        dispatch(updateProducts(updateList));
     };
 
     useEffect(() => {
-        fetchProducts();
+        console.log("HELLO ADMIN");
+
+        // getAllProducts();
+        dispatch(getAllProducts());
     }, []);
 
-    console.log(products);
+    console.log(updateList);
 
-    return (
-        <div>
-            <Header />
-            <h2 className="heading">my profile...</h2>
-            <div className="Aboutttt">
-                <AdminProfile />
-            </div>
-            <div className="adminBox">
-                <div className="adminNav">
-                    <h6 className="adminProducts">
-                        <Link to="/Admin" style={{ color: "#4D4D4D" }}>
-                            PRODUCTS
-                        </Link>
-                    </h6>
-                    <h6 className="adminBilling">
-                        <Link to="/AdminBilling" style={{ color: "#4D4D4D" }}>
-                            BILLING
-                        </Link>
-                    </h6>
-                    <h6 className="adminReseller">
-                        <Link to="/AdminReseller" style={{ color: "#4D4D4D" }}>
-                            RESELLERS
-                        </Link>
-                    </h6>
+    if (updateList.length > 0) {
+        products = updateList;
+    }
+
+    if (loading && !toBeEdited) {
+        return (
+            <Dimmer active={loading}>
+                <Loader />
+            </Dimmer>
+        );
+    } else {
+        return (
+            <div>
+                <Header />
+                <h2 className="heading">my profile...</h2>
+                <div className="Aboutttt">
+                    <AdminProfile />
                 </div>
-                <div className="productLine">
-                    <hr id="adminLine2" />
-                    <hr id="adminLine" />
-                </div>
-                <div className="categoryProductBtn">
-                    <button className="categoryBtn">ADD CATEOGRY</button>
-                    <button className="productBtn" onClick={openProduct}>
-                        ADD PRODUCT
-                    </button>
-                    <button className="productBtn" onClick={openBlog}>
-                        ADD BLOG
-                    </button>
-                    <p className="productNumber">43,240 products in total</p>
-                </div>
-                <div className="SearchDrop"></div>
-                <div className="AdminProductDetails">
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "10.469vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "21.816vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "32.211vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "56.296vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "70.278vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <div className="AdminProductHeading">
-                        <p id="adminCategories">Categories</p>
-                        <p id="adminProductID">Product ID</p>
-                        <p id="adminQuantity">Quantity</p>
-                        <p id="adminName">Name</p>
-                        <p id="adminStatus">Status</p>
+                <div className="adminBox">
+                    <div className="adminNav">
+                        <h6 className="adminProducts">
+                            <Link to="/Admin" style={{ color: "#4D4D4D" }}>
+                                PRODUCTS
+                            </Link>
+                        </h6>
+                        <h6 className="adminBilling">
+                            <Link
+                                to="/AdminBilling"
+                                style={{ color: "#4D4D4D" }}
+                            >
+                                BILLING
+                            </Link>
+                        </h6>
+                        <h6 className="adminReseller">
+                            <Link
+                                to="/AdminReseller"
+                                style={{ color: "#4D4D4D" }}
+                            >
+                                RESELLERS
+                            </Link>
+                        </h6>
+                        <h6 className="adminBlogs">
+                            <Link to="/AdminBlogs" style={{ color: "#4D4D4D" }}>
+                                BLOGS
+                            </Link>
+                        </h6>
                     </div>
-                    <hr id="AdminLine"></hr>
-                    <div className="productDetailOuterBox">
-                        {products &&
-                            products.map((product) => (
-                                <div
-                                    className="productDetailsAdmin"
-                                    key={product._id}
-                                >
-                                    <p className="productDresses">
-                                        {product.category.name}
-                                    </p>
-                                    <p className="productIdAdmin">
-                                        {product._id.substr(
-                                            product._id.length - 5
-                                        )}
-                                    </p>
-                                    <span className="quantityIncDec">
-                                        <FiMinusCircle id="minusIcon" />
-                                        <p className="quantityNo">
-                                            {product.quantity}
+                    <div className="productLine">
+                        <hr id="adminLine2" />
+                        <hr id="adminLine" />
+                    </div>
+                    <div className="categoryProductBtn">
+                        <button className="categoryBtn" onClick={openCategory}>
+                            ADD CATEOGRY
+                        </button>
+                        <button className="productBtn" onClick={openProduct}>
+                            ADD PRODUCT
+                        </button>
+
+                        {products && (
+                            <p className="productNumber">
+                                {products.length} products in total
+                            </p>
+                        )}
+                    </div>
+                    <div className="SearchDrop"></div>
+                    <div className="categoryProductBtn">
+                        <button
+                            className="productBtn"
+                            onClick={handleProductUpdate}
+                        >
+                            APPLY CHANGES
+                        </button>
+                    </div>
+                    <div className="AdminProductDetails">
+                        <hr
+                            style={{
+                                border: "0.073vw solid #707070",
+                                width: "0",
+                                height: "45.388vw",
+                                marginLeft: "10.469vw",
+                                position: "absolute",
+                                marginTop: "0",
+                            }}
+                        ></hr>
+                        <hr
+                            style={{
+                                border: "0.073vw solid #707070",
+                                width: "0",
+                                height: "45.388vw",
+                                marginLeft: "21.816vw",
+                                position: "absolute",
+                                marginTop: "0",
+                            }}
+                        ></hr>
+                        <hr
+                            style={{
+                                border: "0.073vw solid #707070",
+                                width: "0",
+                                height: "45.388vw",
+                                marginLeft: "32.211vw",
+                                position: "absolute",
+                                marginTop: "0",
+                            }}
+                        ></hr>
+                        <hr
+                            style={{
+                                border: "0.073vw solid #707070",
+                                width: "0",
+                                height: "45.388vw",
+                                marginLeft: "56.296vw",
+                                position: "absolute",
+                                marginTop: "0",
+                            }}
+                        ></hr>
+                        <hr
+                            style={{
+                                border: "0.073vw solid #707070",
+                                width: "0",
+                                height: "45.388vw",
+                                marginLeft: "70.278vw",
+                                position: "absolute",
+                                marginTop: "0",
+                            }}
+                        ></hr>
+                        <div className="AdminProductHeading">
+                            <p id="adminCategories">Categories</p>
+                            <p id="adminProductID">Product ID</p>
+                            <p id="adminQuantity">Quantity</p>
+                            <p id="adminName">Name</p>
+                            <p id="adminStatus">Status</p>
+                        </div>
+                        <hr id="AdminLine"></hr>
+                        <div className="productDetailOuterBox">
+                            {products &&
+                                products.length > 0 &&
+                                products.map((product) => (
+                                    <div
+                                        className="productDetailsAdmin"
+                                        key={product._id}
+                                    >
+                                        <p className="productDresses">
+                                            {product.category.name}
                                         </p>
-                                        <FiPlusCircle id="plusIcon" />
-                                    </span>
-                                    <div className="dressName">
-                                        {product.name}
+                                        <p className="productIdAdmin">
+                                            {product._id.substr(
+                                                product._id.length - 5
+                                            )}
+                                        </p>
+                                        <span className="quantityIncDec">
+                                            <FiMinusCircle
+                                                id="minusIcon"
+                                                onClick={() =>
+                                                    handleQuantityUpdate(
+                                                        product._id,
+                                                        false
+                                                    )
+                                                }
+                                            />
+                                            <p className="quantityNo">
+                                                {product.quantity}
+                                            </p>
+                                            <FiPlusCircle
+                                                id="plusIcon"
+                                                onClick={() =>
+                                                    handleQuantityUpdate(
+                                                        product._id,
+                                                        true
+                                                    )
+                                                }
+                                            />
+                                        </span>
+                                        <div className="dressName">
+                                            {product.name}
+                                        </div>
+                                        <span className="productStatus">
+                                            <AiOutlineCloseSquare
+                                                id="closeSquare"
+                                                onClick={() =>
+                                                    handleAvailableUpdate(
+                                                        product._id,
+                                                        false
+                                                    )
+                                                }
+                                            />
+                                            <AiOutlineCheckSquare
+                                                id="checkSquare"
+                                                onClick={() =>
+                                                    handleAvailableUpdate(
+                                                        product._id,
+                                                        true
+                                                    )
+                                                }
+                                            />
+                                            <p className="StatusAva">
+                                                {product.availability
+                                                    ? "Available"
+                                                    : "Unavailable"}
+                                            </p>
+                                        </span>
+                                        <MdDelete
+                                            id="deleteButton"
+                                            onClick={() =>
+                                                handleProductDelete(product._id)
+                                            }
+                                        />
+                                        <MdEdit
+                                            id="editButton"
+                                            onClick={() =>
+                                                openEditProduct(product)
+                                            }
+                                        />
                                     </div>
-                                    <span className="productStatus">
-                                        <AiOutlineCloseSquare id="closeSquare" />
-                                        <AiOutlineCheckSquare id="checkSquare" />
-                                        <p className="StatusAva">
-                                            {product.quantity > 0
-                                                ? "Available"
-                                                : "Unavailable"}
-                                        </p>
-                                    </span>
-                                    <MdDelete
-                                        id="deleteButton"
-                                        onClick={() =>
-                                            handleProductDelete(product._id)
-                                        }
-                                    />
-                                </div>
-                            ))}
+                                ))}
+                        </div>
                     </div>
                 </div>
+                <hr className="endLine" />
+                <Footer />
+                <div className="AdminPopUp">
+                    <AdminAddProduct closeProduct={closeProduct} />
+                </div>
+
+                <div className="AdminCategoryPopUp">
+                    <AdminAddCategory closeProduct={closeCategory} />
+                </div>
+                <div className="AdminEditPopUp">
+                    <AdminEditProduct
+                        closeProduct={closeEditProduct}
+                        product={toBeEdited}
+                    />
+                </div>
+
+                <ToastContainer />
             </div>
-            <hr className="endLine" />
-            <Footer />
-            <div className="AdminPopUp">
-                <AdminAddProduct closeProduct={closeProduct} />
-            </div>
-            <div className="AdminBlogPopUp">
-                <AdminAddBlog closeProduct={closeBlog} />
-            </div>
-        </div>
-    );
-}
+        );
+    }
+};
 export default Admin;

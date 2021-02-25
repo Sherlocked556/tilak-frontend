@@ -6,11 +6,28 @@ import Footer from "../Footer/Footer";
 import "./Shop.css";
 import { TiHeartFullOutline } from "react-icons/ti";
 import { BiCartAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../actions";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import CurrencyConverter from "./CurrencyConvert";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 const Shop = (props) => {
     const product = useSelector((state) => state.product);
+    const cart = useSelector((state) => state.cart);
+    const { currency } = useSelector((state) => state.currency);
+
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
+        console.log(product);
+    };
+
+    console.log(product);
+
     const renderProducts = () => {
         return (
             <div
@@ -30,6 +47,7 @@ const Shop = (props) => {
                                 marginLeft: "1vw",
                                 marginBottom: " 3.5vw",
                             }}
+                            key={product._id}
                         >
                             <div className="product1">
                                 <Link
@@ -40,7 +58,8 @@ const Shop = (props) => {
                                 >
                                     {product.productPictures.map((picture) => (
                                         <img
-                                            src={`http://localhost:2000/public/${picture.img}`}
+                                            src={`https://api.tilakshringar.com/public/${picture.img}`}
+                                            key={picture.img}
                                             alt="HR"
                                         />
                                     ))}
@@ -53,10 +72,13 @@ const Shop = (props) => {
                                         top: "0.366vw",
                                     }}
                                 >
-                                    <div className="ii2">
+                                    {/* <div className="ii2">
                                         <TiHeartFullOutline id="iii2" />
-                                    </div>
-                                    <div className="ii1">
+                                    </div> */}
+                                    <div
+                                        className="ii1"
+                                        onClick={() => handleAddToCart(product)}
+                                    >
                                         <BiCartAlt id="iii1" />
                                     </div>
                                 </div>
@@ -68,131 +90,83 @@ const Shop = (props) => {
                                         display: "block",
                                     }}
                                 >
-                                    <p2
+                                    <p
                                         style={{ color: "#4D4D4D" }}
                                         id="product1i"
                                     >
                                         {product.name}
-                                    </p2>
+                                    </p>
                                 </Link>
-                                <p2 id="price1">Rs. {product.price}/-</p2>
+                                {currency === "INR" && (
+                                    <h2 id="price1">Rs. {product.price}/-</h2>
+                                )}
+
+                                {currency !== "INR" && (
+                                    <h2 id="price1">
+                                        {currency}.
+                                        <CurrencyConverter
+                                            from={"INR"}
+                                            to={currency}
+                                            value={product.price * 1.05}
+                                            precision={2}
+                                        />
+                                        /-
+                                    </h2>
+                                )}
                             </div>
                         </div>
                     ))
                 ) : (
-                        <div className="nullProducts">
-                            <h2>No Products</h2>
-                        </div>
-                    )}
+                    <div className="nullProducts">
+                        <h2>No Products</h2>
+                    </div>
+                )}
             </div>
         );
     };
-    return (
-        <div>
-            <Header />
-            <Index2 />
-            <div className="shop">
-                <Search />
-            </div>
-            <h2 className="shopheadlinee">our products...</h2>
-            {renderProducts()}
-            {/* <div className='product1'>
-                <div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div>
-            </div>
-            <div className='p1info'>
-                <p2 id='product1i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price1'>Rs. 300/-</p2>
-            </div> */}
-            {/* <div className='product2'>
-                <div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div>
-            </div>
-            <div className='p2info'>
-                <p2 id='product2i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price2'>Rs. 300/-</p2>
-            </div>
-            <div className='product3'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p3info'>
-                <p2 id='product3i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price3'>Rs. 300/-</p2>
-            </div>
-            <div className='product4'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p4info'>
-                <p2 id='product4i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price4'>Rs. 300/-</p2>
-            </div>
-            <div className='product5'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p5info'>
-                <p2 id='product5i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price5'>Rs. 300/-</p2>
-            </div>
-            <div className='product6'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p6info'>
-                <p2 id='product6i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price6'>Rs. 300/-</p2>
-            </div>
-            <div className='product7'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p7info'>
-                <p2 id='product7i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price7'>Rs. 300/-</p2>
-            </div>
-            <div className='product8'><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p8info'>
-                <p2 id='product8i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price8'>Rs. 300/-</p2>
-            </div>
-            <div className='product9'><a href='/product' style={{color:'#4D4D4D'}}/><div className="ii"> 
-                    <div className="ii1"><BiCartAlt id="iii1"/></div> 
-                    <div className="ii2"><TiHeartFullOutline id="iii2"/></div> 
-                </div></div>
-            <div className='p9info'>
-                <p2 id='product9i'><a href='/product' style={{color:'#4D4D4D'}}>Product Name will be written in maximum of two lines</a></p2>
-                <p2 id='price9'>Rs. 300/-</p2>
-            </div>
 
-            <button className="shoploadMore">Load More </button> */}
-            <div className="cards">
-                <div className="rrcard3">
-                    <span>
-                        <Link to="/categories" style={{ color: "#4D4D4D" }}>
-                            CATEGORIES
-                        </Link>
-                    </span>
+    console.log(product.loading);
+
+    if (product.loading) {
+        return (
+            <Dimmer active={product.loading}>
+                <Loader />
+            </Dimmer>
+        );
+    } else {
+        return (
+            <div>
+                <Header />
+                <Index2 />
+                <Dimmer active={cart.loading}>
+                    <Loader />
+                </Dimmer>
+                <div className="shop">
+                    <Search />
                 </div>
-                <div className="rrcard4">
-                    <span>
-                        <Link to="/query" style={{ color: "#4D4D4D" }}>
-                            QUERY
-                        </Link>
-                    </span>
+                <h2 className="shopheadlinee">our products...</h2>
+                {renderProducts()}
+                <div className="cards">
+                    <div className="rrcard3">
+                        <span>
+                            <Link to="/categories" style={{ color: "#4D4D4D" }}>
+                                CATEGORIES
+                            </Link>
+                        </span>
+                    </div>
+                    <div className="rrcard4">
+                        <span>
+                            <Link to="/query" style={{ color: "#4D4D4D" }}>
+                                QUERY
+                            </Link>
+                        </span>
+                    </div>
                 </div>
+                <Footer />
+                <ToastContainer />
             </div>
-            <Footer />
-        </div>
-    );
+        );
+    }
 };
 
 export default Shop;
