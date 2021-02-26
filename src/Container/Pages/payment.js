@@ -117,7 +117,7 @@ const Payment = (props) => {
                     `/addOrder/razorpay?orderCreationId=${order_id}&razorpayPaymentId=${response.razorpay_payment_id}&razorpayOrderId=${response.razorpay_order_id}&razorpaySignature=${response.razorpay_signature}`
                 );
 
-                alert(result.data);
+                alert("Payment Successful");
             },
         };
 
