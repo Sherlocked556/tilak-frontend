@@ -63,7 +63,7 @@ const LoginSign = (props) => {
                     </div>
                 )}
 
-            {(localStorage.getItem("access-token") ||
+            {(!localStorage.getItem("access-token") ||
                 localStorage.getItem("access-token") === "") && (
                 <div className="loginOuterBox">
                     <div className="firstSignBox">
