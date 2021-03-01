@@ -125,7 +125,7 @@ const Product = (props) => {
                         {!viewImage && (
                             <img
                                 className="ppic"
-                                src={`http://localhost:2000/public/${product.productDetails.productPictures[0].img}`}
+                                src={`https://api.tilakshringar.com/public/${product.productDetails.productPictures[0].img}`}
                                 alt="HR"
                             ></img>
                         )}
@@ -133,7 +133,7 @@ const Product = (props) => {
                         {viewImage && (
                             <img
                                 className="ppic"
-                                src={`http://localhost:2000/public/${viewImage.image.img}`}
+                                src={`https://api.tilakshringar.com/public/${viewImage.image.img}`}
                                 alt="HR"
                             ></img>
                         )}
@@ -179,7 +179,7 @@ const Product = (props) => {
                                             }
                                         >
                                             <img
-                                                src={`http://localhost:2000/public/${image.img}`}
+                                                src={`https://api.tilakshringar.com/public/${image.img}`}
                                                 height="100"
                                                 width="100"
                                             />
