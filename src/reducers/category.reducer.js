@@ -64,6 +64,7 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 categories: action.payload.categories,
+                loading: false,
             };
             break;
         case categoryConstants.ADD_NEW_CATEGORY_REQUEST:
