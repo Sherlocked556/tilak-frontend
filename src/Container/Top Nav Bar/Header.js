@@ -64,6 +64,8 @@ const Header = () => {
         }
     }, []);
 
+    // console.log(cartItems);
+
     return (
         <>
             <div className="topheadd"></div>
@@ -122,11 +124,13 @@ const Header = () => {
                                 Cart
                             </Link>
                         </p>
-                        <p className="quantity" style={{ color: "white" }}>
-                            <Link to="/cart" style={{ color: "white" }}>
-                                {cartItems.length}
-                            </Link>
-                        </p>
+                        {cartItems.cartItems && (
+                            <p className="quantity" style={{ color: "white" }}>
+                                <Link to="/cart" style={{ color: "white" }}>
+                                    {cartItems.cartItems.length}
+                                </Link>
+                            </p>
+                        )}
                     </div>
                     <div className="user">
                         {" "}

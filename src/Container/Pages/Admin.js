@@ -47,9 +47,9 @@ const Admin = () => {
     const [toBeEdited, setToBeEdited] = useState({});
     // const [productList, setProductList] = useState([]);
 
-    const handleProductDelete = async (id) => {
-        dispatch(deleteProductById(id));
-    };
+    // const handleProductDelete = async (id) => {
+    //     dispatch(deleteProductById(id));
+    // };
 
     const openEditProduct = (product) => {
         setToBeEdited(product);
@@ -186,6 +186,14 @@ const Admin = () => {
                                 BLOGS
                             </Link>
                         </h6>
+                        <h6 className="adminInventory">
+                            <Link
+                                to="/AdminInventory"
+                                style={{ color: "#4D4D4D" }}
+                            >
+                                INVENTORY
+                            </Link>
+                        </h6>
                     </div>
                     <div className="productLine">
                         <hr id="adminLine2" />
@@ -276,90 +284,86 @@ const Admin = () => {
                         <div className="productDetailOuterBox">
                             {products &&
                                 products.length > 0 &&
-                                products.map(
-                                    (product) =>
-                                        product &&
-                                        product.category && (
-                                            <div
-                                                className="productDetailsAdmin"
-                                                key={product._id}
-                                            >
-                                                <p className="productDresses">
-                                                    {product.category.name}
-                                                </p>
-                                                <p className="productIdAdmin">
-                                                    {product._id.substr(
-                                                        product._id.length - 5
-                                                    )}
-                                                </p>
-                                                <span className="quantityIncDec">
-                                                    <FiMinusCircle
-                                                        id="minusIcon"
-                                                        onClick={() =>
-                                                            handleQuantityUpdate(
-                                                                product._id,
-                                                                false
-                                                            )
-                                                        }
-                                                    />
-                                                    <p className="quantityNo">
-                                                        {product.quantity}
-                                                    </p>
-                                                    <FiPlusCircle
-                                                        id="plusIcon"
-                                                        onClick={() =>
-                                                            handleQuantityUpdate(
-                                                                product._id,
-                                                                true
-                                                            )
-                                                        }
-                                                    />
-                                                </span>
-                                                <div className="dressName">
-                                                    {product.name}
-                                                </div>
-                                                <span className="productStatus">
-                                                    <AiOutlineCloseSquare
-                                                        id="closeSquare"
-                                                        onClick={() =>
-                                                            handleAvailableUpdate(
-                                                                product._id,
-                                                                false
-                                                            )
-                                                        }
-                                                    />
-                                                    <AiOutlineCheckSquare
-                                                        id="checkSquare"
-                                                        onClick={() =>
-                                                            handleAvailableUpdate(
-                                                                product._id,
-                                                                true
-                                                            )
-                                                        }
-                                                    />
-                                                    <p className="StatusAva">
-                                                        {product.availability
-                                                            ? "Available"
-                                                            : "Unavailable"}
-                                                    </p>
-                                                </span>
-                                                <MdDelete
-                                                    id="deleteButton"
+                                products.map((product) => (
+                                    <div
+                                        className="productDetailsAdmin"
+                                        key={product._id}
+                                    >
+                                        <p className="productDresses">
+                                            {product.category.name}
+                                        </p>
+                                        <p className="productIdAdmin">
+                                            {product._id.substr(
+                                                product._id.length - 5
+                                            )}
+                                        </p>
+                                        {!product.quantity && (
+                                            <span className="quantityIncDec">
+                                                Multi
+                                            </span>
+                                        )}
+                                        {product.quantity && (
+                                            <span className="quantityIncDec">
+                                                <FiMinusCircle
+                                                    id="minusIcon"
                                                     onClick={() =>
-                                                        handleProductDelete(
-                                                            product._id
+                                                        handleQuantityUpdate(
+                                                            product._id,
+                                                            false
                                                         )
                                                     }
                                                 />
-                                                <MdEdit
-                                                    id="editButton"
+                                                <p className="quantityNo">
+                                                    {product.quantity}
+                                                </p>
+                                                <FiPlusCircle
+                                                    id="plusIcon"
                                                     onClick={() =>
-                                                        openEditProduct(product)
+                                                        handleQuantityUpdate(
+                                                            product._id,
+                                                            true
+                                                        )
                                                     }
                                                 />
-                                            </div>
-                                        )
-                                )}
+                                            </span>
+                                        )}
+                                        <div className="dressName">
+                                            {product.name}
+                                        </div>
+                                        <span className="productStatus">
+                                            <AiOutlineCloseSquare
+                                                id="closeSquare"
+                                                onClick={() =>
+                                                    handleAvailableUpdate(
+                                                        product._id,
+                                                        false
+                                                    )
+                                                }
+                                            />
+                                            <AiOutlineCheckSquare
+                                                id="checkSquare"
+                                                onClick={() =>
+                                                    handleAvailableUpdate(
+                                                        product._id,
+                                                        true
+                                                    )
+                                                }
+                                            />
+                                            <p className="StatusAva">
+                                                {product.availability
+                                                    ? "Available"
+                                                    : "Unavailable"}
+                                            </p>
+                                        </span>
+
+                                        <MdEdit
+                                            id="editButton"
+                                            onClick={() =>
+                                                openEditProduct(product)
+                                            }
+                                        />
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </div>

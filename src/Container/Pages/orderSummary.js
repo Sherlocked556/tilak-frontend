@@ -11,13 +11,16 @@ import { deleteAddress, fetchAddress } from "../../actions/address.action";
 import CurrencyConverter from "./CurrencyConvert";
 
 function OrderSummary() {
-    const { cartItems } = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart);
     const { address } = useSelector((state) => state.address);
     const { currency } = useSelector((state) => state.currency);
 
     const [orderAddress, setOrderAddress] = useState();
 
     let userAddress = [];
+    let totalPrice = 0;
+
+    let cartItems = [];
 
     if (address[0]) {
         userAddress = address[0].address;
@@ -32,13 +35,10 @@ function OrderSummary() {
         dispatch(fetchAddress());
     }, []);
 
-    let totalPrice = 0;
-
-    for (let index = 0; index < cartItems.length; index++) {
-        totalPrice +=
-            cartItems[index].product.price * cartItems[index].quantity;
+    if (cart.cartItems.cartItems) {
+        cartItems = cart.cartItems.cartItems;
+        totalPrice = cart.cartItems.totalAmount;
     }
-
     console.log(userAddress);
 
     return (
@@ -145,26 +145,27 @@ function OrderSummary() {
                             </p>
                         )}
                     </div>
-                    <Link
-                        to={{
-                            pathname: "/payment",
-                            orderAddress: orderAddress,
-                        }}
-                    >
-                        {orderAddress && cartItems.length > 0 && (
+
+                    {!orderAddress && (
+                        <p id="priceSummaryHeading">Select an Address</p>
+                    )}
+
+                    {orderAddress && cartItems.length > 0 && (
+                        <Link
+                            to={{
+                                pathname: "/payment",
+                                orderAddress: orderAddress,
+                            }}
+                        >
                             <button id="confirmPayButton">
                                 Confirm and Pay
                             </button>
-                        )}
 
-                        {(!cartItems || cartItems.length <= 0) && (
-                            <p id="priceSummaryHeading">No Items in Cart</p>
-                        )}
-
-                        {!orderAddress && (
-                            <p id="priceSummaryHeading">Select an Address</p>
-                        )}
-                    </Link>
+                            {(!cartItems || cartItems.length <= 0) && (
+                                <p id="priceSummaryHeading">No Items in Cart</p>
+                            )}
+                        </Link>
+                    )}
                 </div>
             </div>
 
@@ -198,9 +199,7 @@ function OrderSummary() {
                             </p>
                             <p className="priceoftheGivenProduct">
                                 {currency === "INR" && (
-                                    <span id="price1">
-                                        Rs. {item.product.price}/-
-                                    </span>
+                                    <span id="price1">Rs. {item.price}/-</span>
                                 )}
 
                                 {currency !== "INR" && (
@@ -209,7 +208,7 @@ function OrderSummary() {
                                         <CurrencyConverter
                                             from={"INR"}
                                             to={currency}
-                                            value={item.product.price * 1.05}
+                                            value={item.price * 1.05}
                                             precision={2}
                                         />
                                         /-

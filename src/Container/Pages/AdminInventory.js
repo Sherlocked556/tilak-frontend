@@ -13,33 +13,43 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import AdminAddBlog from "./AdminAddBlog";
 import AdminEditBlog from "./AdminEditBlog";
 import { ToastContainer } from "react-toastify";
+import AdminAddInventory from "./AdminAddInventory";
+import {
+    deleteInventory,
+    fetchInventory,
+    fetchOneInventory,
+} from "../../actions/inventory.action";
+import AdminEditInventory from "./AdminEditInventory";
 
-function openBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "flex";
+function openAddInventory() {
+    document.querySelector(".AdminInventoryPopUp").style.display = "flex";
 }
-function closeBlog() {
-    document.querySelector(".AdminBlogPopUp").style.display = "none";
+function closeAddInventory() {
+    document.querySelector(".AdminInventoryPopUp").style.display = "none";
 }
 
-const AdminBlogs = () => {
-    const { blogs } = useSelector((state) => state.blogs);
+const AdminInventory = () => {
+    const { inventory } = useSelector((state) => state.inventory);
     const [toBeEdited, setToBeEdited] = useState({});
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchBlogs());
+        dispatch(fetchInventory());
     }, []);
 
-    const handleBlogDelete = (blogId) => {
-        dispatch(deleteBlog(blogId));
+    const handleInventoryDelete = (inventoryId) => {
+        dispatch(deleteInventory(inventoryId));
     };
 
-    const openEditBlog = (blog) => {
-        setToBeEdited(blog);
-        document.querySelector(".AdminEditBlogPopUp").style.display = "flex";
+    const openEditInventory = (inventory) => {
+        dispatch(fetchOneInventory(inventory._id));
+
+        document.querySelector(".AdminEditInventoryPopUp").style.display =
+            "flex";
     };
-    const closeEditBlog = () => {
-        document.querySelector(".AdminEditBlogPopUp").style.display = "none";
+    const closeEditInventory = () => {
+        document.querySelector(".AdminEditInventoryPopUp").style.display =
+            "none";
     };
 
     console.log(toBeEdited);
@@ -86,10 +96,10 @@ const AdminBlogs = () => {
                     <hr id="AdminResellerLine4" />
                 </div>
                 <div className="categoryProductBtn">
-                    <button className="productBtn" onClick={openBlog}>
-                        ADD BLOG
+                    <button className="productBtn" onClick={openAddInventory}>
+                        ADD INVENTORY
                     </button>{" "}
-                    <p className="productNumber">{blogs.length} blogs</p>
+                    <p className="productNumber">{inventory.length} items</p>
                 </div>
                 <div className="SearchBilling"></div>
                 <div className="AdminProductDetails">
@@ -97,33 +107,35 @@ const AdminBlogs = () => {
                         <Table.Header>
                             <Table.Row>
                                 <Table.HeaderCell>Sr. No.</Table.HeaderCell>
-                                <Table.HeaderCell>Title</Table.HeaderCell>
+                                <Table.HeaderCell>Name</Table.HeaderCell>
                                 <Table.HeaderCell>Dated Added</Table.HeaderCell>
                                 <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
                         <Table.Body>
-                            {blogs &&
-                                blogs.map((blog, index) => (
-                                    <Table.Row key={blog._id}>
+                            {inventory &&
+                                inventory.map((item, index) => (
+                                    <Table.Row key={item._id}>
                                         <Table.Cell>{index + 1}</Table.Cell>
-                                        <Table.Cell>{blog.title}</Table.Cell>
+                                        <Table.Cell>{item.name}</Table.Cell>
                                         <Table.Cell>
-                                            {dayjs(blog.createdAt).format(`DD
+                                            {dayjs(item.createdAt).format(`DD
                                             MMMM YYYY`)}
                                         </Table.Cell>
                                         <Table.Cell>
                                             <MdDelete
                                                 id="deleteButton"
                                                 onClick={() =>
-                                                    handleBlogDelete(blog._id)
+                                                    handleInventoryDelete(
+                                                        item._id
+                                                    )
                                                 }
                                             />
                                             <MdEdit
                                                 id="editButton"
                                                 onClick={() =>
-                                                    openEditBlog(blog)
+                                                    openEditInventory(item)
                                                 }
                                             />
                                         </Table.Cell>
@@ -136,22 +148,16 @@ const AdminBlogs = () => {
             <hr className="endLine" />
 
             <Footer />
-            <div className="AdminBlogPopUp">
-                <AdminAddBlog closeProduct={closeBlog} />
+            <div className="AdminInventoryPopUp">
+                <AdminAddInventory closeProduct={closeAddInventory} />
             </div>
 
-            <div className="AdminEditBlogPopUp">
-                <AdminEditBlog
-                    title={toBeEdited.title}
-                    content={toBeEdited.content}
-                    description={toBeEdited.description}
-                    blogId={toBeEdited._id}
-                    closeProduct={closeEditBlog}
-                />
+            <div className="AdminEditInventoryPopUp">
+                <AdminEditInventory closeProduct={closeEditInventory} />
             </div>
 
             <ToastContainer />
         </div>
     );
 };
-export default AdminBlogs;
+export default AdminInventory;

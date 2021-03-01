@@ -10,7 +10,7 @@ import CurrencyConverter from "./CurrencyConvert";
 import { fx } from "money";
 
 const Payment = (props) => {
-    const { cartItems } = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
 
     const dispatch = useDispatch();
@@ -27,11 +27,14 @@ const Payment = (props) => {
         }
     }, []);
 
-    console.log(cartItems);
+    let cartItems = [];
 
-    for (let index = 0; index < cartItems.length; index++) {
-        amount += cartItems[index].product.price * cartItems[index].quantity;
+    if (cart.cartItems.cartItems) {
+        cartItems = cart.cartItems.cartItems;
+        amount = cart.cartItems.totalAmount;
     }
+
+    console.log(orderAddress);
 
     const changePaymentMethod = (e) => {
         const { name } = e.target;
@@ -75,9 +78,15 @@ const Payment = (props) => {
             return;
         }
 
+        if (!orderAddress) {
+            alert("Please select an address");
+            return;
+        }
+
         const result = await axios.post("/createOrder/razorpay", {
             paymentMethod,
             currency,
+            addressId: orderAddress._id,
         });
 
         console.log(result.data);
@@ -117,7 +126,12 @@ const Payment = (props) => {
                     `/addOrder/razorpay?orderCreationId=${order_id}&razorpayPaymentId=${response.razorpay_payment_id}&razorpayOrderId=${response.razorpay_order_id}&razorpaySignature=${response.razorpay_signature}`
                 );
 
-                alert("Payment Successful");
+                if (result.data) {
+                    alert("Payment Successful");
+                    window.location.replace("/")
+                } else {
+                    alert("Payment Unsuccessful");
+                }
             },
         };
 
@@ -138,9 +152,15 @@ const Payment = (props) => {
             return;
         }
 
+        if (!orderAddress) {
+            alert("Please select an address");
+            return;
+        }
+
         const result = await axios.post("/createOrder/paypal", {
             paymentMethod,
             currency: "INR",
+            addressId: orderAddress._id,
         });
 
         console.log(result.data);

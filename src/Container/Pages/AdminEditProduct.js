@@ -28,21 +28,18 @@ export default function AdminEditProduct(props) {
     const dispatch = useDispatch();
 
     const handleEditProduct = (values) => {
-        if (values.areVariants) {
-            let low = Number.POSITIVE_INFINITY;
-
-            let tmp;
-
-            for (let i = 0; i < values.variant.length; i++) {
-                tmp = values.variant[i].price;
-                if (tmp < low) low = tmp;
-            }
-
-            values.price = low;
-        }
         values._id = product._id;
         values.availability = product.availability;
         values.createdBy = product.createdBy;
+        values.size = {
+            sizeUnit: values.sizeUnit,
+            sizeVariants: values.variant,
+        };
+        values.areSizes = values.areVariants;
+
+        delete values.sizeUnit;
+        delete values.variant;
+        delete values.areVariants;
 
         console.log(values);
 
@@ -67,16 +64,23 @@ export default function AdminEditProduct(props) {
                                 enableReinitialize
                                 initialValues={{
                                     name: product.name,
-                                    price: product.price,
+                                    basePrice: product.basePrice,
                                     quantity: product.quantity,
                                     category: product.category,
                                     description: product.description,
                                     prevProductImages: product.productPictures,
                                     productImages: [],
-                                    variant: product.areVariants
-                                        ? product.variants
-                                        : [{ variantName: "", price: 0 }],
-                                    areVariants: product.areVariants,
+                                    variant: product.areSizes
+                                        ? product.sizes.sizeVariants
+                                        : [
+                                              {
+                                                  sizeValue: "",
+                                                  addOnPrice: 0,
+                                                  quantity: 0,
+                                              },
+                                          ],
+                                    areVariants: product.areSizes,
+                                    sizeUnit: product.sizes.sizeUnit,
                                 }}
                                 onSubmit={(data) => handleEditProduct(data)}
                             >
@@ -100,39 +104,66 @@ export default function AdminEditProduct(props) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
-                                            {!values.areVariants && (
-                                                <Form.Input
-                                                    label="Product Price"
-                                                    labelPosition="right"
-                                                    type="number"
-                                                    placeholder="Product Price"
-                                                    value={values.price}
-                                                    style={{
-                                                        marginRight: "0",
-                                                        marginTop: "0",
-                                                        height: "2.6em",
-                                                    }}
-                                                    name="price"
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                >
-                                                    <Label basic>₹</Label>
-                                                    <input />
-                                                    <Label>.00</Label>
-                                                </Form.Input>
-                                            )}
-                                        </Form.Group>
-                                        <Form.Group widths={2}>
+
                                             <Form.Input
-                                                label="Quantity"
+                                                label="Product Base Price"
+                                                labelPosition="right"
                                                 type="number"
-                                                name="quantity"
-                                                value={values.quantity}
+                                                placeholder="Product Base Price"
+                                                value={values.basePrice}
+                                                style={{
+                                                    marginRight: "0",
+                                                    marginTop: "0",
+                                                    height: "2.6em",
+                                                }}
+                                                name="basePrice"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             >
+                                                <Label basic>₹</Label>
                                                 <input />
+                                                <Label>.00</Label>
                                             </Form.Input>
+                                        </Form.Group>
+                                        <Form.Group widths={2}>
+                                            {!values.areVariants && (
+                                                <Form.Input
+                                                    label="Quantity"
+                                                    type="number"
+                                                    name="quantity"
+                                                    value={values.quantity}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                >
+                                                    <input />
+                                                </Form.Input>
+                                            )}
+
+                                            {values.areVariants && (
+                                                <Form.Select
+                                                    label="Size Unit"
+                                                    placeholder="Select Size Unit"
+                                                    options={[
+                                                        {
+                                                            text: "Inch",
+                                                            value: "inch",
+                                                        },
+                                                        {
+                                                            text: "Feet",
+                                                            value: "feet",
+                                                        },
+                                                    ]}
+                                                    value={values.sizeUnit}
+                                                    name="sizeUnit"
+                                                    onChange={(_, { value }) =>
+                                                        setFieldValue(
+                                                            "sizeUnit",
+                                                            value
+                                                        )
+                                                    }
+                                                    onBlur={handleBlur}
+                                                />
+                                            )}
 
                                             <Form.Field
                                                 label="Category"
@@ -169,11 +200,11 @@ export default function AdminEditProduct(props) {
                                                                     key={index}
                                                                 >
                                                                     <Form.Input
-                                                                        label="Variant Name"
-                                                                        placeholder="Variant Name"
-                                                                        name={`variant[${index}].variantName`}
+                                                                        label="Size Value"
+                                                                        placeholder="Size Value"
+                                                                        name={`variant[${index}].sizeValue`}
                                                                         value={
-                                                                            variant.variantName
+                                                                            variant.sizeValue
                                                                         }
                                                                         onChange={
                                                                             handleChange
@@ -181,12 +212,24 @@ export default function AdminEditProduct(props) {
                                                                     />
 
                                                                     <Form.Input
-                                                                        label="Variant Price"
+                                                                        label="Quantity"
+                                                                        placeholder="Quantity"
+                                                                        name={`variant[${index}].quantity`}
+                                                                        value={
+                                                                            variant.quantity
+                                                                        }
+                                                                        onChange={
+                                                                            handleChange
+                                                                        }
+                                                                    />
+
+                                                                    <Form.Input
+                                                                        label="Variant Add-on Price"
                                                                         labelPosition="right"
                                                                         type="number"
-                                                                        placeholder="Variant Price"
+                                                                        placeholder="Variant Add-on Price"
                                                                         value={
-                                                                            variant.price
+                                                                            variant.addOnPrice
                                                                         }
                                                                         style={{
                                                                             marginRight:
@@ -196,7 +239,7 @@ export default function AdminEditProduct(props) {
                                                                             height:
                                                                                 "2.6em",
                                                                         }}
-                                                                        name={`variant[${index}].price`}
+                                                                        name={`variant[${index}].addOnPrice`}
                                                                         onChange={
                                                                             handleChange
                                                                         }
@@ -219,9 +262,10 @@ export default function AdminEditProduct(props) {
                                                                                 index +
                                                                                     1,
                                                                                 {
-                                                                                    variantName:
+                                                                                    sizeValue:
                                                                                         "",
-                                                                                    price: 0,
+                                                                                    addOnPrice: 0,
+                                                                                    quantity: 0,
                                                                                 }
                                                                             )
                                                                         }

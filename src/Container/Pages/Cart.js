@@ -11,7 +11,7 @@ const Cart = (props) => {
     const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
 
-    const cartItems = cart.cartItems;
+    const { cartItems } = cart.cartItems;
 
     const dispatch = useDispatch();
 
@@ -21,12 +21,8 @@ const Cart = (props) => {
 
     let totalPrice = 0;
 
-    if (cartItems.length > 0) {
-        for (let index = 0; index < cartItems.length; index++) {
-            if (cartItems[index].product)
-                totalPrice +=
-                    cartItems[index].product.price * cartItems[index].quantity;
-        }
+    if (cartItems) {
+        totalPrice = cart.cartItems.totalAmount;
     }
 
     console.log(cartItems);
@@ -44,7 +40,11 @@ const Cart = (props) => {
             <p className="myCartHeadline">my cart...</p>
             <div className="myCartMainBox">
                 <div className="CartBox">
-                    <p className="itemNoHeading">{cartItems.length} Items</p>
+                    {cartItems && (
+                        <p className="itemNoHeading">
+                            {cartItems.length} Items
+                        </p>
+                    )}
 
                     {cartItems &&
                         cartItems.map((item) => (
@@ -55,7 +55,7 @@ const Cart = (props) => {
                                             height: "100%",
                                             maxWidth: "100%",
                                         }}
-                                        src={`https://api.tilakshringar.com/public/${item.product.productPictures[0].img}`}
+                                        src={`http://localhost:2000/public/${item.product.productPictures[0].img}`}
                                         alt="Product Image"
                                     />
                                 </div>
@@ -75,9 +75,9 @@ const Cart = (props) => {
                                     </p>
                                     <p className="priceoftheGivenProduct">
                                         {currency === "INR" && (
-                                            <h2 id="price1">
-                                                Rs. {item.product.price}/-
-                                            </h2>
+                                            <span id="price1">
+                                                Rs. {item.price}/-
+                                            </span>
                                         )}
 
                                         {currency !== "INR" && (
@@ -86,10 +86,7 @@ const Cart = (props) => {
                                                 <CurrencyConverter
                                                     from={"INR"}
                                                     to={currency}
-                                                    value={
-                                                        item.product.price *
-                                                        1.05
-                                                    }
+                                                    value={item.price * 1.05}
                                                     precision={2}
                                                 />
                                                 /-

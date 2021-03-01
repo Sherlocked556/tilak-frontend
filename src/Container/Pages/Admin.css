@@ -70,6 +70,16 @@
     color: #8d8d8d;
 }
 
+
+.adminInventory {
+    width: 7.028vw;
+    height: 2.05vw;
+    margin-top: 0;
+    margin-left: 9.004vw;
+    font: normal normal normal 1.464vw/2.196vw Poppins;
+    color: #8d8d8d;
+}
+
 .productLine {
     width: 80.966vw;
     display: flex;
