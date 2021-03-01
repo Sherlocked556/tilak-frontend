@@ -3,19 +3,40 @@ import store from "../store";
 import axios from "../helpers/axios";
 import { toast } from "react-toastify";
 
-export const addToCart = (product) => {
+export const addToCart = (product, index) => {
     return async (dispatch) => {
         try {
             dispatch({
                 type: cartConstants.ADD_TO_CART_REQUEST,
             });
 
-            const response = await axios.post("user/cart/addtocart", {
-                product: product._id,
-                quantity: 1,
-            });
+            let req = {};
 
-            console.log("ADD_TO_CART", response.data);
+            if (product.areSizes) {
+                req = {
+                    product: product._id,
+                    quantity: 1,
+                    size: {
+                        sizeUnit: product.sizes.sizeUnit,
+                        sizeValue: product.sizes.sizeVariants[index].sizeValue,
+                    },
+                    amount:
+                        product.basePrice +
+                        product.sizes.sizeVariants[index].addOnPrice,
+                };
+            } else {
+                req = {
+                    product: product._id,
+                    quantity: 1,
+                    amount: product.basePrice,
+                };
+            }
+
+            console.log(req);
+
+            const response = await axios.post("user/cart/addtocart", req);
+
+            // console.log("ADD_TO_CART", response.data);
 
             dispatch({
                 type: cartConstants.ADD_TO_CART_SUCCESS,
@@ -53,7 +74,7 @@ export const updateCart = (product, quantity) => async (dispatch) => {
             quantity,
         });
 
-        console.log("UPDATE_TO_CART", response.data);
+        // console.log("UPDATE_TO_CART", response.data);
 
         dispatch({
             type: cartConstants.UPDATE_CART_SUCCESS,
@@ -75,15 +96,18 @@ export const clearFromCart = (product) => async (dispatch) => {
             type: cartConstants.CLEAR_FROM_CART_REQUEST,
         });
 
+        console.log(product);
+
         const response = await axios.post("user/cart/removeItem", {
-            productId: product.product,
+            productId: product._id,
+            price: product.price,
         });
 
-        console.log("CLEAR_FROM_CART", response.data);
+        // console.log("CLEAR_FROM_CART", response.data);
 
         dispatch({
             type: cartConstants.CLEAR_FROM_CART_SUCCESS,
-            payload: product.product,
+            payload: product,
         });
     } catch (error) {
         dispatch({
@@ -101,11 +125,11 @@ export const fetchCart = () => async (dispatch) => {
 
         const response = await axios.get("user/cart/getCartItems");
 
-        console.log("FETCH_CART", response.data);
+        // console.log("FETCH_CART", response.data);
 
         dispatch({
             type: cartConstants.FETCH_CART_SUCCESS,
-            payload: response.data.cartItems,
+            payload: response.data,
         });
     } catch (error) {
         dispatch({

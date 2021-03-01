@@ -35,6 +35,11 @@ function AdminReseller() {
                             BLOGS
                         </Link>
                     </h6>
+                    <h6 className="adminInventory">
+                        <Link to="/AdminInventory" style={{ color: "#4D4D4D" }}>
+                            INVENTORY
+                        </Link>
+                    </h6>
                 </div>
                 <div className="productLine">
                     <hr id="billingLine1"></hr>

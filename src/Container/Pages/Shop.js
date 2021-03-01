@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../Container/Top Nav Bar/Header";
 import Index2 from "../../Container/Side Nav Bar/Index2";
 import Search from "../Search Button/Search";
@@ -8,7 +8,7 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import { BiCartAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../actions";
+import { fetchInventory } from "../../actions/inventory.action";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CurrencyConverter from "./CurrencyConvert";
@@ -18,15 +18,34 @@ const Shop = (props) => {
     const product = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
+    const { inventory } = useSelector((state) => state.inventory);
 
     const dispatch = useDispatch();
 
-    const handleAddToCart = (product) => {
-        dispatch(addToCart(product));
-        console.log(product);
+    useEffect(() => {
+        dispatch(fetchInventory());
+    }, []);
+
+    // const handleAddToCart = (product) => {
+    //     dispatch(addToCart(product));
+    //     console.log(product);
+    // };
+
+    const getProductPrice = (productId) => {
+        let prod = product.products.filter((item) => item._id === productId)[0];
+
+        console.log(prod);
+
+        return prod.basePrice;
     };
 
-    console.log(product);
+    // if (inventory.length > 0) {
+    //     console.log(
+    //         getProductPrice(inventory[0].styles[0].items[0].products[0].product)
+    //     );
+    // }
+
+    console.log(inventory);
 
     const renderProducts = () => {
         return (
@@ -37,8 +56,8 @@ const Shop = (props) => {
                     flexWrap: "wrap",
                 }}
             >
-                {product.products.length > 0 ? (
-                    product.products.map((product) => (
+                {inventory.length > 0 && product.products.length > 0 ? (
+                    inventory.map((product) => (
                         <div
                             style={{
                                 display: "grid",
@@ -51,20 +70,24 @@ const Shop = (props) => {
                         >
                             <div className="product1">
                                 <Link
-                                    to={`/${product.slug}/${product._id}/p`}
+                                    // to={`/${product.slug}/${product.styles[0].items[0].products[0].product}/p`}
                                     style={{
                                         display: "block",
                                     }}
+                                    to={{
+                                        pathname: `/${product._id}/${product.styles[0].items[0].products[0].product}/p`,
+                                        inventory: product,
+                                    }}
                                 >
-                                    {product.productPictures.map((picture) => (
-                                        <img
-                                            src={`http://localhost:2000/public/${picture.img}`}
-                                            key={picture.img}
-                                            alt="HR"
-                                        />
-                                    ))}
+                                    {/* {product.productPictures.map((picture) => ( */}
+                                    <img
+                                        src={`http://localhost:2000/public/${product.thumbnail}`}
+                                        key={product.thumbnail}
+                                        alt="HR"
+                                    />
+                                    {/* ))} */}
                                 </Link>
-                                <div
+                                {/* <div
                                     style={{
                                         position: "absolute",
                                         display: "flex",
@@ -72,20 +95,20 @@ const Shop = (props) => {
                                         top: "0.366vw",
                                     }}
                                 >
-                                    {/* <div className="ii2">
+                                    <div className="ii2">
                                         <TiHeartFullOutline id="iii2" />
-                                    </div> */}
+                                    </div>
                                     <div
                                         className="ii1"
                                         onClick={() => handleAddToCart(product)}
                                     >
                                         <BiCartAlt id="iii1" />
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="p1info">
                                 <Link
-                                    to={`/${product.slug}/${product._id}/p`}
+                                    to={`/${product._id}/${product.styles[0].items[0].products[0].product}/p`}
                                     style={{
                                         display: "block",
                                     }}
@@ -98,7 +121,14 @@ const Shop = (props) => {
                                     </p>
                                 </Link>
                                 {currency === "INR" && (
-                                    <h2 id="price1">Rs. {product.price}/-</h2>
+                                    <h2 id="price1">
+                                        Rs.{" "}
+                                        {getProductPrice(
+                                            product.styles[0].items[0]
+                                                .products[0].product
+                                        )}
+                                        /-
+                                    </h2>
                                 )}
 
                                 {currency !== "INR" && (
@@ -107,7 +137,12 @@ const Shop = (props) => {
                                         <CurrencyConverter
                                             from={"INR"}
                                             to={currency}
-                                            value={product.price * 1.05}
+                                            value={
+                                                getProductPrice(
+                                                    product.styles[0].items[0]
+                                                        .products[0].product
+                                                ) * 1.05
+                                            }
                                             precision={2}
                                         />
                                         /-

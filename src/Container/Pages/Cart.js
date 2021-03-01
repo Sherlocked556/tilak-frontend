@@ -11,7 +11,7 @@ const Cart = (props) => {
     const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
 
-    const cartItems = cart.cartItems;
+    const { cartItems } = cart.cartItems;
 
     const dispatch = useDispatch();
 
@@ -21,9 +21,8 @@ const Cart = (props) => {
 
     let totalPrice = 0;
 
-    for (let index = 0; index < cartItems.length; index++) {
-        totalPrice +=
-            cartItems[index].product.price * cartItems[index].quantity;
+    if (cartItems) {
+        totalPrice = cart.cartItems.totalAmount;
     }
 
     console.log(cartItems);
@@ -41,91 +40,94 @@ const Cart = (props) => {
             <p className="myCartHeadline">my cart...</p>
             <div className="myCartMainBox">
                 <div className="CartBox">
-                    <p className="itemNoHeading">{cartItems.length} Items</p>
+                    {cartItems && (
+                        <p className="itemNoHeading">
+                            {cartItems.length} Items
+                        </p>
+                    )}
 
-                    {cartItems.map((item) => (
-                        <div className="givenOrderNo1" key={item._id}>
-                            <div className="imageoftheProduct1">
-                                <img
-                                    style={{
-                                        height: "100%",
-                                        maxWidth: "100%",
-                                    }}
-                                    src={`http://localhost:2000/public/${item.product.productPictures[0].img}`}
-                                    alt="Product Image"
-                                />
-                            </div>
-                            <div className="detailsoftheProduct1">
-                                <p className="nameoftheProductGiven">
-                                    {item.product.name}
-                                    <span
-                                        className="editTheAddress"
-                                        style={{ float: "right" }}
-                                        onClick={() =>
-                                            dispatch(clearFromCart(item))
-                                        }
-                                    >
-                                        {" "}
-                                        Delete{" "}
-                                    </span>
-                                </p>
-                                <p className="priceoftheGivenProduct">
-                                    {currency === "INR" && (
-                                        <h2 id="price1">
-                                            Rs. {item.product.price}/-
-                                        </h2>
-                                    )}
+                    {cartItems &&
+                        cartItems.map((item) => (
+                            <div className="givenOrderNo1" key={item._id}>
+                                <div className="imageoftheProduct1">
+                                    <img
+                                        style={{
+                                            height: "100%",
+                                            maxWidth: "100%",
+                                        }}
+                                        src={`http://localhost:2000/public/${item.product.productPictures[0].img}`}
+                                        alt="Product Image"
+                                    />
+                                </div>
+                                <div className="detailsoftheProduct1">
+                                    <p className="nameoftheProductGiven">
+                                        {item.product.name}
+                                        <span
+                                            className="editTheAddress"
+                                            style={{ float: "right" }}
+                                            onClick={() =>
+                                                dispatch(clearFromCart(item))
+                                            }
+                                        >
+                                            {" "}
+                                            Delete{" "}
+                                        </span>
+                                    </p>
+                                    <p className="priceoftheGivenProduct">
+                                        {currency === "INR" && (
+                                            <span id="price1">
+                                                Rs. {item.price}/-
+                                            </span>
+                                        )}
 
-                                    {currency !== "INR" && (
-                                        <h2 id="price1">
-                                            {currency}.
-                                            <CurrencyConverter
-                                                from={"INR"}
-                                                to={currency}
-                                                value={
-                                                    item.product.price * 1.05
-                                                }
-                                                precision={2}
-                                            />
-                                            /-
-                                        </h2>
-                                    )}
-                                </p>
-                                <div className="tagsOfGivenProduct">
-                                    <p
-                                        style={{
-                                            color: "#2D2D2D",
-                                            width: "2.928vw",
-                                            height: "1.537vw",
-                                        }}
-                                    >
-                                        Tags:
+                                        {currency !== "INR" && (
+                                            <h2 id="price1">
+                                                {currency}.
+                                                <CurrencyConverter
+                                                    from={"INR"}
+                                                    to={currency}
+                                                    value={item.price * 1.05}
+                                                    precision={2}
+                                                />
+                                                /-
+                                            </h2>
+                                        )}
                                     </p>
-                                    <p
-                                        style={{
-                                            color: "#ADADAD",
-                                            width: "22.548vw",
-                                        }}
-                                    >
-                                        choli, white, small
-                                    </p>
-                                </div>
-                                <div className="descriptionofGivenProduct">
-                                    <p
-                                        style={{
-                                            color: "#2D2D2D",
-                                            height: "1.537vw",
-                                        }}
-                                    >
-                                        Description:
-                                    </p>
-                                    <p style={{ color: "#ADADAD" }}>
-                                        {item.product.description}
-                                    </p>
+                                    <div className="tagsOfGivenProduct">
+                                        <p
+                                            style={{
+                                                color: "#2D2D2D",
+                                                width: "2.928vw",
+                                                height: "1.537vw",
+                                            }}
+                                        >
+                                            Tags:
+                                        </p>
+                                        <p
+                                            style={{
+                                                color: "#ADADAD",
+                                                width: "22.548vw",
+                                            }}
+                                        >
+                                            choli, white, small
+                                        </p>
+                                    </div>
+                                    <div className="descriptionofGivenProduct">
+                                        <p
+                                            style={{
+                                                color: "#2D2D2D",
+                                                height: "1.537vw",
+                                            }}
+                                        >
+                                            Description:
+                                        </p>
+                                        <p style={{ color: "#ADADAD" }}>
+                                            {item.product.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </div>
                 <div className="referenceCodeBox">
                     <p className="ReferenceCodeHeading">Reference Code</p>

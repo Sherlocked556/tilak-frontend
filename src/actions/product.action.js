@@ -44,7 +44,6 @@ export const GetProductDetailsById = (payload) => {
 export const getAllProducts = () => async (dispatch) => {
     dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
     try {
-
         const response = await axios.post("/product/getProducts");
 
         console.log(response.data);
@@ -123,7 +122,7 @@ export const updateProducts = (updateProducts) => async (dispatch) => {
     }
 };
 
-export const addProduct = (data, isVariant) => async (dispatch) => {
+export const addProduct = (data, areSizes) => async (dispatch) => {
     dispatch({
         type: productConstants.ADD_PRODUCT_REQUEST,
     });
@@ -131,16 +130,25 @@ export const addProduct = (data, isVariant) => async (dispatch) => {
     try {
         const formData = new FormData();
 
+        let size = {
+            sizeUnit: data.sizeUnit,
+            sizeVariants: data.variant,
+        };
+
         console.log(data);
 
         formData.append("name", data.name);
-        formData.append("price", data.price);
-        formData.append("quantity", data.quantity);
+        formData.append("basePrice", data.basePrice);
         formData.append("category", data.category);
         formData.append("description", data.description);
-        if (isVariant) {
-            formData.append("variant", JSON.stringify(data.variant));
+        formData.append("areSizes", areSizes);
+
+        if (areSizes) {
+            formData.append("size", JSON.stringify(size));
+        } else {
+            formData.append("quantity", data.quantity);
         }
+
         data.productImages.forEach((file) => {
             formData.append("productPicture", file);
         });
@@ -189,16 +197,18 @@ export const updateProductById = (data) => async (dispatch) => {
 
         formData.append("_id", data._id);
         formData.append("name", data.name);
-        formData.append("areVariants", data.areVariants);
+        formData.append("areSizes", data.areSizes);
         formData.append("availability", data.availability);
         formData.append("createdBy", data.createdBy);
-        formData.append("price", data.price);
-        formData.append("quantity", data.quantity);
+        formData.append("basePrice", data.basePrice);
         formData.append("category", data.category);
         formData.append("description", data.description);
-        if (data.areVariants) {
-            formData.append("variant", JSON.stringify(data.variant));
+        if (!data.areSizes) {
+            formData.append("quantity", data.quantity);
+        } else {
+            formData.append("size", JSON.stringify(data.size));
         }
+
         if (data.prevProductImages.length > 0) {
             formData.append(
                 "prevProductImages",

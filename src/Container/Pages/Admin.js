@@ -47,9 +47,9 @@ const Admin = () => {
     const [toBeEdited, setToBeEdited] = useState({});
     // const [productList, setProductList] = useState([]);
 
-    const handleProductDelete = async (id) => {
-        dispatch(deleteProductById(id));
-    };
+    // const handleProductDelete = async (id) => {
+    //     dispatch(deleteProductById(id));
+    // };
 
     const openEditProduct = (product) => {
         setToBeEdited(product);
@@ -186,6 +186,14 @@ const Admin = () => {
                                 BLOGS
                             </Link>
                         </h6>
+                        <h6 className="adminInventory">
+                            <Link
+                                to="/AdminInventory"
+                                style={{ color: "#4D4D4D" }}
+                            >
+                                INVENTORY
+                            </Link>
+                        </h6>
                     </div>
                     <div className="productLine">
                         <hr id="adminLine2" />
@@ -289,29 +297,36 @@ const Admin = () => {
                                                 product._id.length - 5
                                             )}
                                         </p>
-                                        <span className="quantityIncDec">
-                                            <FiMinusCircle
-                                                id="minusIcon"
-                                                onClick={() =>
-                                                    handleQuantityUpdate(
-                                                        product._id,
-                                                        false
-                                                    )
-                                                }
-                                            />
-                                            <p className="quantityNo">
-                                                {product.quantity}
-                                            </p>
-                                            <FiPlusCircle
-                                                id="plusIcon"
-                                                onClick={() =>
-                                                    handleQuantityUpdate(
-                                                        product._id,
-                                                        true
-                                                    )
-                                                }
-                                            />
-                                        </span>
+                                        {!product.quantity && (
+                                            <span className="quantityIncDec">
+                                                Multi
+                                            </span>
+                                        )}
+                                        {product.quantity && (
+                                            <span className="quantityIncDec">
+                                                <FiMinusCircle
+                                                    id="minusIcon"
+                                                    onClick={() =>
+                                                        handleQuantityUpdate(
+                                                            product._id,
+                                                            false
+                                                        )
+                                                    }
+                                                />
+                                                <p className="quantityNo">
+                                                    {product.quantity}
+                                                </p>
+                                                <FiPlusCircle
+                                                    id="plusIcon"
+                                                    onClick={() =>
+                                                        handleQuantityUpdate(
+                                                            product._id,
+                                                            true
+                                                        )
+                                                    }
+                                                />
+                                            </span>
+                                        )}
                                         <div className="dressName">
                                             {product.name}
                                         </div>
@@ -340,12 +355,7 @@ const Admin = () => {
                                                     : "Unavailable"}
                                             </p>
                                         </span>
-                                        <MdDelete
-                                            id="deleteButton"
-                                            onClick={() =>
-                                                handleProductDelete(product._id)
-                                            }
-                                        />
+
                                         <MdEdit
                                             id="editButton"
                                             onClick={() =>

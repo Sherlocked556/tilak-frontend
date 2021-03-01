@@ -31,15 +31,18 @@ export default (state = initState, action) => {
         case addressConstant.ADD_ADDRESS_SUCCESS:
             return {
                 ...state,
-                address: state.address.map((userAddress) => {
-                    if (userAddress.user === action.payload.user) {
-                        userAddress.address = action.payload.address;
+                address:
+                    state.address.length > 0
+                        ? state.address.map((userAddress) => {
+                              if (userAddress.user === action.payload.user) {
+                                  userAddress.address = action.payload.address;
 
-                        return userAddress;
-                    } else {
-                        return userAddress;
-                    }
-                }),
+                                  return userAddress;
+                              } else {
+                                  return userAddress;
+                              }
+                          })
+                        : [...action.payload],
                 loading: false,
             };
 

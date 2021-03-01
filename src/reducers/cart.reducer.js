@@ -58,9 +58,14 @@ export default (state = initState, action) => {
             return {
                 ...state,
                 loading: false,
-                cartItems: state.cartItems.filter(
-                    (item) => item.product._id !== action.payload._id
-                ),
+                cartItems: {
+                    ...state.cartItems,
+                    cartItems: state.cartItems.cartItems.filter(
+                        (item) => item._id !== action.payload._id
+                    ),
+                    totalAmount:
+                        state.cartItems.totalAmount - action.payload.price,
+                },
             };
 
         case cartConstants.CLEAR_FROM_CART_FAILURE:

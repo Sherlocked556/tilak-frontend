@@ -36,6 +36,7 @@ import LoginSign from "./Container/Pages/LoginSign";
 import LoginNextPage from "./Container/Pages/LoginNextPage";
 import ScrollToTop from "./Container/scrollToTop";
 import AdminBlogs from "./Container/Pages/AdminBlogs";
+import AdminInventory from "./Container/Pages/AdminInventory";
 
 const isLoggedIn = () => {
     if (localStorage.getItem("access-token")) {
@@ -86,7 +87,7 @@ function App() {
                 <Route path="/categories" component={Categories}></Route>
                 <PrivateRoute path="/cart" component={Cart}></PrivateRoute>
                 <Route
-                    path="/:productSlug/:productId/p"
+                    path="/:inventorySlug/:productId/p"
                     component={Product}
                 ></Route>
                 <Route path="/blogs" component={Blogs}></Route>
@@ -114,6 +115,10 @@ function App() {
                 <PrivateRoute
                     path="/adminBlogs"
                     component={AdminBlogs}
+                ></PrivateRoute>
+                <PrivateRoute
+                    path="/adminInventory"
+                    component={AdminInventory}
                 ></PrivateRoute>
                 <PrivateRoute
                     path="/payment"

@@ -13,9 +13,14 @@ import { MdAttachFile } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProductDetailsById } from "../../actions";
 import { addToCart } from "../../actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import CurrencyConverter from "./CurrencyConvert";
+import {
+    fetchInventory,
+    fetchOneInventory,
+} from "../../actions/inventory.action";
+import { Button } from "semantic-ui-react";
 
 var price = 300;
 const Product = (props) => {
@@ -23,15 +28,21 @@ const Product = (props) => {
     const product = useSelector((state) => state.product);
     const [viewImage, setViewImage] = useState(null);
     const { currency } = useSelector((state) => state.currency);
+    const { inventoryDetails } = useSelector((state) => state.inventory);
+    const [prodSize, setProdSize] = useState(0);
+    const history = useHistory();
 
     useEffect(() => {
         const { productId } = props.match.params;
+        const inventoryId = props.location.pathname.split("/")[1];
+
         const payload = {
             params: {
                 productId,
             },
         };
         dispatch(GetProductDetailsById(payload));
+        dispatch(fetchOneInventory(inventoryId));
     }, []);
 
     useEffect(() => {
@@ -43,12 +54,62 @@ const Product = (props) => {
         }
     }, [product]);
 
-    const handleAddToCart = (product) => {
-        dispatch(addToCart(product));
-        console.log(product);
+    const handleAddToCart = (product, index) => {
+        dispatch(addToCart(product, index));
     };
 
-    console.log(viewImage);
+    const getProductName = (productId) => {
+        // console.log(product.products);
+
+        let prod = product.products.filter((item) => item._id === productId)[0];
+        if (prod) {
+            // console.log(prod);
+
+            return prod.name;
+        } else {
+            return "";
+        }
+    };
+
+    const handleStyleChange = (productId, inventoryId) => {
+        history.push(`/${inventoryId}/${productId}/p`);
+        window.location.reload();
+    };
+
+    // console.log(inventoryDetails);
+
+    let prodDetails = {
+        name: "",
+        styleName: "",
+        styleValue: "",
+        sizeUnit: "",
+        price: 0,
+    };
+
+    if (inventoryDetails._id && product.productDetails._id) {
+        inventoryDetails.styles.forEach((style) => {
+            // console.log(style);
+            style.items.forEach((item) => {
+                item.products.forEach((prod) => {
+                    if (prod.product === product.productDetails._id) {
+                        prodDetails.styleName = style.styleName;
+                        prodDetails.styleValue = item.styleValue;
+                    }
+                });
+            });
+        });
+
+        if (product.productDetails.areSizes) {
+            prodDetails.price =
+                product.productDetails.basePrice +
+                product.productDetails.sizes.sizeVariants[prodSize].addOnPrice;
+            prodDetails.sizeUnit = product.productDetails.sizes.sizeUnit;
+        } else {
+            prodDetails.price = product.productDetails.basePrice;
+        }
+    }
+
+    console.log(prodDetails);
 
     return (
         <div>
@@ -161,23 +222,50 @@ const Product = (props) => {
                         </div>
                     </div>
                     <div className="productdes" style={{ marginLeft: "150px" }}>
-                        <p>{product.productDetails.name}</p>
-                        <div className="icon2">
+                        <p>
+                            {product.productDetails.name +
+                                " (" +
+                                prodDetails.styleName +
+                                " : " +
+                                prodDetails.styleValue +
+                                ")"}
+                        </p>
+                        {/* <div className="icon2">
                             <TiHeartFullOutline id="iconn2" />
-                        </div>
+                        </div> */}
                         <div className="icon1">
-                            <BiCartAlt
-                                id="iconn1"
-                                onClick={() => {
-                                    handleAddToCart(product.productDetails);
-                                    // props.history.push("/cart");
-                                }}
-                            />
+                            {product.productDetails.areSizes && (
+                                <BiCartAlt
+                                    id="iconn1"
+                                    onClick={() => {
+                                        handleAddToCart(
+                                            product.productDetails,
+                                            prodSize
+                                        );
+                                    }}
+                                />
+                            )}
+                            {!product.productDetails.areSizes && (
+                                <BiCartAlt
+                                    id="iconn1"
+                                    onClick={() => {
+                                        handleAddToCart(
+                                            product.productDetails,
+                                            prodSize
+                                        );
+                                        // props.history.push("/cart");
+                                    }}
+                                />
+                            )}
                         </div>
                         <div style={{ display: "flex" }}>
                             {currency === "INR" && (
                                 <span className="cost">
-                                    Rs. {product.productDetails.price}/-
+                                    Rs.{" "}
+                                    {product.productDetails.areSizes
+                                        ? prodDetails.price
+                                        : product.productDetails.basePrice}
+                                    /-
                                 </span>
                             )}
 
@@ -188,7 +276,10 @@ const Product = (props) => {
                                         from={"INR"}
                                         to={currency}
                                         value={
-                                            product.productDetails.price * 1.05
+                                            (product.productDetails.areSizes
+                                                ? prodDetails.price
+                                                : product.productDetails
+                                                      .basePrice) * 1.05
                                         }
                                         precision={2}
                                     />
@@ -220,16 +311,70 @@ const Product = (props) => {
                             </p>
                         </div>
                         <span className="tags">Tags:</span>
-                        <p2>choli, white, small,</p2>
+                        <p>choli, white, small,</p>
                         <div className="descriptions">
                             <span>Description:</span>
                             <p>{product.productDetails.description}</p>
                         </div>
+                        {product.productDetails.areSizes && (
+                            <div className="">
+                                <span>Sizes:</span>
+                                <Button.Group basic>
+                                    {product.productDetails.sizes.sizeVariants.map(
+                                        (size, index) => (
+                                            <Button
+                                                key={index}
+                                                onClick={() =>
+                                                    setProdSize(index)
+                                                }
+                                                active={prodSize === index}
+                                            >
+                                                {size.sizeValue}
+                                            </Button>
+                                        )
+                                    )}
+                                </Button.Group>
+                            </div>
+                        )}
+
+                        {inventoryDetails.styles &&
+                            inventoryDetails.styles.map((style) => (
+                                <div className="tags" key={style._id}>
+                                    <span>{style.styleName}:</span>
+                                    {style.items.map((item) => (
+                                        <div className="" key={item._id}>
+                                            <span> {item.styleValue} </span>
+                                            {
+                                                <Button.Group basic>
+                                                    {item.products.length > 0 &&
+                                                        item.products.map(
+                                                            (prod, index) => (
+                                                                <Button
+                                                                    key={index}
+                                                                    onClick={() =>
+                                                                        handleStyleChange(
+                                                                            prod.product,
+                                                                            inventoryDetails._id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {getProductName(
+                                                                        prod.product
+                                                                    )}
+                                                                </Button>
+                                                            )
+                                                        )}
+                                                </Button.Group>
+                                            }
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
                     </div>
                 </div>
             )}
 
-            <div id="reviewBox">
+            {/* <div id="reviewBox">
                 <div className="reviewsHeading"> Reviews:</div>
                 <div className="fiveStar">
                     <AiFillStar id="starReview" />
@@ -242,7 +387,7 @@ const Product = (props) => {
                     <div className="writeReview">
                         <textarea
                             className="commentBox"
-                            maxlength="200"
+                            maxLength="200"
                             placeholder="Choose a rating and start writing a review..."
                         ></textarea>
                         <div className="attachmentLimit">
@@ -341,7 +486,7 @@ const Product = (props) => {
                     </div>
                 </div>
                 <button className="productLoadMore">Load More</button>
-            </div>
+            </div> */}
             <hr id="linee"></hr>
             <div className="cardss">
                 <div className="rcardd1">

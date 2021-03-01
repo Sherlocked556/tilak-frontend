@@ -35,15 +35,23 @@ export default function AdminAddProduct(props) {
                         <Formik
                             initialValues={{
                                 name: "",
-                                price: 0,
+                                basePrice: 0,
                                 quantity: 0,
                                 category: "",
                                 description: "",
                                 productImages: [],
-                                variant: [{ variantName: "", price: 0 }],
+                                variant: [
+                                    {
+                                        sizeValue: "",
+                                        addOnPrice: 0,
+                                        quantity: 0,
+                                    },
+                                ],
+                                sizeUnit: "",
                             }}
-                            onSubmit={(data) =>
-                                dispatch(addProduct(data, isVariant))
+                            onSubmit={
+                                (data) => dispatch(addProduct(data, isVariant))
+                                // console.log(data)
                             }
                         >
                             {({
@@ -62,37 +70,61 @@ export default function AdminAddProduct(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                         />
-                                        {!isVariant && (
-                                            <Form.Input
-                                                label="Product Price"
-                                                labelPosition="right"
-                                                type="number"
-                                                placeholder="Product Price"
-                                                style={{
-                                                    marginRight: "0",
-                                                    marginTop: "0",
-                                                    height: "2.6em",
-                                                }}
-                                                name="price"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            >
-                                                <Label basic>₹</Label>
-                                                <input />
-                                                <Label>.00</Label>
-                                            </Form.Input>
-                                        )}
-                                    </Form.Group>
-                                    <Form.Group widths={2}>
                                         <Form.Input
-                                            label="Quantity"
+                                            label="Product Base Price"
+                                            labelPosition="right"
                                             type="number"
-                                            name="quantity"
+                                            placeholder="Product Price"
+                                            style={{
+                                                marginRight: "0",
+                                                marginTop: "0",
+                                                height: "2.6em",
+                                            }}
+                                            name="basePrice"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                         >
+                                            <Label basic>₹</Label>
                                             <input />
+                                            <Label>.00</Label>
                                         </Form.Input>
+                                    </Form.Group>
+                                    <Form.Group widths={2}>
+                                        {!isVariant && (
+                                            <Form.Input
+                                                label="Quantity"
+                                                type="number"
+                                                name="quantity"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            >
+                                                <input />
+                                            </Form.Input>
+                                        )}
+                                        {isVariant && (
+                                            <Form.Select
+                                                label="Size Unit"
+                                                placeholder="Select Size Unit"
+                                                options={[
+                                                    {
+                                                        text: "Inch",
+                                                        value: "inch",
+                                                    },
+                                                    {
+                                                        text: "Feet",
+                                                        value: "feet",
+                                                    },
+                                                ]}
+                                                name="sizeUnit"
+                                                onChange={(_, { value }) =>
+                                                    setFieldValue(
+                                                        "sizeUnit",
+                                                        value
+                                                    )
+                                                }
+                                                onBlur={handleBlur}
+                                            />
+                                        )}
 
                                         <Form.Field
                                             label="Category"
@@ -125,19 +157,28 @@ export default function AdminAddProduct(props) {
                                                                 key={index}
                                                             >
                                                                 <Form.Input
-                                                                    label="Variant Name"
-                                                                    placeholder="Variant Name"
-                                                                    name={`variant[${index}].variantName`}
+                                                                    label="Size Value"
+                                                                    placeholder="Size Value"
+                                                                    name={`variant[${index}].sizeValue`}
                                                                     onChange={
                                                                         handleChange
                                                                     }
                                                                 />
 
                                                                 <Form.Input
-                                                                    label="Variant Price"
+                                                                    label="Quantity"
+                                                                    placeholder="Quantity"
+                                                                    name={`variant[${index}].quantity`}
+                                                                    onChange={
+                                                                        handleChange
+                                                                    }
+                                                                />
+
+                                                                <Form.Input
+                                                                    label="Variant Add-On Price"
                                                                     labelPosition="right"
                                                                     type="number"
-                                                                    placeholder="Variant Price"
+                                                                    placeholder="Variant Add-On Price"
                                                                     style={{
                                                                         marginRight:
                                                                             "0",
@@ -146,7 +187,7 @@ export default function AdminAddProduct(props) {
                                                                         height:
                                                                             "2.6em",
                                                                     }}
-                                                                    name={`variant[${index}].price`}
+                                                                    name={`variant[${index}].addOnPrice`}
                                                                     onChange={
                                                                         handleChange
                                                                     }
@@ -169,9 +210,10 @@ export default function AdminAddProduct(props) {
                                                                             index +
                                                                                 1,
                                                                             {
-                                                                                variantName:
+                                                                                sizeValue:
                                                                                     "",
-                                                                                price: 0,
+                                                                                addOnPrice: 0,
+                                                                                quantity: 0,
                                                                             }
                                                                         )
                                                                     }
