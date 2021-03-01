@@ -23,7 +23,7 @@ axiosInstance.interceptors.response.use(
         if (error.response !== undefined) {
             if (
                 error.response.status === 400 &&
-                ogReq.url === "https://api.tilakshringar.com/api/refresh"
+                ogReq.url === "http://localhost:2000/api/refresh"
             ) {
                 window.location.replace("https://tilakshringar.com/loginSign");
                 return Promise.reject(error);

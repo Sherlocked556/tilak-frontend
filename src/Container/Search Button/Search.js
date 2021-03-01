@@ -6,7 +6,7 @@ import { FiSearch} from "react-icons/fi";
 function Search() {
     return (
         <div className='searchButton'>
-            <input type='text' placeholder='Search ornament, dresses, handicrafts, etc...'></input><FiSearch id='searchIcon'/>
+            <input type='search' placeholder='Search ornament, dresses, handicrafts, etc...'></input><FiSearch id='searchIcon'/>
         </div>
     )
 }

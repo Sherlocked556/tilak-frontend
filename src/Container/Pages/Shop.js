@@ -58,7 +58,7 @@ const Shop = (props) => {
                                 >
                                     {product.productPictures.map((picture) => (
                                         <img
-                                            src={`https://api.tilakshringar.com/public/${picture.img}`}
+                                            src={`http://localhost:2000/public/${picture.img}`}
                                             key={picture.img}
                                             alt="HR"
                                         />
@@ -102,7 +102,7 @@ const Shop = (props) => {
                                 )}
 
                                 {currency !== "INR" && (
-                                    <h2 id="price1">
+                                    <p id="price1">
                                         {currency}.
                                         <CurrencyConverter
                                             from={"INR"}
@@ -111,7 +111,7 @@ const Shop = (props) => {
                                             precision={2}
                                         />
                                         /-
-                                    </h2>
+                                    </p>
                                 )}
                             </div>
                         </div>

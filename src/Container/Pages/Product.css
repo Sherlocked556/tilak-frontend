@@ -1,9 +1,31 @@
 .breadcrumbs {
   margin-left: 21.889vw;
-  border: 0.146vw solid red;
+  border: 0.146vw solid rgb(255, 255, 255);
   margin-top: 2.928vw;
   width: 51.245vw;
-  height: 1.537vw;
+  padding: 0;
+  height: 2.537vw;
+  font: normal normal normal 1.098vw/2.7vw Poppins;
+}
+.breadcrumbs__items {
+  display: inline-block;
+}
+.breadcrumbs__items:not(:last-of-type)::after {
+  content: "\203a";
+  margin: 0 0.952vw;
+  color: #cccccc;
+}
+.breadcrumbs__link {
+  text-decoration: none;
+  color: #999999;
+}
+.breadcrumbs__link:hover {
+  text-decoration: underline;
+  color: #999999;
+}
+.breadcrumbs__link--active {
+  color: #2d2d2d;
+  font-weight: 500;
 }
 
 .productheadlineee {

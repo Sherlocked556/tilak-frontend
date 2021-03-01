@@ -13,7 +13,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import AdminAddBlog from "./AdminAddBlog";
 import AdminEditBlog from "./AdminEditBlog";
 import { ToastContainer } from "react-toastify";
-
+import './AdminBlogs.css';
 function openBlog() {
     document.querySelector(".AdminBlogPopUp").style.display = "flex";
 }
@@ -76,9 +76,9 @@ const AdminBlogs = () => {
                 </div>
                 <div className="productLine">
                     <hr id="billingLine1"></hr>
-                    <hr id="AdminResellerLine2" />
-                    <hr id="AdminResellerLine3" />
-                    <hr id="AdminResellerLine4" />
+                    <hr id="blogLine" />
+                    <hr id="blogline1" />
+                    <hr id="blog2" />
                 </div>
                 <div className="categoryProductBtn">
                     <button className="productBtn" onClick={openBlog}>
@@ -86,7 +86,7 @@ const AdminBlogs = () => {
                     </button>{" "}
                     <p className="productNumber">{blogs.length} blogs</p>
                 </div>
-                <div className="SearchBilling"></div>
+                {/* <div className="SearchBilling"></div> */}
                 <div className="AdminProductDetails">
                     <Table>
                         <Table.Header>
