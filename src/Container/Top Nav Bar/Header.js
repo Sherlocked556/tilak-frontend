@@ -134,7 +134,7 @@ const Header = () => {
                     </div>
                     <div className="user">
                         {" "}
-                        <Link to="loginSign">
+                        <Link to="/loginSign">
                             <img src={require("./Profile.png")}></img>
                             {/* <BsPersonPlus className="icon"/> */}
                         </Link>
