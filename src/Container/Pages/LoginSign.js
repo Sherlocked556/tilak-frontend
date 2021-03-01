@@ -24,7 +24,9 @@ const LoginSign = (props) => {
     console.log(auth);
 
     if (redirect) {
-        return <Redirect to={from.from.pathname} />;
+        // return <Redirect to={from.from.pathname} />;
+        window.location.replace(from.from.pathname);
+        return null;
     }
 
     if (auth.user.accessToken) {
@@ -40,6 +42,11 @@ const LoginSign = (props) => {
     }
 
     console.log(user);
+
+    console.log(
+        localStorage.getItem("access-token") &&
+            localStorage.getItem("access-token") === ""
+    );
 
     return (
         <div>
@@ -63,7 +70,7 @@ const LoginSign = (props) => {
                     </div>
                 )}
 
-            {(localStorage.getItem("access-token") ||
+            {(!localStorage.getItem("access-token") ||
                 localStorage.getItem("access-token") === "") && (
                 <div className="loginOuterBox">
                     <div className="firstSignBox">

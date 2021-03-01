@@ -22,7 +22,6 @@ import {
 } from "../../actions/inventory.action";
 import { Button } from "semantic-ui-react";
 
-var price = 300;
 const Product = (props) => {
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
@@ -46,6 +45,7 @@ const Product = (props) => {
     }, []);
 
     useEffect(() => {
+        // window.location.reload();
         if (product.productDetails._id) {
             setViewImage({
                 image: product.productDetails.productPictures[0],
@@ -118,7 +118,6 @@ const Product = (props) => {
             <div className="shop">
                 <Search />
             </div>
-            <div className="breadcrumbs">Breadcrumb</div>
             <h3 className="productheadlineee">the product...</h3>
             {product.productDetails._id && (
                 <div className="productss">

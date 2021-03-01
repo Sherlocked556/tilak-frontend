@@ -5,6 +5,7 @@ import AdminProfile from "./AdminProfile";
 import "./AdminBilling.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {} from "semantic-ui-react";
 import { fetchAllAdminOrders } from "../../actions/order.action";
 import dayjs from "dayjs";
 
@@ -76,7 +77,11 @@ const AdminBilling = () => {
                     <button onClick={emptyOpen} className="productBtn">
                         EMPTY SECTION
                     </button>
-                    <p className="productNumber">5000 products sold</p>
+                    {orders.adminOrders && (
+                        <p className="productNumber">
+                            {orders.adminOrders.length} products sold
+                        </p>
+                    )}
                 </div>
                 <div className="SearchBilling"></div>
                 <div className="AdminProductDetails">
@@ -85,7 +90,7 @@ const AdminBilling = () => {
                             border: "0.073vw solid #707070",
                             width: "0",
                             height: "45.388vw",
-                            marginLeft: "5.124vw",
+                            marginLeft: "4.7vw",
                             position: "absolute",
                             marginTop: "0",
                         }}
@@ -95,7 +100,7 @@ const AdminBilling = () => {
                             border: "0.073vw solid #707070",
                             width: "0",
                             height: "45.388vw",
-                            marginLeft: "14.422vw",
+                            marginLeft: "15.422vw",
                             position: "absolute",
                             marginTop: "0",
                         }}

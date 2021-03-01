@@ -10,6 +10,15 @@ export const addToCart = (product, index) => {
                 type: cartConstants.ADD_TO_CART_REQUEST,
             });
 
+            console.log(localStorage.getItem("access-token"));
+
+            if (
+                !localStorage.getItem("access-token") ||
+                localStorage.getItem("access-token") === ""
+            ) {
+                throw new Error("To add a product to cart, Please login");
+            }
+
             let req = {};
 
             if (product.areSizes) {
@@ -50,7 +59,15 @@ export const addToCart = (product, index) => {
                 type: cartConstants.ADD_TO_CART_FAILURE,
                 payload: { error: error },
             });
-            if (error.response) {
+
+            if (
+                !localStorage.getItem("access-token") ||
+                localStorage.getItem("access-token") === ""
+            ) {
+                toast.error("To add a product to cart, Please login", {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                });
+            } else if (error.response) {
                 toast.error(error.response.data.message, {
                     position: toast.POSITION.BOTTOM_LEFT,
                 });

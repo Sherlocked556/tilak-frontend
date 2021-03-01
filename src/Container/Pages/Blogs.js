@@ -13,7 +13,6 @@ import dayjs from "dayjs";
 function Blogs() {
     let [blogs, setBlogs] = useState([]);
     let [openedBlog, setOpenedBlog] = useState(null);
-    // let blogs = [];
 
     const fetchBlogs = async () => {
         try {
@@ -51,8 +50,8 @@ function Blogs() {
                 <Search />
             </div>
             <h2 className="blogHeadline">our blogs...</h2>
-            <div className="containerr">
-                <div className="containerr1">
+            <div className="category_card">
+                
                     {blogs &&
                         blogs.map((blog, index) => (
                             <div className="carrd" key={blog._id}>
@@ -74,9 +73,10 @@ function Blogs() {
                                 </div>
                             </div>
                         ))}
-                </div>
-                <button className="loadMoreButton">Load More</button>
+                
+               
             </div>
+            <button className="loadMoreButton">Load More</button>
 
             <hr id="linee"></hr>
             <div className="cardss">

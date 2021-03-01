@@ -59,22 +59,24 @@
 
 #price1 {
   text-align: right;
+  display: flex;
   width: 24.158vw;
-  height: 2.416vw;
+  height: 2.416vw;padding-left: 16vw;
   margin-top: 0.366vw;
   font: normal normal normal 1.757vw/2.562vw Poppins;
 }
 
 .ii1 {
-  /* margin-left: 0.5vw; */
+  margin-left: 2.8vw;
   width: 2.343vw;
   height: 2.343vw;
   background: #cdcdcd 0% 0% no-repeat padding-box;
-  opacity: 1;
+  opacity: 1;display: none;
   /* transform: translateY(22.694vw); */
 }
 .product1:hover .ii1 {
   transform: translateY(0);
+  display: block;
 }
 .product2:hover .ii1 {
   transform: translateY(0);
@@ -133,8 +135,8 @@
 .nullProducts h2{
   margin-top:10vw;
   width:fit-content;
-  margin-left: 43.5vw;
-  font: normal normal normal 5.124vw/4.88vw Acme;
+  margin-left: 19.5vw;
+  font: normal normal normal 5.124vw/4.88vw poppins;
   background-image: linear-gradient(#f5004e, #8e0072);  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;

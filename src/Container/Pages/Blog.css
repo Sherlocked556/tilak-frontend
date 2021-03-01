@@ -29,7 +29,8 @@
 }
 
 .carrd {
-    margin-left: 1.464vw;
+    margin-left: 2vw;
+    margin-top: 2vw;
     position: relative;
     width: 22.255vw;
     height: 32.65vw;
@@ -112,7 +113,7 @@
     width: 12.299vw;
     height: 3.514vw;
     margin-top: 3.001vw;
-    margin-left: 31.552vw;
+    margin-left: 59.552vw;
     border: 0.073vw solid #cdcdcd;
     font: normal normal normal 1.098vw/1.684vw Poppins;
     color: white;
