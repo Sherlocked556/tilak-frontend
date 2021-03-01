@@ -49,6 +49,52 @@ const AddNewAddressModal = () => {
                     alternatePhone: "",
                     addressType: "",
                 }}
+                validate={(values) => {
+                    const errors = {};
+
+                    if (!values.name) {
+                        errors.name = "Name is Required";
+                    }
+
+                    if (!values.mobileNumber) {
+                        errors.mobileNumber = "Mobile Number is Required";
+                    }
+
+                    if (!values.pinCode) {
+                        errors.pinCode = "Pin Code is required";
+                    }
+
+                    if (!values.locality) {
+                        errors.locality = "Locality is Required";
+                    }
+
+                    if (!values.address) {
+                        errors.address = "Address is Required";
+                    }
+
+                    if (!values.cityDistrictTown) {
+                        errors.cityDistrictTown = "City is Required";
+                    }
+
+                    if (!values.state) {
+                        errors.state = "State is Required";
+                    }
+
+                    if (!values.landmark) {
+                        errors.landmark = "Landmark is Required";
+                    }
+
+                    if (values.alternatePhone === values.mobileNumber) {
+                        errors.alternatePhone =
+                            "Alternate Phone Number cannot same as primary Mobile Number";
+                    }
+
+                    if (!values.addressType) {
+                        errors.addressType = "Address Type is Required";
+                    }
+
+                    return errors;
+                }}
                 onSubmit={(data) => addNewAddress(data)}
             >
                 {({
@@ -57,6 +103,7 @@ const AddNewAddressModal = () => {
                     handleSubmit,
                     handleBlur,
                     setFieldValue,
+                    errors,
                 }) => (
                     <>
                         <Form
@@ -72,6 +119,14 @@ const AddNewAddressModal = () => {
                                     name="name"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.name
+                                            ? {
+                                                  content: errors.name,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="Mobile Number"
@@ -79,6 +134,14 @@ const AddNewAddressModal = () => {
                                     name="mobileNumber"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.mobileNumber
+                                            ? {
+                                                  content: errors.mobileNumber,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="Alternative Phone"
@@ -86,6 +149,15 @@ const AddNewAddressModal = () => {
                                     name="alternatePhone"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.alternatePhone
+                                            ? {
+                                                  content:
+                                                      errors.alternatePhone,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="PinCode"
@@ -93,6 +165,14 @@ const AddNewAddressModal = () => {
                                     name="pinCode"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.pinCode
+                                            ? {
+                                                  content: errors.pinCode,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="Full Address"
@@ -100,6 +180,14 @@ const AddNewAddressModal = () => {
                                     name="address"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.address
+                                            ? {
+                                                  content: errors.address,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="Locality"
@@ -107,6 +195,14 @@ const AddNewAddressModal = () => {
                                     name="locality"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.locality
+                                            ? {
+                                                  content: errors.locality,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="City"
@@ -114,6 +210,15 @@ const AddNewAddressModal = () => {
                                     name="cityDistrictTown"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.cityDistrictTown
+                                            ? {
+                                                  content:
+                                                      errors.cityDistrictTown,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="State"
@@ -121,6 +226,14 @@ const AddNewAddressModal = () => {
                                     name="state"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.state
+                                            ? {
+                                                  content: errors.state,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Input
                                     label="Landmark"
@@ -128,6 +241,14 @@ const AddNewAddressModal = () => {
                                     name="landmark"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    error={
+                                        errors.landmark
+                                            ? {
+                                                  content: errors.landmark,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 />
                                 <Form.Field
                                     label="Address Type"
@@ -137,6 +258,14 @@ const AddNewAddressModal = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.category}
+                                    error={
+                                        errors.addressType
+                                            ? {
+                                                  content: errors.addressType,
+                                                  pointing: "above",
+                                              }
+                                            : false
+                                    }
                                 >
                                     <option>Select Address Type</option>
                                     {options.map((option) => (

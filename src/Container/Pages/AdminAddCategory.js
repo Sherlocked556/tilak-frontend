@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input } from "semantic-ui-react";
 import { addCategory } from "../../actions";
 import axios from "../../helpers/axios";
@@ -7,6 +7,7 @@ import axios from "../../helpers/axios";
 export default function AdminAddCategory(props) {
     const [name, setName] = useState("");
     const [categoryImg, setCategoryImg] = useState("");
+    const { loading } = useSelector((state) => state.category);
 
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export default function AdminAddCategory(props) {
                 </div>
                 <div className="detailBlogFill" style={{ padding: "1em" }}>
                     <div className="productDetailsCol">
-                        <Form>
+                        <Form loading={loading}>
                             <Form.Input
                                 type="text"
                                 label="Category Name"

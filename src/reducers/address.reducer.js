@@ -42,7 +42,7 @@ export default (state = initState, action) => {
                                   return userAddress;
                               }
                           })
-                        : [...action.payload],
+                        : [action.payload],
                 loading: false,
             };
 
