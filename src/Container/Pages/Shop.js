@@ -68,17 +68,17 @@ const Shop = (props) => {
                             }}
                             key={product._id}
                         >
-                            <div className="product1">
-                                <Link
-                                    // to={`/${product.slug}/${product.styles[0].items[0].products[0].product}/p`}
-                                    style={{
-                                        display: "block",
-                                    }}
-                                    to={{
-                                        pathname: `/${product._id}/${product.styles[0].items[0].products[0].product}/p`,
-                                        inventory: product,
-                                    }}
-                                >
+                            <Link
+                                // to={`/${product.slug}/${product.styles[0].items[0].products[0].product}/p`}
+                                style={{
+                                    display: "block",
+                                }}
+                                to={{
+                                    pathname: `/${product._id}/${product.styles[0].items[0].products[0].product}/p`,
+                                    inventory: product,
+                                }}
+                            >
+                                <div className="product1">
                                     {/* {product.productPictures.map((picture) => ( */}
                                     <img
                                         src={`https://api.tilakshringar.com/public/${product.thumbnail}`}
@@ -86,8 +86,7 @@ const Shop = (props) => {
                                         alt="HR"
                                     />
                                     {/* ))} */}
-                                </Link>
-                                {/* <div
+                                    {/* <div
                                     style={{
                                         position: "absolute",
                                         display: "flex",
@@ -105,7 +104,9 @@ const Shop = (props) => {
                                         <BiCartAlt id="iii1" />
                                     </div>
                                 </div> */}
-                            </div>
+                                </div>
+                            </Link>
+
                             <div className="p1info">
                                 <Link
                                     to={`/${product._id}/${product.styles[0].items[0].products[0].product}/p`}
@@ -132,7 +133,7 @@ const Shop = (props) => {
                                 )}
 
                                 {currency !== "INR" && (
-                                    <h2 id="price1">
+                                    <p id="price1">
                                         {currency}.
                                         <CurrencyConverter
                                             from={"INR"}
@@ -146,7 +147,7 @@ const Shop = (props) => {
                                             precision={2}
                                         />
                                         /-
-                                    </h2>
+                                    </p>
                                 )}
                             </div>
                         </div>

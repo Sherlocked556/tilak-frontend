@@ -4,6 +4,7 @@
   width:12vw;
   margin-top: 0.52vw;
   font: normal normal normal 0.878vw/1.684vw Poppins;
+  caret-color: transparent;
 }
 
 @media (max-width:700px){
