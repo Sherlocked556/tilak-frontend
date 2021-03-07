@@ -33,7 +33,7 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
-            toast.error("Error in added product to cart", {
+            toast.error("Error in Registering User", {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         }
@@ -54,6 +54,16 @@ export const loginUser = (email, password, history) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
+        if (error.response) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in Loggin In", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
+
         dispatch({ type: authConstants.USER_LOGIN_FAILURE, payload: error });
     }
 };

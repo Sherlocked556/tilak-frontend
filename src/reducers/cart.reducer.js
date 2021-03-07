@@ -64,7 +64,8 @@ export default (state = initState, action) => {
                         (item) => item._id !== action.payload._id
                     ),
                     totalAmount:
-                        state.cartItems.totalAmount - action.payload.price,
+                        state.cartItems.totalAmount -
+                        action.payload.price * action.payload.quantity,
                 },
             };
 

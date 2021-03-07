@@ -1,24 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Container/Top Nav Bar/Header";
 import Index2 from "../../Container/Side Nav Bar/Index2";
-import Search from "../Search Button/Search";
+// import Search from "../Search Button/Search";
+import "../Search Button/Search.css";
 import Footer from "../Footer/Footer";
 import "./Shop.css";
 import { TiHeartFullOutline } from "react-icons/ti";
 import { BiCartAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { fetchInventory } from "../../actions/inventory.action";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CurrencyConverter from "./CurrencyConvert";
 import { Dimmer, Loader } from "semantic-ui-react";
+import { FiSearch } from "react-icons/fi";
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+};
 
 const Shop = (props) => {
     const product = useSelector((state) => state.product);
     const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
-    const { inventory } = useSelector((state) => state.inventory);
+    let { inventory } = useSelector((state) => state.inventory);
+    let [search, setSearch] = useState("");
+    const query = useQuery();
 
     const dispatch = useDispatch();
 
@@ -26,26 +34,33 @@ const Shop = (props) => {
         dispatch(fetchInventory());
     }, []);
 
-    // const handleAddToCart = (product) => {
-    //     dispatch(addToCart(product));
-    //     console.log(product);
-    // };
+    // useEffect(() => {
+    //     if (inventory.length > 0) {
+    // inventory = inventory.filter(
+    //     (item) => item.name.search(search) > 0
+    // );
+    //         setSearch(search);
+    //     }
+    // }, [search, inventory]);
 
     const getProductPrice = (productId) => {
         let prod = product.products.filter((item) => item._id === productId)[0];
-
-        console.log(prod);
-
         return prod.basePrice;
     };
 
-    // if (inventory.length > 0) {
-    //     console.log(
-    //         getProductPrice(inventory[0].styles[0].items[0].products[0].product)
-    //     );
-    // }
+    if (inventory.length > 0 && search !== "") {
+        inventory = inventory.filter((item) =>
+            new RegExp(search, "i").test(item.name)
+        );
+    }
 
-    console.log(inventory);
+    if (query.get("cat") && inventory.length > 0) {
+        // console.log(query.get("cat"));
+
+        inventory = inventory.filter(
+            (prod) => prod.category._id === query.get("cat")
+        );
+    }
 
     const renderProducts = () => {
         return (
@@ -154,7 +169,11 @@ const Shop = (props) => {
                     ))
                 ) : (
                     <div className="nullProducts">
-                        <h2>No Products</h2>
+                        {query.get("cat") && (
+                            <h2>No Products with matching Type</h2>
+                        )}
+
+                        {!query.get("cat") && <h2>No Products</h2>}
                     </div>
                 )}
             </div>
@@ -163,7 +182,7 @@ const Shop = (props) => {
 
     console.log(product.loading);
 
-    if (product.loading) {
+    if (inventory.loading) {
         return (
             <Dimmer active={product.loading}>
                 <Loader />
@@ -174,11 +193,16 @@ const Shop = (props) => {
             <div>
                 <Header />
                 <Index2 />
-                <Dimmer active={cart.loading}>
-                    <Loader />
-                </Dimmer>
+
                 <div className="shop">
-                    <Search />
+                    <div className="searchButton">
+                        <input
+                            type="search"
+                            placeholder="Search ornament, dresses, handicrafts, etc..."
+                            onChange={(e) => setSearch(e.target.value)}
+                        ></input>
+                        <FiSearch id="searchIcon" />
+                    </div>
                 </div>
                 <h2 className="shopheadlinee">our products...</h2>
                 {renderProducts()}

@@ -5,7 +5,7 @@ import axios from "../../helpers/axios";
 
 class TextEditor extends Component {
     render() {
-        const { value, onChange } = this.props; // <- Dont mind this, just handling objects from props because Im using this as a shared component.
+        const { value, onChange } = this.props;
 
         const custom_config = {
             extraPlugins: [MyCustomUploadAdapterPlugin],

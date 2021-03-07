@@ -6,6 +6,7 @@ import { addCategory, getAllProducts } from "../../actions";
 import { addInventory } from "../../actions/inventory.action";
 
 export default function AdminAddInventory(props) {
+    const { categories } = useSelector((state) => state.category);
     const { products, loading: prodLoading } = useSelector(
         (state) => state.product
     );
@@ -14,6 +15,7 @@ export default function AdminAddInventory(props) {
     const dispatch = useDispatch();
 
     const handleInventorySubmit = (data) => {
+        console.log(data);
         dispatch(addInventory(data));
     };
 
@@ -50,6 +52,7 @@ export default function AdminAddInventory(props) {
                             initialValues={{
                                 name: "",
                                 thumbnail: "",
+                                category: "",
                                 styles: [
                                     {
                                         styleName: "",
@@ -79,13 +82,33 @@ export default function AdminAddInventory(props) {
                                     onSubmit={handleSubmit}
                                     loading={invtLoading}
                                 >
-                                    <Form.Input
-                                        type="text"
-                                        label="Inventory Name"
-                                        placeholder="Enter Inventory Name here"
-                                        name="name"
-                                        onChange={handleChange}
-                                    />
+                                    <Form.Group widths={2}>
+                                        <Form.Input
+                                            type="text"
+                                            label="Inventory Name"
+                                            placeholder="Enter Inventory Name here"
+                                            name="name"
+                                            onChange={handleChange}
+                                        />
+                                        <Form.Field
+                                            label="Category"
+                                            control="select"
+                                            placeholder="Category"
+                                            name="category"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        >
+                                            <option>Select Category</option>
+                                            {categories.map((option) => (
+                                                <option
+                                                    key={option._id}
+                                                    value={option._id}
+                                                >
+                                                    {option.name}
+                                                </option>
+                                            ))}
+                                        </Form.Field>
+                                    </Form.Group>
 
                                     <Form.Input
                                         type="file"
@@ -193,7 +216,6 @@ export default function AdminAddInventory(props) {
                                                                                         placeholder="Products"
                                                                                         label="Select Prod"
                                                                                         fluid
-                                                                                        multiple
                                                                                         search
                                                                                         selection
                                                                                         options={
@@ -208,19 +230,23 @@ export default function AdminAddInventory(props) {
                                                                                                 value: selected,
                                                                                             }
                                                                                         ) => {
-                                                                                            let prods = selected.map(
-                                                                                                (
-                                                                                                    select
-                                                                                                ) => {
-                                                                                                    return {
-                                                                                                        product: select,
-                                                                                                    };
-                                                                                                }
-                                                                                            );
+                                                                                            // let prods = selected.map(
+                                                                                            //     (
+                                                                                            //         select
+                                                                                            //     ) => {
+                                                                                            //         return {
+                                                                                            //             product: select,
+                                                                                            //         };
+                                                                                            //     }
+                                                                                            // );
 
                                                                                             setFieldValue(
                                                                                                 `styles[${index}].items[${idx}].products`,
-                                                                                                prods
+                                                                                                [
+                                                                                                    {
+                                                                                                        product: selected,
+                                                                                                    },
+                                                                                                ]
                                                                                             );
                                                                                         }}
                                                                                     />

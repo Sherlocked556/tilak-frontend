@@ -22,7 +22,8 @@ import {
 import AdminAddCategory from "./AdminAddCategory";
 import AdminEditProduct from "./AdminEditProduct";
 import { ToastContainer } from "react-toastify";
-import { Dimmer, Loader } from "semantic-ui-react";
+import { Dimmer, Loader, Table } from "semantic-ui-react";
+import dayjs from "dayjs";
 
 function openProduct() {
     document.querySelector(".AdminPopUp").style.display = "flex";
@@ -132,8 +133,6 @@ const Admin = () => {
     };
 
     useEffect(() => {
-        console.log("HELLO ADMIN");
-
         // getAllProducts();
         dispatch(getAllProducts());
     }, []);
@@ -222,149 +221,115 @@ const Admin = () => {
                             APPLY CHANGES
                         </button>
                     </div>
-                    <div className="AdminProductDetails">
-                        <hr
-                            style={{
-                                border: "0.073vw solid #707070",
-                                width: "0",
-                                height: "45.388vw",
-                                marginLeft: "10.469vw",
-                                position: "absolute",
-                                marginTop: "0",
-                            }}
-                        ></hr>
-                        <hr
-                            style={{
-                                border: "0.073vw solid #707070",
-                                width: "0",
-                                height: "45.388vw",
-                                marginLeft: "21.816vw",
-                                position: "absolute",
-                                marginTop: "0",
-                            }}
-                        ></hr>
-                        <hr
-                            style={{
-                                border: "0.073vw solid #707070",
-                                width: "0",
-                                height: "45.388vw",
-                                marginLeft: "32.211vw",
-                                position: "absolute",
-                                marginTop: "0",
-                            }}
-                        ></hr>
-                        <hr
-                            style={{
-                                border: "0.073vw solid #707070",
-                                width: "0",
-                                height: "45.388vw",
-                                marginLeft: "56.296vw",
-                                position: "absolute",
-                                marginTop: "0",
-                            }}
-                        ></hr>
-                        <hr
-                            style={{
-                                border: "0.073vw solid #707070",
-                                width: "0",
-                                height: "45.388vw",
-                                marginLeft: "70.278vw",
-                                position: "absolute",
-                                marginTop: "0",
-                            }}
-                        ></hr>
-                        <div className="AdminProductHeading">
-                            <p id="adminCategories">Categories</p>
-                            <p id="adminProductID">Product ID</p>
-                            <p id="adminQuantity">Quantity</p>
-                            <p id="adminName">Name</p>
-                            <p id="adminStatus">Status</p>
-                        </div>
-                        <hr id="AdminLine"></hr>
-                        <div className="productDetailOuterBox">
-                            {products &&
-                                products.length > 0 &&
-                                products.map((product) => (
-                                    <div
-                                        className="productDetailsAdmin"
-                                        key={product._id}
-                                    >
-                                        <p className="productDresses">
-                                            {product.category.name}
-                                        </p>
-                                        <p className="productIdAdmin">
-                                            {product._id.substr(
-                                                product._id.length - 5
-                                            )}
-                                        </p>
-                                        {!product.quantity && (
-                                            <span className="quantityIncDec">
-                                                Multi
-                                            </span>
-                                        )}
-                                        {product.quantity && (
-                                            <span className="quantityIncDec">
-                                                <FiMinusCircle
-                                                    id="minusIcon"
-                                                    onClick={() =>
-                                                        handleQuantityUpdate(
-                                                            product._id,
-                                                            false
-                                                        )
-                                                    }
-                                                />
-                                                <p className="quantityNo">
-                                                    {product.quantity}
-                                                </p>
-                                                <FiPlusCircle
-                                                    id="plusIcon"
-                                                    onClick={() =>
-                                                        handleQuantityUpdate(
-                                                            product._id,
-                                                            true
-                                                        )
-                                                    }
-                                                />
-                                            </span>
-                                        )}
-                                        <div className="dressName">
-                                            {product.name}
-                                        </div>
-                                        <span className="productStatus">
-                                            <AiOutlineCloseSquare
-                                                id="closeSquare"
-                                                onClick={() =>
-                                                    handleAvailableUpdate(
-                                                        product._id,
-                                                        false
-                                                    )
-                                                }
-                                            />
-                                            <AiOutlineCheckSquare
-                                                id="checkSquare"
-                                                onClick={() =>
-                                                    handleAvailableUpdate(
-                                                        product._id,
-                                                        true
-                                                    )
-                                                }
-                                            />
-                                            <p className="StatusAva">
-                                                {product.availability
-                                                    ? "Available"
-                                                    : "Unavailable"}
-                                            </p>
-                                        </span>
+                    <div
+                        className="AdminProductDetails"
+                        style={{ overflowY: "scroll" }}
+                    >
+                        <Table>
+                            <Table.Header>
+                                <Table.Row>
+                                    <Table.HeaderCell>Sr. No.</Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Product ID
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Quantity
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>Status</Table.HeaderCell>
+                                    <Table.HeaderCell>
+                                        Dated Added
+                                    </Table.HeaderCell>
+                                    <Table.HeaderCell>Edit</Table.HeaderCell>
+                                </Table.Row>
+                            </Table.Header>
 
-                                        <MdEdit
-                                            id="editButton"
-                                            onClick={() =>
-                                                openEditProduct(product)
-                                            }
-                                        />
-                                    </div>
-                                ))}
-                        </div>
+                            <Table.Body>
+                                {products &&
+                                    products.length > 0 &&
+                                    products.map((product, index) => (
+                                        <Table.Row key={product._id}>
+                                            <Table.Cell>{index + 1}</Table.Cell>
+                                            <Table.Cell>
+                                                {product._id.substr(
+                                                    product._id.length - 5
+                                                )}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {product.name}
+                                            </Table.Cell>
+                                            {product.areSizes && (
+                                                <Table.Cell>Multi</Table.Cell>
+                                            )}
+                                            {!product.areSizes && (
+                                                <Table.Cell>
+                                                    <FiMinusCircle
+                                                        id="minusIcon"
+                                                        onClick={() =>
+                                                            handleQuantityUpdate(
+                                                                product._id,
+                                                                false
+                                                            )
+                                                        }
+                                                    />
+                                                    <span className="quantityNo">
+                                                        {product.quantity}
+                                                    </span>
+                                                    <FiPlusCircle
+                                                        id="plusIcon"
+                                                        onClick={() =>
+                                                            handleQuantityUpdate(
+                                                                product._id,
+                                                                true
+                                                            )
+                                                        }
+                                                    />
+                                                </Table.Cell>
+                                            )}
+                                            <Table.Cell>
+                                                <span>
+                                                    <AiOutlineCloseSquare
+                                                        id="closeSquare"
+                                                        onClick={() =>
+                                                            handleAvailableUpdate(
+                                                                product._id,
+                                                                false
+                                                            )
+                                                        }
+                                                    />
+                                                    <AiOutlineCheckSquare
+                                                        id="checkSquare"
+                                                        onClick={() =>
+                                                            handleAvailableUpdate(
+                                                                product._id,
+                                                                true
+                                                            )
+                                                        }
+                                                    />
+                                                </span>
+                                                <p className="StatusAva">
+                                                    {product.availability
+                                                        ? "Available"
+                                                        : "Unavailable"}
+                                                </p>
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {dayjs(product.createdAt)
+                                                    .format(`DD
+                                            MMMM YYYY`)}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <MdEdit
+                                                    id="editButton"
+                                                    onClick={() =>
+                                                        openEditProduct(product)
+                                                    }
+                                                />
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
+                            </Table.Body>
+                        </Table>
                     </div>
                 </div>
                 <hr className="endLine" />

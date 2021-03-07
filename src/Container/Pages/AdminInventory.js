@@ -107,6 +107,7 @@ const AdminInventory = () => {
                         <Table.Header>
                             <Table.Row>
                                 <Table.HeaderCell>Sr. No.</Table.HeaderCell>
+                                <Table.HeaderCell>Category</Table.HeaderCell>
                                 <Table.HeaderCell>Name</Table.HeaderCell>
                                 <Table.HeaderCell>Dated Added</Table.HeaderCell>
                                 <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
@@ -118,6 +119,9 @@ const AdminInventory = () => {
                                 inventory.map((item, index) => (
                                     <Table.Row key={item._id}>
                                         <Table.Cell>{index + 1}</Table.Cell>
+                                        <Table.Cell>
+                                            {item.category.name}
+                                        </Table.Cell>
                                         <Table.Cell>{item.name}</Table.Cell>
                                         <Table.Cell>
                                             {dayjs(item.createdAt).format(`DD

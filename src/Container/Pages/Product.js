@@ -22,6 +22,158 @@ import {
 } from "../../actions/inventory.action";
 import { Button } from "semantic-ui-react";
 
+const PriceQuantity = (props) => {
+    /**
+     * props.product
+     * props.size
+     * props.currency
+     * props.prodDetails
+     */
+
+    if (!props.product.availability) {
+        return <span className="cost">Product Currently Unavailiable</span>;
+    }
+
+    if (props.product.availability && props.product.areSizes) {
+        if (props.product.sizes.sizeVariants[props.size].quantity <= 5) {
+            return <span className="cost">Product Out Of Stock</span>;
+        } else if (
+            props.product.sizes.sizeVariants[props.size].quantity <= 15
+        ) {
+            return (
+                <div>
+                    Only few remaining
+                    <br />
+                    {props.currency === "INR" && (
+                        <span className="cost">
+                            Rs.{" "}
+                            {props.product.areSizes
+                                ? props.prodDetails.price
+                                : props.product.basePrice}
+                            /-
+                        </span>
+                    )}
+                    {props.currency !== "INR" && (
+                        <span className="cost">
+                            {props.currency}.
+                            <CurrencyConverter
+                                from={"INR"}
+                                to={props.currency}
+                                value={
+                                    (props.product.areSizes
+                                        ? props.prodDetails.price
+                                        : props.product.basePrice) * 1.05
+                                }
+                                precision={2}
+                            />
+                            /-
+                        </span>
+                    )}
+                </div>
+            );
+        } else {
+            return (
+                <span>
+                    {props.currency === "INR" && (
+                        <span className="cost">
+                            Rs.{" "}
+                            {props.product.areSizes
+                                ? props.prodDetails.price
+                                : props.product.basePrice}
+                            /-
+                        </span>
+                    )}
+                    {props.currency !== "INR" && (
+                        <span className="cost">
+                            {props.currency}.
+                            <CurrencyConverter
+                                from={"INR"}
+                                to={props.currency}
+                                value={
+                                    (props.product.areSizes
+                                        ? props.prodDetails.price
+                                        : props.product.basePrice) * 1.05
+                                }
+                                precision={2}
+                            />
+                            /-
+                        </span>
+                    )}
+                </span>
+            );
+        }
+    }
+
+    if (props.product.availability && !props.product.areSizes) {
+        if (props.product.quantity <= 5) {
+            return <span className="cost">Product Out Of Stock</span>;
+        } else if (props.product.quantity <= 15) {
+            return (
+                <div>
+                    Only few remaining <br />
+                    {props.currency === "INR" && (
+                        <span className="cost">
+                            Rs.{" "}
+                            {props.product.areSizes
+                                ? props.prodDetails.price
+                                : props.product.basePrice}
+                            /-
+                        </span>
+                    )}
+                    {props.currency !== "INR" && (
+                        <span className="cost">
+                            {props.currency}.
+                            <CurrencyConverter
+                                from={"INR"}
+                                to={props.currency}
+                                value={
+                                    (props.product.areSizes
+                                        ? props.prodDetails.price
+                                        : props.product.basePrice) * 1.05
+                                }
+                                precision={2}
+                            />
+                            /-
+                        </span>
+                    )}
+                </div>
+            );
+        } else {
+            return (
+                <span>
+                    {props.currency === "INR" && (
+                        <span className="cost">
+                            Rs.{" "}
+                            {props.product.areSizes
+                                ? props.prodDetails.price
+                                : props.product.basePrice}
+                            /-
+                        </span>
+                    )}
+                    {props.currency !== "INR" && (
+                        <span className="cost">
+                            {props.currency}.
+                            <CurrencyConverter
+                                from={"INR"}
+                                to={props.currency}
+                                value={
+                                    (props.product.areSizes
+                                        ? props.prodDetails.price
+                                        : props.product.basePrice) * 1.05
+                                }
+                                precision={2}
+                            />
+                            /-
+                        </span>
+                    )}
+                </span>
+            );
+        }
+    }
+
+    return;
+};
+
 const Product = (props) => {
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
@@ -115,9 +267,7 @@ const Product = (props) => {
         <div>
             <Header />
             <Index2 />
-            <div className="shop">
-                <Search />
-            </div>
+            <div className="shop">{/* <Search /> */}</div>
             <h3 className="productheadlineee">the product...</h3>
             {product.productDetails._id && (
                 <div className="productss">
@@ -232,64 +382,51 @@ const Product = (props) => {
                         {/* <div className="icon2">
                             <TiHeartFullOutline id="iconn2" />
                         </div> */}
-                        <div className="icon1">
-                            {product.productDetails.areSizes && (
-                                <BiCartAlt
-                                    id="iconn1"
-                                    onClick={() => {
-                                        handleAddToCart(
-                                            product.productDetails,
-                                            prodSize
-                                        );
-                                    }}
-                                />
-                            )}
-                            {!product.productDetails.areSizes && (
-                                <BiCartAlt
-                                    id="iconn1"
-                                    onClick={() => {
-                                        handleAddToCart(
-                                            product.productDetails,
-                                            prodSize
-                                        );
-                                        // props.history.push("/cart");
-                                    }}
-                                />
-                            )}
-                        </div>
-                        <div style={{ display: "flex" }}>
-                            {currency === "INR" && (
-                                <span className="cost">
-                                    Rs.{" "}
-                                    {product.productDetails.areSizes
-                                        ? prodDetails.price
-                                        : product.productDetails.basePrice}
-                                    /-
-                                </span>
-                            )}
-
-                            {currency !== "INR" && (
-                                <span className="cost">
-                                    {currency}.
-                                    <CurrencyConverter
-                                        from={"INR"}
-                                        to={currency}
-                                        value={
-                                            (product.productDetails.areSizes
-                                                ? prodDetails.price
-                                                : product.productDetails
-                                                      .basePrice) * 1.05
-                                        }
-                                        precision={2}
+                        {/* <div className="icon1"> */}
+                        {product.productDetails.areSizes &&
+                            product.productDetails.availability &&
+                            product.productDetails.sizes.sizeVariants[prodSize]
+                                .quantity >= 5 && (
+                                <div className="icon1">
+                                    <BiCartAlt
+                                        id="iconn1"
+                                        onClick={() => {
+                                            handleAddToCart(
+                                                product.productDetails,
+                                                prodSize
+                                            );
+                                        }}
                                     />
-                                    /-
-                                </span>
+                                </div>
                             )}
-
+                        {!product.productDetails.areSizes &&
+                            product.productDetails.availability &&
+                            product.productDetails.quantity >= 5 && (
+                                <div className="icon1">
+                                    <BiCartAlt
+                                        id="iconn1"
+                                        onClick={() => {
+                                            handleAddToCart(
+                                                product.productDetails,
+                                                prodSize
+                                            );
+                                            // props.history.push("/cart");
+                                        }}
+                                    />
+                                </div>
+                            )}
+                        {/* </div> */}
+                        <div style={{ display: "flex" }}>
+                            <PriceQuantity
+                                prodDetails={prodDetails}
+                                currency={currency}
+                                product={product.productDetails}
+                                size={prodSize}
+                            />
                             {/* <span className="cost">
                                 Rs. {product.productDetails.price}/-
                             </span> */}
-                            <AiFillStar
+                            {/* <AiFillStar
                                 style={{
                                     marginTop: "3.29vw",
                                     height: "1.830vw",
@@ -297,8 +434,8 @@ const Product = (props) => {
                                     color: "#FFFF00",
                                     marginLeft: "1.245vw",
                                 }}
-                            />
-                            <p
+                            /> */}
+                            {/* <p
                                 style={{
                                     marginTop: "2.928vw",
                                     font:
@@ -307,17 +444,20 @@ const Product = (props) => {
                                 }}
                             >
                                 0.0
-                            </p>
+                            </p> */}
                         </div>
-                        <span className="tags">Tags:</span>
-                        <p>choli, white, small,</p>
+                        {/* <span className="tags">Tags:</span>
+                        <p>choli, white, small,</p> */}
                         <div className="descriptions">
                             <span>Description:</span>
                             <p>{product.productDetails.description}</p>
                         </div>
                         {product.productDetails.areSizes && (
-                            <div className="">
-                                <span>Sizes:</span>
+                            <div className="descriptions">
+                                <span style={{ marginRight: "1em" }}>
+                                    Sizes (in{" "}
+                                    {product.productDetails.sizes.sizeUnit}) :
+                                </span>
                                 <Button.Group basic>
                                     {product.productDetails.sizes.sizeVariants.map(
                                         (size, index) => (
@@ -338,35 +478,31 @@ const Product = (props) => {
 
                         {inventoryDetails.styles &&
                             inventoryDetails.styles.map((style) => (
-                                <div className="tags" key={style._id}>
-                                    <span>{style.styleName}:</span>
-                                    {style.items.map((item) => (
-                                        <div className="" key={item._id}>
-                                            <span> {item.styleValue} </span>
-                                            {
-                                                <Button.Group basic>
-                                                    {item.products.length > 0 &&
-                                                        item.products.map(
-                                                            (prod, index) => (
-                                                                <Button
-                                                                    key={index}
-                                                                    onClick={() =>
-                                                                        handleStyleChange(
-                                                                            prod.product,
-                                                                            inventoryDetails._id
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    {getProductName(
-                                                                        prod.product
-                                                                    )}
-                                                                </Button>
-                                                            )
-                                                        )}
-                                                </Button.Group>
-                                            }
-                                        </div>
-                                    ))}
+                                <div className="descriptions" key={style._id}>
+                                    <span style={{ marginRight: "1em" }}>
+                                        {style.styleName}:
+                                    </span>
+                                    <Button.Group>
+                                        {style.items.map((item, index) => (
+                                            <Button
+                                                key={index}
+                                                active={
+                                                    item.products[0].product ===
+                                                    product.productDetails._id
+                                                }
+                                                onClick={() => {
+                                                    handleStyleChange(
+                                                        item.products[0]
+                                                            .product,
+                                                        inventoryDetails._id
+                                                    );
+                                                }}
+                                            >
+                                                {" "}
+                                                {item.styleValue}{" "}
+                                            </Button>
+                                        ))}
+                                    </Button.Group>
                                 </div>
                             ))}
                     </div>

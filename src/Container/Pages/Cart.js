@@ -93,25 +93,34 @@ const Cart = (props) => {
                                             </h2>
                                         )}
                                     </p>
-                                    <div className="tagsOfGivenProduct">
-                                        <p
-                                            style={{
-                                                color: "#2D2D2D",
-                                                width: "2.928vw",
-                                                height: "1.537vw",
-                                            }}
-                                        >
-                                            Tags:
-                                        </p>
-                                        <p
-                                            style={{
-                                                color: "#ADADAD",
-                                                width: "22.548vw",
-                                            }}
-                                        >
-                                            choli, white, small
-                                        </p>
-                                    </div>
+
+                                    {item.product.areSizes && (
+                                        <div className="tagsOfGivenProduct">
+                                            <p
+                                                style={{
+                                                    color: "#2D2D2D",
+                                                    width: "2.928vw",
+                                                    height: "1.537vw",
+                                                }}
+                                            >
+                                                Size:
+                                            </p>
+                                            <p
+                                                style={{
+                                                    color: "#ADADAD",
+                                                    width: "22.548vw",
+                                                }}
+                                            >
+                                                <span>
+                                                    {item.size.sizeValue}
+                                                </span>
+                                                <span>
+                                                    {" " + item.size.sizeUnit}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    )}
+
                                     <div className="descriptionofGivenProduct">
                                         <p
                                             style={{
@@ -119,10 +128,10 @@ const Cart = (props) => {
                                                 height: "1.537vw",
                                             }}
                                         >
-                                            Description:
+                                            Quantity:
                                         </p>
                                         <p style={{ color: "#ADADAD" }}>
-                                            {item.product.description}
+                                            {item.quantity}
                                         </p>
                                     </div>
                                 </div>

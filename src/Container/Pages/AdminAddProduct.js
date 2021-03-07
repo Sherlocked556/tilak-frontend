@@ -14,7 +14,7 @@ import { addProduct } from "../../actions/product.action";
 import axios from "../../helpers/axios";
 
 export default function AdminAddProduct(props) {
-    const { categories } = useSelector((state) => state.category);
+    // const { categories } = useSelector((state) => state.category);
     const { loading } = useSelector((state) => state.product);
     const dispatch = useDispatch();
     const [isVariant, setIsVarient] = useState(false);
@@ -89,44 +89,41 @@ export default function AdminAddProduct(props) {
                                             <Label>.00</Label>
                                         </Form.Input>
                                     </Form.Group>
-                                    <Form.Group widths={2}>
-                                        {!isVariant && (
-                                            <Form.Input
-                                                label="Quantity"
-                                                type="number"
-                                                name="quantity"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            >
-                                                <input />
-                                            </Form.Input>
-                                        )}
-                                        {isVariant && (
-                                            <Form.Select
-                                                label="Size Unit"
-                                                placeholder="Select Size Unit"
-                                                options={[
-                                                    {
-                                                        text: "Inch",
-                                                        value: "inch",
-                                                    },
-                                                    {
-                                                        text: "Feet",
-                                                        value: "feet",
-                                                    },
-                                                ]}
-                                                name="sizeUnit"
-                                                onChange={(_, { value }) =>
-                                                    setFieldValue(
-                                                        "sizeUnit",
-                                                        value
-                                                    )
-                                                }
-                                                onBlur={handleBlur}
-                                            />
-                                        )}
+                                    {/* <Form.Group widths={1}> */}
+                                    {!isVariant && (
+                                        <Form.Input
+                                            label="Quantity"
+                                            type="number"
+                                            name="quantity"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        >
+                                            <input />
+                                        </Form.Input>
+                                    )}
+                                    {isVariant && (
+                                        <Form.Select
+                                            label="Size Unit"
+                                            placeholder="Select Size Unit"
+                                            options={[
+                                                {
+                                                    text: "Inch",
+                                                    value: "inch",
+                                                },
+                                                {
+                                                    text: "Feet",
+                                                    value: "feet",
+                                                },
+                                            ]}
+                                            name="sizeUnit"
+                                            onChange={(_, { value }) =>
+                                                setFieldValue("sizeUnit", value)
+                                            }
+                                            onBlur={handleBlur}
+                                        />
+                                    )}
 
-                                        <Form.Field
+                                    {/* <Form.Field
                                             label="Category"
                                             control="select"
                                             placeholder="Category"
@@ -143,8 +140,8 @@ export default function AdminAddProduct(props) {
                                                     {option.name}
                                                 </option>
                                             ))}
-                                        </Form.Field>
-                                    </Form.Group>
+                                        </Form.Field> */}
+                                    {/* </Form.Group> */}
                                     {isVariant && (
                                         <FieldArray
                                             name="variant"

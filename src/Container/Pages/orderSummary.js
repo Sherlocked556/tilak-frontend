@@ -128,10 +128,47 @@ function OrderSummary() {
                         <p id="discountName">Discount:</p>
                         <p id="discountPriceValue">00.00</p>
                     </div>
+                    <div className="discountPrice">
+                        <p id="discountName">Shipping Cost(in {currency}):</p>
+                        {currency === "INR" && (
+                            <p id="discountPriceValue">{50.0}</p>
+                        )}
+
+                        {currency !== "INR" && (
+                            <p id="discountPriceValue">
+                                <CurrencyConverter
+                                    from={"INR"}
+                                    to={currency}
+                                    value={50.0 * 1.05}
+                                    precision={2}
+                                />
+                            </p>
+                        )}
+                    </div>
+                    <div
+                        className="discountPrice"
+                        style={{ marginTop: "2.5em", marginBottom: "2em" }}
+                    >
+                        <p id="discountName">Total Amount(in {currency}):</p>
+                        {currency === "INR" && (
+                            <p id="discountPriceValue">{totalPrice}</p>
+                        )}
+
+                        {currency !== "INR" && (
+                            <p id="discountPriceValue">
+                                <CurrencyConverter
+                                    from={"INR"}
+                                    to={currency}
+                                    value={totalPrice * 1.05}
+                                    precision={2}
+                                />
+                            </p>
+                        )}
+                    </div>
                     <div className="bagTotalPrice">
                         <p id="bagTotal">Bag Total(in {currency}):</p>
                         {currency === "INR" && (
-                            <p id="bagTotalValue">{totalPrice}</p>
+                            <p id="bagTotalValue">{totalPrice + 50}</p>
                         )}
 
                         {currency !== "INR" && (
@@ -139,7 +176,7 @@ function OrderSummary() {
                                 <CurrencyConverter
                                     from={"INR"}
                                     to={currency}
-                                    value={totalPrice * 1.05}
+                                    value={(totalPrice + 50) * 1.05}
                                     precision={2}
                                 />
                             </p>
