@@ -4,6 +4,14 @@
     width: 31.625vw !important;
 }
 
+.image-gallery-slide .right {
+    width: 0;
+}
+
+.image-gallery-slide .right {
+    height: 0;
+}
+
 .breadcrumbs {
     margin-left: 21.889vw;
     border: 0.146vw solid rgb(255, 255, 255);

@@ -269,7 +269,6 @@ const Product = (props) => {
                     <div className="productpic">
                         <ReactImageGallery
                             showPlayButton={false}
-                            slideOnThumbnailOver={true}
                             items={product.productDetails.productPictures.map(
                                 (pic) => {
                                     return {
