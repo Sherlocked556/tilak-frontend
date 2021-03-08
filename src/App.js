@@ -8,6 +8,7 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
+import jwt from "jsonwebtoken";
 import Shop from "./Container/Pages/Shop";
 import About from "./Container/Pages/About";
 import Query from "./Container/Pages/Query";
@@ -44,6 +45,20 @@ const isLoggedIn = () => {
     } else return false;
 };
 
+const isAdmin = () => {
+    if (isLoggedIn()) {
+        let user = jwt.decode(localStorage.getItem("access-token"));
+
+        if (user.role === "admin") {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+};
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
@@ -55,6 +70,26 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     <Redirect
                         to={{
                             pathname: "/loginSign",
+                            state: { from: props.location },
+                        }}
+                    />
+                )
+            }
+        />
+    );
+};
+
+const AdminRoute = ({ component: Component, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={(props) =>
+                isAdmin() ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/",
                             state: { from: props.location },
                         }}
                     />
@@ -103,23 +138,23 @@ function App() {
                     path="/myprofile"
                     component={myProfile}
                 ></PrivateRoute>
-                <PrivateRoute path="/admin" component={Admin}></PrivateRoute>
-                <PrivateRoute
+                <AdminRoute path="/admin" component={Admin}></AdminRoute>
+                <AdminRoute
                     path="/adminbilling"
                     component={AdminBilling}
-                ></PrivateRoute>
-                <PrivateRoute
+                ></AdminRoute>
+                <AdminRoute
                     path="/adminReseller"
                     component={AdminReseller}
-                ></PrivateRoute>
-                <PrivateRoute
+                ></AdminRoute>
+                <AdminRoute
                     path="/adminBlogs"
                     component={AdminBlogs}
-                ></PrivateRoute>
-                <PrivateRoute
+                ></AdminRoute>
+                <AdminRoute
                     path="/adminInventory"
                     component={AdminInventory}
-                ></PrivateRoute>
+                ></AdminRoute>
                 <PrivateRoute
                     path="/payment"
                     component={payment}
@@ -128,18 +163,18 @@ function App() {
                     path="/orderSummary"
                     component={orderSummary}
                 ></PrivateRoute>
-                <PrivateRoute
+                <AdminRoute
                     path="/resellerOrder"
                     component={ResellerOrder}
-                ></PrivateRoute>
-                <PrivateRoute
+                ></AdminRoute>
+                <AdminRoute
                     path="/resellerEarning"
                     component={ResellerEarning}
-                ></PrivateRoute>
-                <PrivateRoute
+                ></AdminRoute>
+                <AdminRoute
                     path="/ResellerNotification"
                     component={ResellerNotification}
-                ></PrivateRoute>
+                ></AdminRoute>
                 <PrivateRoute path="/result" component={result}></PrivateRoute>
                 <Route path="/privacypolicy" component={PrivacyPolicy}></Route>
                 <Route

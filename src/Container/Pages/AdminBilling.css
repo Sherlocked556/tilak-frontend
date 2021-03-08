@@ -322,3 +322,25 @@
     list-style-type: none;
     margin-top: 0;
 }
+
+#inventoryLine{
+    width: 834px;
+    border: 2px solid #cdcdcd;
+    margin-right: 0;
+    margin-left: 0px;
+    margin-top: 0;
+}
+#inventoryline1{
+    width: 163px;
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    border: 2px solid #4d4d4d;
+}
+#inventory2{
+    width: 158px;
+    border: 2px solid #cdcdcd;
+    margin-right: 0;
+    margin-left: 0px;
+    margin-top: 0;
+}

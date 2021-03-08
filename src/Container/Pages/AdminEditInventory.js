@@ -54,7 +54,7 @@ export default function AdminEditInventory(props) {
                                 initialValues={{
                                     name: inventoryDetails.name,
                                     thumbnail: inventoryDetails.thumbnail,
-                                    category: inventoryDetails.category,
+                                    category: inventoryDetails.category._id,
                                     styles: inventoryDetails.styles,
                                 }}
                                 onSubmit={(data) =>

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fetchCart } from "../../actions/cart.action";
 import { useSelector } from "react-redux";
+
 const Div = styled.div`
 margin-left:0;
 @media (max-width:700px){
@@ -64,8 +65,6 @@ const Header = () => {
         }
     }, []);
 
-    // console.log(cartItems);
-
     return (
         <>
             <div className="topheadd"></div>
@@ -78,7 +77,7 @@ const Header = () => {
                 <div className="hamburg">
                     <Link to="/" style={{ color: "#4D4D4D" }}>
                         <ul className="left">
-                            <img src={require("../newLogo.png")} alt="HR" />
+                            <img src={require("../newLogo.png").default} alt="HR" />
                         </ul>
                     </Link>
                     <hr id="navlineee"></hr>
@@ -135,7 +134,7 @@ const Header = () => {
                     <div className="user">
                         <Link to="/loginSign">
                             {" "}
-                            <img src={require("./Profile.png")}></img>
+                            <img src={require("./Profile.png").default}></img>
                             {/* <BsPersonPlus className="icon"/> */}
                         </Link>
                     </div>

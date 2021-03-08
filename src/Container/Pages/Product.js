@@ -21,14 +21,9 @@ import {
     fetchOneInventory,
 } from "../../actions/inventory.action";
 import { Button } from "semantic-ui-react";
+import ReactImageGallery from "react-image-gallery";
 
 const PriceQuantity = (props) => {
-    /**
-     * props.product
-     * props.size
-     * props.currency
-     * props.prodDetails
-     */
 
     if (!props.product.availability) {
         return <span className="cost">Product Currently Unavailiable</span>;
@@ -272,103 +267,18 @@ const Product = (props) => {
             {product.productDetails._id && (
                 <div className="productss">
                     <div className="productpic">
-                        {!viewImage && (
-                            <img
-                                className="ppic"
-                                src={`http://localhost:2000/public/${product.productDetails.productPictures[0].img}`}
-                                alt="HR"
-                            ></img>
-                        )}
-
-                        {viewImage && (
-                            <img
-                                className="ppic"
-                                src={`http://localhost:2000/public/${viewImage.image.img}`}
-                                alt="HR"
-                            ></img>
-                        )}
-
-                        <div className="productSimilar">
-                            <div className="leftSlide">
-                                <IoIosArrowBack
-                                    id="Arrow"
-                                    onClick={() => {
-                                        if (
-                                            viewImage.index ===
-                                            product.productDetails
-                                                .productPictures.length -
-                                                1
-                                        ) {
-                                            setViewImage({
-                                                image:
-                                                    product.productDetails
-                                                        .productPictures[0],
-                                                index: 0,
-                                            });
-                                        } else {
-                                            setViewImage({
-                                                image:
-                                                    product.productDetails
-                                                        .productPictures[
-                                                        viewImage.index + 1
-                                                    ],
-                                                index: viewImage.index + 1,
-                                            });
-                                        }
-                                    }}
-                                />
-                            </div>
-                            {product.productDetails.productPictures &&
-                                product.productDetails.productPictures.map(
-                                    (image, index) => (
-                                        <div
-                                            className="similarImage1"
-                                            key={index + 1}
-                                            onClick={() =>
-                                                setViewImage({ image, index })
-                                            }
-                                        >
-                                            <img
-                                                src={`http://localhost:2000/public/${image.img}`}
-                                                height="100"
-                                                width="100"
-                                            />
-                                        </div>
-                                    )
-                                )}
-
-                            <div className="rightSlide">
-                                <IoIosArrowForward
-                                    id="Arrow"
-                                    onClick={() => {
-                                        if (viewImage.index === 0) {
-                                            setViewImage({
-                                                image:
-                                                    product.productDetails
-                                                        .productPictures[
-                                                        product.productDetails
-                                                            .productPictures
-                                                            .length - 1
-                                                    ],
-                                                index:
-                                                    product.productDetails
-                                                        .productPictures
-                                                        .length - 1,
-                                            });
-                                        } else {
-                                            setViewImage({
-                                                image:
-                                                    product.productDetails
-                                                        .productPictures[
-                                                        viewImage.index - 1
-                                                    ],
-                                                index: viewImage.index - 1,
-                                            });
-                                        }
-                                    }}
-                                />
-                            </div>
-                        </div>
+                        <ReactImageGallery
+                            showPlayButton={false}
+                            slideOnThumbnailOver={true}
+                            items={product.productDetails.productPictures.map(
+                                (pic) => {
+                                    return {
+                                        original: `http://localhost:2000/public/${pic.img}`,
+                                        thumbnail: `http://localhost:2000/public/${pic.img}`,
+                                    };
+                                }
+                            )}
+                        />
                     </div>
                     <div className="productdes" style={{ marginLeft: "150px" }}>
                         <p>

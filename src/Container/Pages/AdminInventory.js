@@ -91,9 +91,9 @@ const AdminInventory = () => {
                 </div>
                 <div className="productLine">
                     <hr id="billingLine1"></hr>
-                    <hr id="AdminResellerLine2" />
-                    <hr id="AdminResellerLine3" />
-                    <hr id="AdminResellerLine4" />
+                    <hr id="inventoryLine" />
+                    <hr id="inventoryline1" />
+                    <hr id="inventory2" />
                 </div>
                 <div className="categoryProductBtn">
                     <button className="productBtn" onClick={openAddInventory}>
