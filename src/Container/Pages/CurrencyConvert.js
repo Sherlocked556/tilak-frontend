@@ -106,6 +106,6 @@ export default class CurrencyConverter extends React.Component {
     }
 
     render() {
-        return <div>{this.state.convertedValue}</div>;
+        return <span>{this.state.convertedValue}</span>;
     }
 }

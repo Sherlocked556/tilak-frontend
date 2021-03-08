@@ -10,6 +10,7 @@ export const addInventory = (data) => async (dispatch) => {
 
         formData.append("name", data.name);
         formData.append("thumbnail", data.thumbnail);
+        formData.append("category", data.category);
         formData.append("styles", JSON.stringify(data.styles));
 
         const response = await axios.post("/inventory", formData, {
@@ -54,6 +55,7 @@ export const updateInventory = (data, inventoryId) => async (dispatch) => {
 
         formData.append("name", data.name);
         formData.append("thumbnail", data.thumbnail);
+        formData.append("category", data.category);
         formData.append("prevStyles", JSON.stringify(data.styles));
 
         const response = await axios.patch(

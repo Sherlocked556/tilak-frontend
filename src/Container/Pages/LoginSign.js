@@ -19,9 +19,6 @@ const LoginSign = (props) => {
     const history = useHistory();
 
     const from = props.location.state || { from: { pathname: "/" } };
-    console.log(from);
-
-    console.log(auth);
 
     if (redirect) {
         // return <Redirect to={from.from.pathname} />;
@@ -41,7 +38,6 @@ const LoginSign = (props) => {
         user = jwt.decode(localStorage.getItem("access-token"));
     }
 
-    console.log(user);
 
     console.log(
         localStorage.getItem("access-token") &&

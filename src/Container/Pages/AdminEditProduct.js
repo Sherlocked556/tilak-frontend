@@ -18,7 +18,7 @@ import {
 import axios from "../../helpers/axios";
 
 export default function AdminEditProduct(props) {
-    const { categories } = useSelector((state) => state.category);
+    // const { categories } = useSelector((state) => state.category);
     const { loading } = useSelector((state) => state.product);
     const { productDetails: product } = useSelector((state) => state.product);
     const { products } = useSelector((state) => state.product);
@@ -125,7 +125,7 @@ export default function AdminEditProduct(props) {
                                                 <Label>.00</Label>
                                             </Form.Input>
                                         </Form.Group>
-                                        <Form.Group widths={2}>
+                                        <Form.Group>
                                             {!values.areVariants && (
                                                 <Form.Input
                                                     label="Quantity"
@@ -165,7 +165,7 @@ export default function AdminEditProduct(props) {
                                                 />
                                             )}
 
-                                            <Form.Field
+                                            {/* <Form.Field
                                                 label="Category"
                                                 control="select"
                                                 placeholder="Category"
@@ -183,7 +183,7 @@ export default function AdminEditProduct(props) {
                                                         {option.name}
                                                     </option>
                                                 ))}
-                                            </Form.Field>
+                                            </Form.Field> */}
                                         </Form.Group>
                                         {values.areVariants && (
                                             <FieldArray

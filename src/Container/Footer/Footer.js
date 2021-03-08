@@ -36,9 +36,9 @@ function Footer() {
                         <p>PAYMENT METHODS</p>
                         <div className="logo">
                             <ul>
-                                <li><img src={require('./phonepay.png')} alt="RELOAD" /></li>
-                                <li><img src={require('./paytmLogoOne.jfif')} alt="RELOAD" /></li>
-                                <li><img src={require('./googlepay.jfif')} alt="RELOAD" /></li>
+                                <li><img src={require('./phonepay.png').default} alt="RELOAD" /></li>
+                                <li><img src={require('./paytmLogoOne.jfif').default} alt="RELOAD" /></li>
+                                <li><img src={require('./googlepay.jfif').default} alt="RELOAD" /></li>
                             </ul>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className='f4'><p>Tilak Shringar | <BiCopyright /> All rights reserved 2020 | Designed and Developed by <a href="https://www.agiledone.in/" target="_blank" className="Agiledone">AgileDone</a></p> <img src={require('../agileLogo.png')}></img></div>
+                <div className='f4'><p>Tilak Shringar | <BiCopyright /> All rights reserved 2020 | Designed and Developed by <a href="https://www.agiledone.in/" target="_blank" className="Agiledone">AgileDone</a></p> <img src={require('../agileLogo.png').default}></img></div>
             </div>
         </footer>
     

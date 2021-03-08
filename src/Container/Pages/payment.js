@@ -128,7 +128,7 @@ const Payment = (props) => {
 
                 if (result.data) {
                     alert("Payment Successful");
-                    window.location.replace("/")
+                    window.location.replace("/");
                 } else {
                     alert("Payment Unsuccessful");
                 }
@@ -231,6 +231,69 @@ const Payment = (props) => {
                             <p id="discountName">Discount:</p>
                             <p id="discountPriceValue">00.00</p>
                         </div>
+                        <div className="discountPrice">
+                            <p id="discountName">
+                                Shipping Cost(in {currency}):
+                            </p>
+                            {currency === "INR" && (
+                                <p id="discountPriceValue">{50.0}</p>
+                            )}
+
+                            {currency !== "INR" && (
+                                <p id="discountPriceValue">
+                                    <CurrencyConverter
+                                        from={"INR"}
+                                        to={currency}
+                                        value={50.0 * 1.05}
+                                        precision={2}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        <div
+                            className="discountPrice"
+                            style={{ marginTop: "2.5em", marginBottom: "2em" }}
+                        >
+                            <p id="discountName">
+                                Total Amount(in {currency}):
+                            </p>
+                            {currency === "INR" && (
+                                <p id="discountPriceValue">{amount}</p>
+                            )}
+
+                            {currency !== "INR" && (
+                                <p id="discountPriceValue">
+                                    <CurrencyConverter
+                                        from={"INR"}
+                                        to={currency}
+                                        value={amount * 1.05}
+                                        precision={2}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        <div className="bagTotalPrice">
+                            <p id="bagTotal">Bag Total(in {currency}):</p>
+                            {currency === "INR" && (
+                                <p id="bagTotalValue">{amount + 50}</p>
+                            )}
+
+                            {currency !== "INR" && (
+                                <p id="bagTotalValue">
+                                    <CurrencyConverter
+                                        from={"INR"}
+                                        to={currency}
+                                        value={(amount + 50) * 1.05}
+                                        precision={2}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        {/* <p id="priceSummaryHeading">Price Summary</p>
+                        <div className="discountPrice">
+                            <p id="discountName">Discount:</p>
+                            <p id="discountPriceValue">00.00</p>
+                        </div>
                         <div className="bagTotalPrice">
                             <p id="bagTotal">Bag Total(in {currency}):</p>
                             {currency === "INR" && (
@@ -247,7 +310,7 @@ const Payment = (props) => {
                                     />
                                 </div>
                             )}
-                        </div>
+                        </div> */}
                         {currency && (
                             <button
                                 id="confirmPayButton"

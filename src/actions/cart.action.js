@@ -115,7 +115,7 @@ export const clearFromCart = (product) => async (dispatch) => {
 
         const response = await axios.post("user/cart/removeItem", {
             productId: product._id,
-            price: product.price,
+            price: product.price * product.quantity,
         });
 
         // console.log("CLEAR_FROM_CART", response.data);

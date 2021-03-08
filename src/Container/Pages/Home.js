@@ -16,20 +16,20 @@ function Home() {
       <h2 id="focus">we focus on...</h2>
       <div className="cardsl1">
         <div className="cardNew"><Link to="/result">
-          <img src={require('../category_IDOLS.jpg')} alt="HR" />
+          <img src={require('../category_IDOLS.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>IDOLS</h2>
           </div>
         </Link>
         </div>
         <div className="card2">
-          <img src={require('../gcard1.jpg')} alt="HR" />
+          <img src={require('../gcard1.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>POSHAK</h2>
           </div>
         </div>
         <div className="card3">
-          <img src={require('../category_Shringar.jpg')} alt="HR" />
+          <img src={require('../category_Shringar.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>SHRINGAR</h2>
           </div>
@@ -37,20 +37,20 @@ function Home() {
       </div>
       <div className="cardsl1">
         <div className="cardNew">
-          <img src={require('../category_furniture.jpg')} alt="HR" />
+          <img src={require('../category_furniture.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>FURNITURE</h2>
           </div>
 
         </div>
         <div className="card2">
-          <img src={require('../category_decoration.jpg')} alt="HR" />
+          <img src={require('../category_decoration.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>DECORATION</h2>
           </div>
         </div>
         <div className="card3">
-          <img src={require('../category_poojaitem.jpg')} alt="HR" />
+          <img src={require('../category_poojaitem.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>POOJA ITEM</h2>
           </div>
@@ -58,14 +58,14 @@ function Home() {
       </div>
       <div className="cardsl1">
         <div className="cardNew">
-          <img src={require('../category_handicrafts.jpeg')} alt="HR" />
+          <img src={require('../category_handicrafts.jpeg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>HANDICRAFTS</h2>
           </div>
 
         </div>
         <div className="card2">
-          <img src={require('../category_toys.jpg')} alt="HR" />
+          <img src={require('../category_toys.jpg').default} alt="HR" />
           <div className="figCaption" style={{ textAlign: "right" }}>
             <h2>TOYS</h2>
           </div>
@@ -83,56 +83,56 @@ function Home() {
         <div className="gridImageBox1">
           <div className="outerBoxGcard1">
             <div className="slider1">
-              <img src={require('../slider1 (1).png')}></img>
-              <img src={require('../slider1 (2).png')}></img>
-              <img src={require('../slider1 (3).png')}></img>
+              <img src={require('../slider1 (1).png').default}></img>
+              <img src={require('../slider1 (2).png').default}></img>
+              <img src={require('../slider1 (3).png').default}></img>
             </div>
           </div>
           <div className="outerBoxgcard2">
             <div className="slider2">
-              <img src={require('../slider1 (4).png')}></img>
-              <img src={require('../slider1 (5).png')}></img>
-              <img src={require('../slider1 (6).png')}></img>
+              <img src={require('../slider1 (4).png').default}></img>
+              <img src={require('../slider1 (5).png').default}></img>
+              <img src={require('../slider1 (6).png').default}></img>
             </div>
           </div>
         </div>
         <div className="outerBoxgcard3">
           <div className="slider3">
-            <img src={require('../slider2 (1).png')}></img>
-            <img src={require('../slider2 (2).png')}></img>
-            <img src={require('../slider2 (3).png')}></img>
+            <img src={require('../slider2 (1).png').default}></img>
+            <img src={require('../slider2 (2).png').default}></img>
+            <img src={require('../slider2 (3).png').default}></img>
           </div>
         </div>
         <div className="gridImageBox3">
           <div className="outerBoxgcard4">
             <div className="slider4">
-              <img src={require('../slider3 (1).png')}></img>
-              <img src={require('../slider3 (2).png')}></img>
-              <img src={require('../slider3 (3).png')}></img>
+              <img src={require('../slider3 (1).png').default}></img>
+              <img src={require('../slider3 (2).png').default}></img>
+              <img src={require('../slider3 (3).png').default}></img>
             </div>
           </div>
           <div className="box3Inside">
             <div className="outerBoxgcard5">
               <div className="slider5">
-                <img src={require('../slider1 (7).png')}></img>
-                <img src={require('../slider1 (8).png')}></img>
-                <img src={require('../slider1 (9).png')}></img>
+                <img src={require('../slider1 (7).png').default}></img>
+                <img src={require('../slider1 (8).png').default}></img>
+                <img src={require('../slider1 (9).png').default}></img>
               </div>
             </div>
             <div className="outerBoxgcard6">
               <div className="slider6">
-                <img src={require('../slider1 (10).png')}></img>
-                <img src={require('../slider1 (11).png')}></img>
-                <img src={require('../slider1 (12).png')}></img>
+                <img src={require('../slider1 (10).png').default}></img>
+                <img src={require('../slider1 (11).png').default}></img>
+                <img src={require('../slider1 (12).png').default}></img>
               </div>
             </div>
           </div>
         </div>
         <div className="outerBoxgcard7">
           <div className="slider7">
-            <img src={require('../slider2 (4).png')}></img>
-            <img src={require('../slider2 (5).png')}></img>
-            <img src={require('../slider2 (6).png')}></img>
+            <img src={require('../slider2 (4).png').default}></img>
+            <img src={require('../slider2 (5).png').default}></img>
+            <img src={require('../slider2 (6).png').default}></img>
           </div>
         </div>
       </div>

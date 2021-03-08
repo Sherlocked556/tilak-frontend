@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import AdminProfile from "./AdminProfile";
 import "./AdminBilling.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "semantic-ui-react";
+import { Accordion, Button, Icon, Table } from "semantic-ui-react";
 import { fetchAllAdminOrders } from "../../actions/order.action";
 import dayjs from "dayjs";
 
@@ -16,8 +16,52 @@ function emptyClose() {
     document.querySelector(".adminBillingPopUp").style.display = "none";
 }
 
+const OrderRow = ({ items }) => {
+    // console.log(items);
+
+    return (
+        <Table>
+            <Table.Header>
+                <Table.Row>
+                    {/* <Table.HeaderCell /> */}
+                    <Table.HeaderCell>S. No.</Table.HeaderCell>
+                    <Table.HeaderCell>Product Name</Table.HeaderCell>
+                    <Table.HeaderCell>Price</Table.HeaderCell>
+                    <Table.HeaderCell>Quantity</Table.HeaderCell>
+                    <Table.HeaderCell>Size</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {items.map((item) => (
+                    <Table.Row key={item._id}>
+                        <Table.Cell>
+                            {item._id.substr(item._id.length - 5)}
+                        </Table.Cell>
+                        <Table.Cell> {item.productId.name} </Table.Cell>
+                        <Table.Cell> {item.payablePrice} </Table.Cell>
+                        <Table.Cell> {item.purchasedQty} </Table.Cell>
+
+                        {item.purchasedSize !== undefined && (
+                            <Table.Cell>
+                                {" "}
+                                {item.purchasedSize.sizeValue +
+                                    " " +
+                                    item.purchasedSize.sizeUnit}{" "}
+                            </Table.Cell>
+                        )}
+                        {item.purchasedSize === undefined && (
+                            <Table.Cell> Null </Table.Cell>
+                        )}
+                    </Table.Row>
+                ))}
+            </Table.Body>
+        </Table>
+    );
+};
+
 const AdminBilling = () => {
     const orders = useSelector((state) => state.orders);
+    const [showDetails, setShowDetails] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -84,145 +128,110 @@ const AdminBilling = () => {
                     )}
                 </div>
                 <div className="SearchBilling"></div>
-                <div className="AdminProductDetails">
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "4.7vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "15.422vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "24.963vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "33.382vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "41.508vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "49.414vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "58.199vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "0.073vw solid #707070",
-                            width: "0",
-                            height: "45.388vw",
-                            marginLeft: "67.350vw",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <div className="billingCols">
-                        <p className="serialNo">S. No.</p>
-                        <p className="orderIdBill">Ordered ID</p>
-                        <p className="orderDateBill">Ordered Date</p>
-                        <p className="orderStatusBill">Status</p>
-                        <p className="orderQuantityBill">Quantities</p>
-                        <p className="orderUserType">User Type</p>
-                        <p className="orderNameBill">Name</p>
-                        <p className="orderTotalAmount">Total Amount</p>
-                        <p className="orderPaymentMethod">Payment Method</p>
-                    </div>
-                    <hr id="AdminLine"></hr>
-                    <div className="AdminBillingOuterBox">
-                        {orders.adminOrders &&
-                            orders.adminOrders.map((order) => {
-                                return (
-                                    <div className="productDetailsAdminBilling">
-                                        <p className="oneSerial">
-                                            {order._id.substr(
-                                                order._id.length - 5
-                                            )}
-                                        </p>
-                                        <p className="oneId">
-                                            {order.paymentData.orderId}
-                                        </p>
-                                        <p className="oneDate">
-                                            {" "}
-                                            {dayjs(order.createdAt).format(`DD
+                <div
+                    className="AdminProductDetails"
+                    style={{ overflowY: "scroll" }}
+                >
+                    <Table selectable>
+                        <Table.Header>
+                            <Table.Row>
+                                {/* <Table.HeaderCell /> */}
+                                <Table.HeaderCell>S. No.</Table.HeaderCell>
+                                <Table.HeaderCell>Ordered ID</Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Ordered Date
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>Status</Table.HeaderCell>
+                                <Table.HeaderCell>Quantities</Table.HeaderCell>
+                                <Table.HeaderCell>User Type</Table.HeaderCell>
+                                <Table.HeaderCell>Name</Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Total Amount
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Payment Method
+                                </Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+                        <Accordion
+                            fluid={true}
+                            as={Table.Body}
+                            panels={orders.adminOrders.map((order) => {
+                                return {
+                                    key: order._id,
+                                    class: "tr",
+                                    title: {
+                                        as: Table.Row,
+                                        className: "",
+                                        children: [
+                                            <Table.Cell key={`id_${order._id}`}>
+                                                {order._id.substr(
+                                                    order._id.length - 5
+                                                )}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`order_id_${order._id}`}
+                                            >
+                                                {order.paymentData.orderId}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`order_date_${order._id}`}
+                                            >
+                                                {dayjs(order.createdAt)
+                                                    .format(`DD
                                             MMMM YYYY`)}
-                                        </p>
-                                        <p className="oneStatus">
-                                            {" "}
-                                            {order.orderStatus[
-                                                order.orderStatus.length - 1
-                                            ]
-                                                ? order.orderStatus[
-                                                      order.orderStatus.length -
-                                                          1
-                                                  ].type
-                                                : "ordered"}{" "}
-                                            {/* {order.paymentStatus} */}
-                                        </p>
-                                        <p className="oneQuantity">
-                                            {" "}
-                                            {order.items.length}{" "}
-                                        </p>
-                                        <p className="oneUsertype">Customer</p>
-                                        <p className="oneName">Mohit Gopal</p>
-                                        <p className="oneTotal">
-                                            {order.totalAmount}
-                                        </p>
-                                        <p className="onePayment">
-                                            {order.paymentType}
-                                        </p>
-                                    </div>
-                                );
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`order_status_${order._id}`}
+                                            >
+                                                {order.orderStatus[
+                                                    order.orderStatus.length - 1
+                                                ]
+                                                    ? order.orderStatus[
+                                                          order.orderStatus
+                                                              .length - 1
+                                                      ].type
+                                                    : "ordered"}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`item_length_${order._id}`}
+                                            >
+                                                {order.items.length}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`user_role_${order._id}`}
+                                            >
+                                                {order.user.role}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`username_${order._id}`}
+                                            >
+                                                {order.user.firstName}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`total_amount_${order._id}`}
+                                            >
+                                                {order.totalAmount}
+                                            </Table.Cell>,
+                                            <Table.Cell
+                                                key={`payment_type_${order._id}`}
+                                            >
+                                                {order.paymentType}
+                                            </Table.Cell>,
+                                        ],
+                                    },
+                                    content: {
+                                        key: order._id,
+                                        class: "tr",
+                                        children: (
+                                            <OrderRow items={order.items} />
+                                        ),
+                                    },
+                                };
                             })}
-                    </div>
+                        />
+                    </Table>
                 </div>
             </div>
             <hr className="endLine" />

@@ -6,6 +6,7 @@ import { addCategory, getAllProducts } from "../../actions";
 import { addInventory, updateInventory } from "../../actions/inventory.action";
 
 export default function AdminEditInventory(props) {
+    const { categories } = useSelector((state) => state.category);
     const { products, loading: prodLoading } = useSelector(
         (state) => state.product
     );
@@ -53,6 +54,7 @@ export default function AdminEditInventory(props) {
                                 initialValues={{
                                     name: inventoryDetails.name,
                                     thumbnail: inventoryDetails.thumbnail,
+                                    category: inventoryDetails.category._id,
                                     styles: inventoryDetails.styles,
                                 }}
                                 onSubmit={(data) =>
@@ -73,14 +75,35 @@ export default function AdminEditInventory(props) {
                                         onSubmit={handleSubmit}
                                         loading={invtLoading}
                                     >
-                                        <Form.Input
-                                            type="text"
-                                            label="Inventory Name"
-                                            placeholder="Enter Inventory Name here"
-                                            name="name"
-                                            onChange={handleChange}
-                                            value={values.name}
-                                        />
+                                        <Form.Group widths={2}>
+                                            <Form.Input
+                                                type="text"
+                                                label="Inventory Name"
+                                                placeholder="Enter Inventory Name here"
+                                                name="name"
+                                                onChange={handleChange}
+                                                value={values.name}
+                                            />
+                                            <Form.Field
+                                                label="Category"
+                                                control="select"
+                                                placeholder="Category"
+                                                name="category"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.category}
+                                            >
+                                                <option>Select Category</option>
+                                                {categories.map((option) => (
+                                                    <option
+                                                        key={option._id}
+                                                        value={option._id}
+                                                    >
+                                                        {option.name}
+                                                    </option>
+                                                ))}
+                                            </Form.Field>
+                                        </Form.Group>
 
                                         <Form.Input
                                             type="file"
