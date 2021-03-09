@@ -4,12 +4,24 @@
     width: 31.625vw !important;
 }
 
-.image-gallery-slide .right {
-    width: 0;
+.image-gallery
+    .image-gallery-content
+    .image-gallery-slide-wrapper
+    .image-gallery-swipe
+    .image-gallery-slides
+    .left {
+    width: 0 !important;
+    height: 0 !important;
 }
 
-.image-gallery-slide .right {
-    height: 0;
+.image-gallery
+    .image-gallery-content
+    .image-gallery-slide-wrapper
+    .image-gallery-swipe
+    .image-gallery-slides
+    .right {
+    width: 0 !important;
+    height: 0 !important;
 }
 
 .breadcrumbs {
