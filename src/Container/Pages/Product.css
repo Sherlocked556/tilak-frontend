@@ -4,6 +4,26 @@
     width: 31.625vw !important;
 }
 
+.image-gallery
+    .image-gallery-content
+    .image-gallery-slide-wrapper
+    .image-gallery-swipe
+    .image-gallery-slides
+    .left {
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.image-gallery
+    .image-gallery-content
+    .image-gallery-slide-wrapper
+    .image-gallery-swipe
+    .image-gallery-slides
+    .right {
+    width: 0 !important;
+    height: 0 !important;
+}
+
 .breadcrumbs {
     margin-left: 21.889vw;
     border: 0.146vw solid rgb(255, 255, 255);
