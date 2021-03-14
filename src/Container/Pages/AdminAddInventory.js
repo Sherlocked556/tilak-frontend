@@ -15,7 +15,7 @@ export default function AdminAddInventory(props) {
     const dispatch = useDispatch();
 
     const handleInventorySubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         dispatch(addInventory(data));
     };
 
@@ -144,8 +144,9 @@ export default function AdminAddInventory(props) {
                                                                 icon
                                                                 onClick={() =>
                                                                     styleHelpers.insert(
-                                                                        index +
-                                                                            1,
+                                                                        values
+                                                                            .styles
+                                                                            .length,
                                                                         {
                                                                             styleName:
                                                                                 "",
@@ -230,16 +231,6 @@ export default function AdminAddInventory(props) {
                                                                                                 value: selected,
                                                                                             }
                                                                                         ) => {
-                                                                                            // let prods = selected.map(
-                                                                                            //     (
-                                                                                            //         select
-                                                                                            //     ) => {
-                                                                                            //         return {
-                                                                                            //             product: select,
-                                                                                            //         };
-                                                                                            //     }
-                                                                                            // );
-
                                                                                             setFieldValue(
                                                                                                 `styles[${index}].items[${idx}].products`,
                                                                                                 [
@@ -253,10 +244,24 @@ export default function AdminAddInventory(props) {
                                                                                     <Button
                                                                                         type="button"
                                                                                         icon
-                                                                                        onClick={() =>
-                                                                                            itemHelpers.insert(
-                                                                                                index +
-                                                                                                    1,
+                                                                                        onClick={() => {
+                                                                                            // console.log(
+                                                                                            //     values
+                                                                                            //         .styles[
+                                                                                            //         index
+                                                                                            //     ]
+                                                                                            //         .items
+                                                                                            //         .length,
+                                                                                            //     "Addition Index"
+                                                                                            // );
+
+                                                                                            return itemHelpers.insert(
+                                                                                                values
+                                                                                                    .styles[
+                                                                                                    index
+                                                                                                ]
+                                                                                                    .items
+                                                                                                    .length,
                                                                                                 {
                                                                                                     styleValue:
                                                                                                         "",
@@ -267,19 +272,24 @@ export default function AdminAddInventory(props) {
                                                                                                         },
                                                                                                     ],
                                                                                                 }
-                                                                                            )
-                                                                                        }
+                                                                                            );
+                                                                                        }}
                                                                                     >
                                                                                         <Icon name="add" />
                                                                                     </Button>
                                                                                     <Button
                                                                                         type="button"
                                                                                         icon
-                                                                                        onClick={() =>
-                                                                                            itemHelpers.remove(
-                                                                                                index
-                                                                                            )
-                                                                                        }
+                                                                                        onClick={() => {
+                                                                                            // console.log(
+                                                                                            //     idx,
+                                                                                            //     "Deletion Index"
+                                                                                            // );
+
+                                                                                            return itemHelpers.remove(
+                                                                                                idx
+                                                                                            );
+                                                                                        }}
                                                                                     >
                                                                                         <Icon name="minus" />
                                                                                     </Button>

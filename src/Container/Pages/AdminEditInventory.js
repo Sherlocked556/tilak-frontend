@@ -17,6 +17,8 @@ export default function AdminEditInventory(props) {
     const dispatch = useDispatch();
 
     const handleInventoryEdit = (data, inventoryId) => {
+        // console.log(data);
+
         dispatch(updateInventory(data, inventoryId));
     };
 
@@ -287,7 +289,7 @@ export default function AdminEditInventory(props) {
                                                                                             icon
                                                                                             onClick={() =>
                                                                                                 itemHelpers.insert(
-                                                                                                    index +
+                                                                                                    idx +
                                                                                                         1,
                                                                                                     {
                                                                                                         styleValue:
@@ -309,7 +311,7 @@ export default function AdminEditInventory(props) {
                                                                                             icon
                                                                                             onClick={() =>
                                                                                                 itemHelpers.remove(
-                                                                                                    index
+                                                                                                    idx
                                                                                                 )
                                                                                             }
                                                                                         >

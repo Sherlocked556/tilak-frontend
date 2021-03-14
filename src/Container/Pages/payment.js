@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../actions/cart.action";
 import CurrencyConverter from "./CurrencyConvert";
 import { fx } from "money";
+import { Icon } from "semantic-ui-react";
 
 const Payment = (props) => {
     const cart = useSelector((state) => state.cart);
@@ -190,9 +191,9 @@ const Payment = (props) => {
                         Select payment option
                     </p>
                     <div className="boxPaymentOption">
-                        <table>
+                        Pay With
+                        {/* <table>
                             <tbody>
-                                {/* <tr> */}
                                 <tr>
                                     <td>
                                         <input
@@ -219,9 +220,52 @@ const Payment = (props) => {
                                         Pay with PayPal
                                     </td>
                                 </tr>
-                                {/* </tr> */}
                             </tbody>
-                        </table>
+                        </table> */}
+                        <div className="radio-with-Icon">
+                            <p className="radioOption-Item">
+                                <input
+                                    type="radio"
+                                    name="razor"
+                                    id="BannerType1"
+                                    value="true"
+                                    aria-invalid="false"
+                                    onClick={changePaymentMethod}
+                                    checked={paymentMethod === "razor"}
+                                />
+                                <label htmlFor="BannerType1">
+                                    <img
+                                        src={
+                                            require("../razorpayIcon.svg")
+                                                .default
+                                        }
+                                        alt=""
+                                        width="60%"
+                                        style={{
+                                            marginRight: "auto",
+                                            marginLeft: "auto",
+                                        }}
+                                    />
+                                    Razorpay
+                                </label>
+                            </p>
+
+                            <p className="radioOption-Item">
+                                <input
+                                    type="radio"
+                                    name="paypal"
+                                    id="BannerType2"
+                                    value="false"
+                                    aria-invalid="false"
+                                    checked={paymentMethod === "paypal"}
+                                    onClick={changePaymentMethod}
+                                />
+                                <label htmlFor="BannerType2">
+                                    <Icon name="paypal" />
+                                    Paypal
+                                </label>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div className="summaryDetail">
