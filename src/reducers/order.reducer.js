@@ -30,6 +30,26 @@ export default (state = initState, action) => {
                 loading: false,
             };
 
+        case orderConstants.FETCH_ALL_USER_ORDERS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case orderConstants.FETCH_ALL_USER_ORDERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                userOrders: action.payload.orders,
+            };
+
+        case orderConstants.FETCH_ALL_USER_ORDERS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.error,
+            };
+
         default:
             return state;
     }

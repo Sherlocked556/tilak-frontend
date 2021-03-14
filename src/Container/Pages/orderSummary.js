@@ -77,6 +77,10 @@ function OrderSummary() {
                                         orderAddress._id === address._id && (
                                             <AiOutlineCheckCircle id="addressTickIcon" />
                                         )}
+                                    {(!orderAddress ||
+                                        orderAddress._id !== address._id) && (
+                                        <AiOutlineCheckCircle id="addressTickUnSelectedIcon" />
+                                    )}
                                 </div>
                                 <div className="customerAddressBox">
                                     <p>{address.address}</p>

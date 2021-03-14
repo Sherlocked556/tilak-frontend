@@ -5,9 +5,10 @@ import AdminProfile from "./AdminProfile";
 import "./AdminBilling.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Accordion, Button, Icon, Table } from "semantic-ui-react";
+import { Accordion, Button, Icon, Tab, Table } from "semantic-ui-react";
 import { fetchAllAdminOrders } from "../../actions/order.action";
 import dayjs from "dayjs";
+import AdminViewOrderDetails from "./AdminViewOrderDetails";
 
 function emptyOpen() {
     document.querySelector(".adminBillingPopUp").style.display = "flex";
@@ -15,49 +16,6 @@ function emptyOpen() {
 function emptyClose() {
     document.querySelector(".adminBillingPopUp").style.display = "none";
 }
-
-const OrderRow = ({ items }) => {
-    // console.log(items);
-
-    return (
-        <Table>
-            <Table.Header>
-                <Table.Row>
-                    {/* <Table.HeaderCell /> */}
-                    <Table.HeaderCell>S. No.</Table.HeaderCell>
-                    <Table.HeaderCell>Product Name</Table.HeaderCell>
-                    <Table.HeaderCell>Price</Table.HeaderCell>
-                    <Table.HeaderCell>Quantity</Table.HeaderCell>
-                    <Table.HeaderCell>Size</Table.HeaderCell>
-                </Table.Row>
-            </Table.Header>
-            <Table.Body>
-                {items.map((item) => (
-                    <Table.Row key={item._id}>
-                        <Table.Cell>
-                            {item._id.substr(item._id.length - 5)}
-                        </Table.Cell>
-                        <Table.Cell> {item.productId.name} </Table.Cell>
-                        <Table.Cell> {item.payablePrice} </Table.Cell>
-                        <Table.Cell> {item.purchasedQty} </Table.Cell>
-
-                        {item.purchasedSize !== undefined && (
-                            <Table.Cell>
-                                {" "}
-                                {item.purchasedSize.sizeValue +
-                                    " " +
-                                    item.purchasedSize.sizeUnit}{" "}
-                            </Table.Cell>
-                        )}
-                        {item.purchasedSize === undefined && (
-                            <Table.Cell> Null </Table.Cell>
-                        )}
-                    </Table.Row>
-                ))}
-            </Table.Body>
-        </Table>
-    );
-};
 
 const AdminBilling = () => {
     const orders = useSelector((state) => state.orders);
@@ -70,11 +28,9 @@ const AdminBilling = () => {
 
     console.log(orders.adminOrders);
 
-    if (orders.adminOrders[0]) {
-        console.log(
-            dayjs(orders.adminOrders[0].createdAt).format("DD MMMM YYYY")
-        );
-    }
+    // if (orders.adminOrders[0]) {
+    //     orders.adminOrders = [...orders.adminOrders].reverse();
+    // }
 
     return (
         <div>
@@ -133,7 +89,7 @@ const AdminBilling = () => {
                     style={{ overflowY: "scroll" }}
                 >
                     <Table selectable>
-                        <Table.Header>
+                        <Table.Header style={{ position: "sticky", top: "0" }}>
                             <Table.Row>
                                 {/* <Table.HeaderCell /> */}
                                 <Table.HeaderCell>S. No.</Table.HeaderCell>
@@ -149,39 +105,39 @@ const AdminBilling = () => {
                                     Total Amount
                                 </Table.HeaderCell>
                                 <Table.HeaderCell>
+                                    Payment Status
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
                                     Payment Method
                                 </Table.HeaderCell>
+                                <Table.HeaderCell>View Order</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
-                        <Accordion
-                            fluid={true}
-                            as={Table.Body}
-                            panels={orders.adminOrders.map((order) => {
-                                return {
-                                    key: order._id,
-                                    class: "tr",
-                                    title: {
-                                        as: Table.Row,
-                                        className: "",
-                                        children: [
+                        <Table.Body>
+                            {orders.adminOrders &&
+                                orders.adminOrders
+                                    .slice()
+                                    .reverse()
+                                    .map((order) => (
+                                        <Table.Row>
                                             <Table.Cell key={`id_${order._id}`}>
                                                 {order._id.substr(
                                                     order._id.length - 5
                                                 )}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`order_id_${order._id}`}
                                             >
                                                 {order.paymentData.orderId}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`order_date_${order._id}`}
                                             >
                                                 {dayjs(order.createdAt)
                                                     .format(`DD
                                             MMMM YYYY`)}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`order_status_${order._id}`}
                                             >
@@ -193,44 +149,47 @@ const AdminBilling = () => {
                                                               .length - 1
                                                       ].type
                                                     : "ordered"}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`item_length_${order._id}`}
                                             >
                                                 {order.items.length}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`user_role_${order._id}`}
                                             >
                                                 {order.user.role}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`username_${order._id}`}
                                             >
                                                 {order.user.firstName}
-                                            </Table.Cell>,
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`total_amount_${order._id}`}
                                             >
                                                 {order.totalAmount}
-                                            </Table.Cell>,
+                                            </Table.Cell>
+                                            <Table.Cell
+                                                key={`payment_status_${order._id}`}
+                                            >
+                                                {order.paymentStatus}
+                                            </Table.Cell>
                                             <Table.Cell
                                                 key={`payment_type_${order._id}`}
                                             >
                                                 {order.paymentType}
-                                            </Table.Cell>,
-                                        ],
-                                    },
-                                    content: {
-                                        key: order._id,
-                                        class: "tr",
-                                        children: (
-                                            <OrderRow items={order.items} />
-                                        ),
-                                    },
-                                };
-                            })}
-                        />
+                                            </Table.Cell>
+                                            <Table.Cell
+                                                key={`view_details_${order._id}`}
+                                            >
+                                                <AdminViewOrderDetails
+                                                    order={order}
+                                                />
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
+                        </Table.Body>
                     </Table>
                 </div>
             </div>

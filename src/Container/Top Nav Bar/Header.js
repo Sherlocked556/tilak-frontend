@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fetchCart } from "../../actions/cart.action";
 import { useSelector } from "react-redux";
+import jwt from "jsonwebtoken";
 
 const Div = styled.div`
 margin-left:0;
@@ -56,6 +57,26 @@ const StyledBurger = styled.div`
 var quant = 12;
 
 const Header = () => {
+    const isLoggedIn = () => {
+        if (localStorage.getItem("access-token")) {
+            return true;
+        } else return false;
+    };
+
+    const isAdmin = () => {
+        if (isLoggedIn()) {
+            let user = jwt.decode(localStorage.getItem("access-token"));
+
+            if (user.role === "admin") {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+
     const [open, setOpen] = useState(false);
     const { cartItems } = useSelector((state) => state.cart);
 
@@ -77,7 +98,10 @@ const Header = () => {
                 <div className="hamburg">
                     <Link to="/" style={{ color: "#4D4D4D" }}>
                         <ul className="left">
-                            <img src={require("../newLogo.png").default} alt="HR" />
+                            <img
+                                src={require("../newLogo.png").default}
+                                alt="HR"
+                            />
                         </ul>
                     </Link>
                     <hr id="navlineee"></hr>
@@ -107,6 +131,13 @@ const Header = () => {
                                 Blogs
                             </Link>
                         </li>
+                        {isAdmin() && (
+                            <li>
+                                <Link to="/admin" style={{ color: "#4D4D4D" }}>
+                                    Admin
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                     <div className="foot">
                         Tilak Shringar | <BiCopyright /> &nbsp; All rights
@@ -132,11 +163,25 @@ const Header = () => {
                         )}
                     </div>
                     <div className="user">
-                        <Link to="/loginSign">
-                            {" "}
-                            <img src={require("./Profile.png").default}></img>
-                            {/* <BsPersonPlus className="icon"/> */}
-                        </Link>
+                        {isLoggedIn() && (
+                            <Link to="/myprofile">
+                                {" "}
+                                <img
+                                    src={require("./Profile.png").default}
+                                ></img>
+                                {/* <BsPersonPlus className="icon"/> */}
+                            </Link>
+                        )}
+
+                        {!isLoggedIn() && (
+                            <Link to="/loginSign">
+                                {" "}
+                                <img
+                                    src={require("./Profile.png").default}
+                                ></img>
+                                {/* <BsPersonPlus className="icon"/> */}
+                            </Link>
+                        )}
                     </div>
                 </div>
             </Div>
