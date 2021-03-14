@@ -80,8 +80,8 @@ const AdminViewOrderDetails = ({ order }) => {
                             showPlayButton={false}
                             slideOnThumbnailOver={true}
                             items={order.items.map((item) => ({
-                                original: `http://localhost:2000/public/${item.productId.productPictures[0].img}`,
-                                thumbnail: `http://localhost:2000/public/${item.productId.productPictures[0].img}`,
+                                original: `https://api.tilakshringar.com/public/${item.productId.productPictures[0].img}`,
+                                thumbnail: `https://api.tilakshringar.com/public/${item.productId.productPictures[0].img}`,
                             }))}
                         />
                     </Grid.Column>

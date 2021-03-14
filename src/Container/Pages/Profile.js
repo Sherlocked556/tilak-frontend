@@ -182,7 +182,7 @@ const Profile = () => {
                                                                 <div className="orderProductBox">
                                                                     <span className="imageBox">
                                                                         <img
-                                                                            src={`http://localhost:2000/public/${item.productId.productPictures[0].img}`}
+                                                                            src={`https://api.tilakshringar.com/public/${item.productId.productPictures[0].img}`}
                                                                             alt=""
                                                                         />
                                                                     </span>
