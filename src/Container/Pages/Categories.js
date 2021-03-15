@@ -25,7 +25,7 @@ const Categories = (props) => {
                         <Link to={`/shop?cat=${category._id}`}>
                             <div className="cardNew1">
                                 <img
-                                    src={`https://api.tilakshringar.com/public/${category.categoryImage}`}
+                                    src={`https://api.tilakshringar.com${category.categoryImage}`}
                                     alt="HR"
                                 />
                                 <div
