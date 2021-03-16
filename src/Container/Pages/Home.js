@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import Pro from '../New Module/generateProducts'
 import Index3 from "../Side Nav Bar/Index3";
 import Search from "../Search Button/Search";
@@ -6,17 +6,70 @@ import "./Home.css";
 import Footer from "../Footer/Footer";
 import Header from "../Top Nav Bar/Header";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategory } from "../../actions";
+import "./Categories.css";
 
 const Home = () => {
+    const category = useSelector((state) => state.category);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllCategory());
+    }, []);
+
+    const renderCategories = (categories) => {
+        let myCategories = [];
+        for (let category of categories) {
+            myCategories.push(
+                <div key={category.name}>
+                    {category.parentId ? (
+                        <Link to={category.slug}>{category.name}</Link>
+                    ) : (
+                        <Link to={`/shop?cat=${category._id}`}>
+                            <div className="cardNew1">
+                                <img
+                                    src={`http://localhost:2000${category.categoryImage}`}
+                                    alt="HR"
+                                />
+                                <div
+                                    className="figCaption"
+                                    style={{ textAlign: "right" }}
+                                >
+                                    <h2>{category.name}</h2>
+                                </div>
+                            </div>
+                        </Link>
+                    )}
+                </div>
+            );
+        }
+        return myCategories;
+    };
+    const renderNull = () => {
+        let nullCategory = [];
+        nullCategory.push(
+            <div className="nullCategories">
+                <h2>No Categories</h2>
+            </div>
+        );
+        return nullCategory;
+    };
+
     return (
         <div>
             <Header />
             <Index3 />
             <Search />
             <h2 id="focus">we focus on...</h2>
-            <div className="cardsl1">
+
+            <div className="category_card">
+                {category.categories.length > 0
+                    ? renderCategories(category.categories)
+                    : renderNull()}
+            </div>
+            {/* <div className="cardsl1">
                 <div className="cardNew">
-                    {/* <Link to=""> */}
                     <img
                         src={require("../category_IDOLS.jpg").default}
                         alt="HR"
@@ -24,7 +77,6 @@ const Home = () => {
                     <div className="figCaption" style={{ textAlign: "right" }}>
                         <h2>IDOLS</h2>
                     </div>
-                    {/* </Link> */}
                 </div>
                 <div className="card2">
                     <img src={require("../gcard1.jpg").default} alt="HR" />
@@ -99,7 +151,7 @@ const Home = () => {
                         <h2> Duppata</h2>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <p className="work">our work...</p>
             <div className="grid">
