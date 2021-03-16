@@ -6,11 +6,9 @@ import "./Home.css";
 import Footer from "../Footer/Footer";
 import Header from "../Top Nav Bar/Header";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllCategory } from "../../actions";
-import "./Categories.css";
 
 const Home = () => {
+<<<<<<< HEAD
     const category = useSelector((state) => state.category);
     const dispatch = useDispatch();
 
@@ -56,6 +54,8 @@ const Home = () => {
         return nullCategory;
     };
 
+=======
+>>>>>>> 07429d81820d00243669a58867cedb9df82fe5fe
     return (
         <div>
             <Header />
@@ -63,95 +63,137 @@ const Home = () => {
             <Search />
             <h2 id="focus">we focus on...</h2>
 
-            <div className="category_card">
-                {category.categories.length > 0
-                    ? renderCategories(category.categories)
-                    : renderNull()}
-            </div>
-            {/* <div className="cardsl1">
-                <div className="cardNew">
-                    <img
-                        src={require("../category_IDOLS.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>IDOLS</h2>
+            <div className="cardsl1">
+                <Link to="/categories">
+                    <div className="cardNew">
+                        <img
+                            src={require("../category_IDOLS.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>IDOLS</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card2">
-                    <img src={require("../gcard1.jpg").default} alt="HR" />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>POSHAK</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card2">
+                        <img src={require("../gcard1.jpg").default} alt="HR" />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>POSHAK</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card3">
-                    <img
-                        src={require("../category_Shringar.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>SHRINGAR</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card3">
+                        <img
+                            src={require("../category_Shringar.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>SHRINGAR</h2>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </div>
             <div className="cardsl1">
-                <div className="cardNew">
-                    <img
-                        src={require("../category_furniture.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>FURNITURE</h2>
+                <Link to="/categories">
+                    <div className="cardNew">
+                        <img
+                            src={require("../category_furniture.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>FURNITURE</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card2">
-                    <img
-                        src={require("../category_decoration.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>DECORATION</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card2">
+                        <img
+                            src={require("../category_decoration.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>DECORATION</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card3">
-                    <img
-                        src={require("../category_poojaitem.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>POOJA ITEM</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card3">
+                        <img
+                            src={require("../category_poojaitem.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>POOJA ITEM</h2>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </div>
             <div className="cardsl1">
-                <div className="cardNew">
-                    <img
-                        src={require("../category_handicrafts.jpeg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>HANDICRAFTS</h2>
+                <Link to="/categories">
+                    <div className="cardNew">
+                        <img
+                            src={
+                                require("../category_handicrafts.jpeg").default
+                            }
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>HANDICRAFTS</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card2">
-                    <img
-                        src={require("../category_toys.jpg").default}
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2>TOYS</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card2">
+                        <img
+                            src={require("../category_toys.jpg").default}
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2>TOYS</h2>
+                        </div>
                     </div>
-                </div>
-                <div className="card3">
-                    <img
-                        src="https://i.pinimg.com/originals/98/81/02/988102527faa21e51a8ba5a9406bf6dd.jpg"
-                        alt="HR"
-                    />
-                    <div className="figCaption" style={{ textAlign: "right" }}>
-                        <h2> Duppata</h2>
+                </Link>
+                <Link to="/categories">
+                    <div className="card3">
+                        <img
+                            src="https://i.pinimg.com/originals/98/81/02/988102527faa21e51a8ba5a9406bf6dd.jpg"
+                            alt="HR"
+                        />
+                        <div
+                            className="figCaption"
+                            style={{ textAlign: "right" }}
+                        >
+                            <h2> Duppata</h2>
+                        </div>
                     </div>
-                </div>
-            </div> */}
+                </Link>
+            </div>
 
             <p className="work">our work...</p>
             <div className="grid">
