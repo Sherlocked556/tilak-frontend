@@ -8,54 +8,6 @@ import Header from "../Top Nav Bar/Header";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-<<<<<<< HEAD
-    const category = useSelector((state) => state.category);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getAllCategory());
-    }, []);
-
-    const renderCategories = (categories) => {
-        let myCategories = [];
-        for (let category of categories) {
-            myCategories.push(
-                <div key={category.name}>
-                    {category.parentId ? (
-                        <Link to={category.slug}>{category.name}</Link>
-                    ) : (
-                        <Link to={`/shop?cat=${category._id}`}>
-                            <div className="cardNew1">
-                                <img
-                                    src={`https://api.tilakshringar.com${category.categoryImage}`}
-                                    alt="HR"
-                                />
-                                <div
-                                    className="figCaption"
-                                    style={{ textAlign: "right" }}
-                                >
-                                    <h2>{category.name}</h2>
-                                </div>
-                            </div>
-                        </Link>
-                    )}
-                </div>
-            );
-        }
-        return myCategories;
-    };
-    const renderNull = () => {
-        let nullCategory = [];
-        nullCategory.push(
-            <div className="nullCategories">
-                <h2>No Categories</h2>
-            </div>
-        );
-        return nullCategory;
-    };
-
-=======
->>>>>>> 07429d81820d00243669a58867cedb9df82fe5fe
     return (
         <div>
             <Header />
