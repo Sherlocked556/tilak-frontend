@@ -29,7 +29,7 @@ const Home = () => {
                         <Link to={`/shop?cat=${category._id}`}>
                             <div className="cardNew1">
                                 <img
-                                    src={`http://localhost:2000${category.categoryImage}`}
+                                    src={`https://api.tilakshringar.com${category.categoryImage}`}
                                     alt="HR"
                                 />
                                 <div
