@@ -5,6 +5,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { GrMail } from "react-icons/gr";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategory } from "../../actions";
+import { Link } from "react-router-dom";
 
 const Index2 = (props) => {
     const category = useSelector((state) => state.category);
