@@ -177,11 +177,11 @@
 }
 .userDetails {
     width: 26.208vw;
-    height: 14.129vw;
+    height: max-content;
     margin-top: 1.757vw;
     border: 0.073vw solid #cdcdcd;
     display: grid;
-    grid-template-rows: 2.928vw 5.344vw 2.416vw 2.343vw;
+    grid-template-rows: auto;
 }
 
 .userName {
@@ -207,7 +207,7 @@
 
 .addressDetail {
     width: 24.451vw;
-    height: 4.905vw;
+    height: max-content;
     margin-left: 1.611vw;
     margin-top: 0.805vw;
     display: flex;
@@ -222,13 +222,13 @@
 .addressLineDetail {
     margin-left: 5.417vw;
     width: 12.299vw;
-    height: 4.905vw;
+    height: max-content;
     font: normal normal normal 1.171vw/1.684vw Poppins;
     color: #2d2d2d;
 }
 .landmarkDetails {
     width: 24.451vw;
-    height: 1.537vw;
+    height: max-content;
     margin-left: 1.611vw;
     margin-top: 0.878vw;
     display: flex;
@@ -248,7 +248,7 @@
 }
 .contactDetails {
     width: 24.451vw;
-    height: 1.537vw;
+    height: max-content;
     margin-left: 1.611vw;
     display: flex;
     margin-top: 0.805vw;

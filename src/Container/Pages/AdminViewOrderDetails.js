@@ -59,7 +59,7 @@ const AdminViewOrderDetails = ({ order }) => {
 
     // useEffect(() => {}, [props.order]);
 
-    console.log(order);
+    // console.log(order);
 
     return (
         <Modal

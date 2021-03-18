@@ -24,7 +24,6 @@ import { Button } from "semantic-ui-react";
 import ReactImageGallery from "react-image-gallery";
 
 const PriceQuantity = (props) => {
-
     if (!props.product.availability) {
         return <span className="cost">Product Currently Unavailiable</span>;
     }
@@ -280,14 +279,7 @@ const Product = (props) => {
                         />
                     </div>
                     <div className="productdes" style={{ marginLeft: "150px" }}>
-                        <p>
-                            {product.productDetails.name +
-                                " (" +
-                                prodDetails.styleName +
-                                " : " +
-                                prodDetails.styleValue +
-                                ")"}
-                        </p>
+                        <p>{product.productDetails.name}</p>
                         {/* <div className="icon2">
                             <TiHeartFullOutline id="iconn2" />
                         </div> */}

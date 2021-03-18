@@ -134,6 +134,8 @@ const Admin = () => {
 
     useEffect(() => {
         // getAllProducts();
+
+        // console.log("HAHAHHAHAH ADMIN");
         dispatch(getAllProducts());
     }, []);
 
