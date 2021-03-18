@@ -26,7 +26,7 @@ const AdminBilling = () => {
         dispatch(fetchAllAdminOrders());
     }, []);
 
-    console.log(orders.adminOrders);
+    // console.log(orders.adminOrders);
 
     // if (orders.adminOrders[0]) {
     //     orders.adminOrders = [...orders.adminOrders].reverse();
@@ -119,8 +119,8 @@ const AdminBilling = () => {
                                 orders.adminOrders
                                     .slice()
                                     .reverse()
-                                    .map((order) => (
-                                        <Table.Row>
+                                    .map((order, index) => (
+                                        <Table.Row key={index}>
                                             <Table.Cell key={`id_${order._id}`}>
                                                 {order._id.substr(
                                                     order._id.length - 5
