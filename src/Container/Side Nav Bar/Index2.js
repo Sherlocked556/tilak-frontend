@@ -16,11 +16,15 @@ const Index2 = (props) => {
         let myCategories = [];
         for (let category of categories) {
             myCategories.push(
-                <li key={category._id}>
+                <li key={category.name}>
                     {category.parentId ? (
-                        <a href={category.slug}>{category.name}</a>
+                        <Link to={`/shop?cat=${category._id}`}>
+                            {category.name}
+                        </Link>
                     ) : (
-                        <span>{category.name}</span>
+                        <Link to={`/shop?cat=${category._id}`}>
+                            <span>{category.name}</span>
+                        </Link>
                     )}
                 </li>
             );
