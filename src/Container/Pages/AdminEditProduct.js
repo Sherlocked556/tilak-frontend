@@ -15,7 +15,6 @@ import {
     GetProductDetailsById,
     updateProductById,
 } from "../../actions/product.action";
-import axios from "../../helpers/axios";
 
 export default function AdminEditProduct(props) {
     // const { categories } = useSelector((state) => state.category);
@@ -23,7 +22,7 @@ export default function AdminEditProduct(props) {
     const { productDetails: product } = useSelector((state) => state.product);
     const { products } = useSelector((state) => state.product);
 
-    console.log(products);
+    console.log("edit products", products);
 
     const dispatch = useDispatch();
 

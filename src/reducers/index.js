@@ -9,6 +9,7 @@ import addressReducer from "./address.reducer";
 import currencyReducer from "./currency.reducer";
 import blogReducer from "./blog.reducer";
 import inventoryReducer from "./inventory.reducer";
+import { resellerReducer } from "./reseller.reducer";
 
 const rootReducer = combineReducers({
     category: categoryReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     currency: currencyReducer,
     blogs: blogReducer,
     inventory: inventoryReducer,
+    reseller: resellerReducer,
 });
 
 export default rootReducer;

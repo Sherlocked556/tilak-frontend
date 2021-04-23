@@ -46,7 +46,7 @@ export const getAllProducts = () => async (dispatch) => {
     try {
         const response = await axios.post("/product/getProducts");
 
-        console.log(response.data);
+        console.log("fetch product", response.data);
 
         dispatch({
             type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
@@ -111,7 +111,7 @@ export const updateProducts = (updateProducts) => async (dispatch) => {
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
@@ -174,7 +174,7 @@ export const addProduct = (data, areSizes) => async (dispatch) => {
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
@@ -244,7 +244,7 @@ export const updateProductById = (data) => async (dispatch) => {
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {

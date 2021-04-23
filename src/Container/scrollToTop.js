@@ -4,7 +4,7 @@ import ReactGA from "react-ga";
 
 export default function ScrollToTop() {
     const { pathname, search } = useLocation();
-
+    
     useEffect(() => {
         window.scrollTo(0, 0);
 

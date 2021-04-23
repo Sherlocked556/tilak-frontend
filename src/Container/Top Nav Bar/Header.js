@@ -77,6 +77,20 @@ const Header = () => {
         }
     };
 
+    const isReseller = () => {
+        if (isLoggedIn()) {
+            let user = jwt.decode(localStorage.getItem("access-token"));
+
+            if (user.role === "reseller") {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+
     const [open, setOpen] = useState(false);
     const { cartItems } = useSelector((state) => state.cart);
 
@@ -138,6 +152,16 @@ const Header = () => {
                                 </Link>
                             </li>
                         )}
+                        {isReseller() && (
+                            <li>
+                                <Link
+                                    to="/resellerOrder"
+                                    style={{ color: "#4D4D4D" }}
+                                >
+                                    Reseller
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                     <div className="foot">
                         Tilak Shringar | <BiCopyright /> &nbsp; All rights
@@ -168,6 +192,7 @@ const Header = () => {
                                 {" "}
                                 <img
                                     src={require("./Profile.png").default}
+                                    alt=""
                                 ></img>
                                 {/* <BsPersonPlus className="icon"/> */}
                             </Link>
@@ -178,6 +203,7 @@ const Header = () => {
                                 {" "}
                                 <img
                                     src={require("./Profile.png").default}
+                                    alt=""
                                 ></img>
                                 {/* <BsPersonPlus className="icon"/> */}
                             </Link>

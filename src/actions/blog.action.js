@@ -38,7 +38,7 @@ export const addBlog = ({ title, coverImg, content, description }) => async (
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
@@ -78,7 +78,7 @@ export const updateBlog = ({ title, content, description, blogId }) => async (
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {

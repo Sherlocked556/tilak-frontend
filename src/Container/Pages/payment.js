@@ -84,11 +84,23 @@ const Payment = (props) => {
             return;
         }
 
-        const result = await axios.post("/createOrder/razorpay", {
-            paymentMethod,
-            currency,
-            addressId: orderAddress._id,
-        });
+        let result;
+        const resellerCode = localStorage.getItem("tilak-reseller-code");
+
+        if (!resellerCode) {
+            result = await axios.post("/createOrder/razorpay", {
+                paymentMethod,
+                currency,
+                addressId: orderAddress._id,
+            });
+        } else {
+            result = await axios.post("/createOrder/razorpay", {
+                paymentMethod,
+                currency,
+                addressId: orderAddress._id,
+                resellerCode,
+            });
+        }
 
         console.log(result.data);
 
@@ -97,7 +109,7 @@ const Payment = (props) => {
             return;
         }
 
-        const {
+        let {
             totalAmount: amount,
             paymentData: { orderId: order_id, currency: currencyRes },
         } = result.data.order;
@@ -105,15 +117,18 @@ const Payment = (props) => {
         console.log(amount, order_id, currencyRes);
 
         if (currencyRes != "INR") {
-            amount = await fx.convert(amount, { from: "INR", to: currencyRes });
+            amount = await fx.convert(amount, {
+                from: "INR",
+                to: currencyRes,
+            });
         }
 
         const options = {
             key: "rzp_test_i7F44AtOei6anE",
             amount: amount.toString(),
             currency: currencyRes,
-            name: "Test Name",
-            description: "Test Transaction",
+            name: "Tilak Shringar",
+            description: "Payment for Order",
             order_id: order_id,
             handler: async function (response) {
                 const data = {
@@ -128,6 +143,7 @@ const Payment = (props) => {
                 );
 
                 if (result.data) {
+                    localStorage.removeItem("tilak-reseller-code");
                     alert("Payment Successful");
                     window.location.replace("/");
                 } else {
@@ -158,11 +174,23 @@ const Payment = (props) => {
             return;
         }
 
-        const result = await axios.post("/createOrder/paypal", {
-            paymentMethod,
-            currency: "INR",
-            addressId: orderAddress._id,
-        });
+        let result;
+        const resellerCode = localStorage.getItem("tilak-reseller-code");
+
+        if (!resellerCode) {
+            result = await axios.post("/createOrder/paypal", {
+                paymentMethod,
+                currency: "INR",
+                addressId: orderAddress._id,
+            });
+        } else {
+            result = await axios.post("/createOrder/paypal", {
+                paymentMethod,
+                currency: "INR",
+                addressId: orderAddress._id,
+                resellerCode,
+            });
+        }
 
         console.log(result.data);
 
@@ -229,7 +257,6 @@ const Payment = (props) => {
                                     name="razor"
                                     id="BannerType1"
                                     value="true"
-                                    aria-invalid="false"
                                     onClick={changePaymentMethod}
                                     checked={paymentMethod === "razor"}
                                 />
@@ -256,7 +283,6 @@ const Payment = (props) => {
                                     name="paypal"
                                     id="BannerType2"
                                     value="false"
-                                    aria-invalid="false"
                                     checked={paymentMethod === "paypal"}
                                     onClick={changePaymentMethod}
                                 />

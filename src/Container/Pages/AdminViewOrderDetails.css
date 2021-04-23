@@ -1,7 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 .image-gallery-thumbnails-wrapper {
-    width: 15.625vw !important;
+    /* width: 15.625vw !important; */
 }
 
 .image-gallery

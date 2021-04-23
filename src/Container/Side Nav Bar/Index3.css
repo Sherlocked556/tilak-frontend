@@ -1,29 +1,29 @@
-.sidenvbar{
-    margin-top:0vw;
-    margin-left:0pvw;
-    width:19.766vw;
+.sidenvbar {
+    margin-top: 0vw;
+    margin-left: 0pvw;
+    width: 19.766vw;
     height: 76.061vw;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 .sidetop {
     align-items: left;
     justify-content: left;
     margin-top: 3.239vw;
     margin-left: 2.343vw;
-    height: 17.5vw;
+    height: max-content;
     width: 13.177vw;
-    font: normal normal normal 0.878vw/1.830vw Poppins;
+    font: normal normal normal 0.878vw/1.83vw Poppins;
 }
 
-.sidetop li{
+.sidetop li {
     display: flex;
     align-items: left;
     justify-content: left;
-    font: normal normal bold 0.878vw/1.830vw Poppins;
-    color: #4D4D4D;
+    font: normal normal bold 0.878vw/1.83vw Poppins;
+    color: #4d4d4d;
     text-decoration: none;
-    margin-top:0.295vw;
-    color:#4D4D4D;
+    margin-top: 0.295vw;
+    color: #4d4d4d;
 }
 
 .sidemid {
@@ -34,15 +34,15 @@
     height: 28.007vw;
     width: 15.958vw;
     font: normal normal normal 0.878vw/0vw Poppins;
-    color: #4D4D4D;
+    color: #4d4d4d;
 }
-.sidemid span{
-    font: normal normal normal 0.878vw/1.630vw Poppins;
-    background-image: linear-gradient(#f5004e,#8e0072);
+.sidemid span {
+    font: normal normal normal 0.878vw/1.63vw Poppins;
+    background-image: linear-gradient(#f5004e, #8e0072);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
-    -moz-text-fill-color:transparent;
+    -moz-text-fill-color: transparent;
 }
 .sidebottom1 {
     align-items: left;
@@ -51,15 +51,15 @@
     margin-left: 2.343vw;
     height: 11.375vw;
     width: 16.423vw;
-    display:grid;
-    grid-template-rows:20px 20px 20px 25px;
+    display: grid;
+    grid-template-rows: 20px 20px 20px 25px;
 }
-.sidebottom1 p{
-    font: normal normal normal 0.878vw/1.4vw Poppins; 
-    color:#ADADAD;
+.sidebottom1 p {
+    font: normal normal normal 0.878vw/1.4vw Poppins;
+    color: #adadad;
 }
-@media (max-width:700px){
-    .sidenvbar{
-        display:none;
+@media (max-width: 700px) {
+    .sidenvbar {
+        display: none;
     }
 }

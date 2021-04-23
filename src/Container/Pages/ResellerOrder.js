@@ -1,119 +1,163 @@
-import React from 'react';
-import Header from '../../Container/Top Nav Bar/Header';
-import Footer from '../Footer/Footer';
-import ResellerProfile from './ResellerProfile';
-import './ResellerOrder.css'
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import Header from "../../Container/Top Nav Bar/Header";
+import Footer from "../Footer/Footer";
+import ResellerProfile from "./ResellerProfile";
+import "./ResellerOrder.css";
+import jwt from "jsonwebtoken";
+import { Link } from "react-router-dom";
+import { Button, Icon, Table } from "semantic-ui-react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchResellerById } from "../../actions/reseller.action";
+import dayjs from "dayjs";
+import AdminViewOrderDetails from "./AdminViewOrderDetails";
+import { ToastContainer } from "react-toastify";
 
 function ResellerOrder() {
+    const { resellerDetails } = useSelector((state) => state.reseller);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let user = jwt.decode(localStorage.getItem("access-token"));
+
+        if (user.role === "reseller") {
+            dispatch(fetchResellerById(user._id));
+        }
+    }, []);
+
+    console.log("resellerDetails", resellerDetails);
+
     return (
         <div>
             <Header></Header>
-            <h2 className="heading">my profile...</h2>
-            <div className="Aboutttt">
+            <h2 className="heading">my resells...</h2>
+            {/* <div className="Aboutttt">
                 <ResellerProfile />
-            </div>
+            </div> */}
             <div className="adminBox">
                 <div className="adminNav">
-                    <h6 className="ResllerOrder"><Link to="/ResellerOrder" style={{ color: '#4D4D4D' }}>ORDERS</Link></h6>
-                    <h6 className="ResellerEarning"><Link to="/ResellerEarning" style={{ color: '#4D4D4D' }}>EARNINGS</Link></h6>
-                    <h6 className="ResellerNotification"><Link to="/ResellerNotification" style={{ color: '#4D4D4D' }}>NOTIFICATIONS</Link></h6>
+                    <h6 className="ResllerOrder">
+                        <Link to="/ResellerOrder" style={{ color: "#4D4D4D" }}>
+                            ORDERS
+                        </Link>
+                    </h6>
+                    <h6 className="ResellerEarning">
+                        <Link
+                            to="/ResellerEarning"
+                            style={{ color: "#4D4D4D" }}
+                        >
+                            EARNINGS
+                        </Link>
+                    </h6>
+                    {/* <h6 className="ResellerNotification">
+                        <Link
+                            to="/ResellerNotification"
+                            style={{ color: "#4D4D4D" }}
+                        >
+                            NOTIFICATIONS
+                        </Link>
+                    </h6> */}
                 </div>
                 <div className="productLine">
-                    <hr id='ResellerOrderLine2' />
-                    <hr id='adminLine' />
+                    <hr id="ResellerOrderLine2" />
+                    <hr id="adminLine" />
                 </div>
                 <div className="categoryProductBtn">
-                    <p className='CouponCode'>List of orders who applied your coupon code. For any query contact the Admin.</p>
-                    <p className="CouponCodeValue">Coupon Code: MAD2020</p>
+                    <p className="CouponCode">
+                        List of orders who applied your coupon code. For any
+                        query contact the Admin.
+                    </p>
+                    {resellerDetails && (
+                        <p className="CouponCodeValue">
+                            Coupon Code: {resellerDetails.resellerCode}
+                        </p>
+                    )}
                 </div>
                 <div className="SearchDrop"></div>
                 <div className="AdminProductDetails">
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '70px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '197px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '341px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '456px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '567px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '675px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '795px', position: 'absolute', marginTop: '0', }}></hr>
-                    <hr style={{ border: '1px solid #707070', width: '0px', height: '620px', marginLeft: '920px', position: 'absolute', marginTop: '0', }}></hr>
-                    <div className="billingCols">
-                        <p className="serialNo">S. No.</p>
-                        <p className="orderIdBill">Ordered ID</p>
-                        <p className="orderDateBill">Ordered Date</p>
-                        <p className="orderStatusBill">Status</p>
-                        <p className="orderQuantityBill">Quantities</p>
-                        <p className="orderUserType">User Type</p>
-                        <p className="orderNameBill">Name</p>
-                        <p className="orderTotalAmount">Total Amount</p>
-                        <p className="orderPaymentMethod">Payment Method</p>
-                    </div>
-                    <hr id="AdminLine"></hr>
-                    <div className='AdminBillingOuterBox'>
-                        <div className="productDetailsAdminBilling">
-                            <p className="oneSerial">1.</p>
-                            <p className="oneId">444444</p>
-                            <p className="oneDate">23 Sep 2020</p>
-                            <p className="oneStatus">Delivered</p>
-                            <p className="oneQuantity">15</p>
-                            <p className="oneUsertype">Customer</p>
-                            <p className="oneName">Mohit Gopal</p>
-                            <p className="oneTotal">3000.00</p>
-                            <p className="onePayment">Net Banking</p>
-                        </div>
-                        <div className="productDetailsAdminBilling">
-                            <p className="oneSerial">1.</p>
-                            <p className="oneId">444444</p>
-                            <p className="oneDate">23 Sep 2020</p>
-                            <p className="oneStatus">Delivered</p>
-                            <p className="oneQuantity">15</p>
-                            <p className="oneUsertype">Customer</p>
-                            <p className="oneName">Mohit Gopal</p>
-                            <p className="oneTotal">3000.00</p>
-                            <p className="onePayment">Net Banking</p>
-                        </div>
-                        <div className="productDetailsAdminBilling">
-                            <p className="oneSerial">1.</p>
-                            <p className="oneId">444444</p>
-                            <p className="oneDate">23 Sep 2020</p>
-                            <p className="oneStatus">Delivered</p>
-                            <p className="oneQuantity">15</p>
-                            <p className="oneUsertype">Customer</p>
-                            <p className="oneName">Mohit Gopal</p>
-                            <p className="oneTotal">3000.00</p>
-                            <p className="onePayment">Net Banking</p>
-                        </div>
-                        <div className="productDetailsAdminBilling">
-                            <p className="oneSerial">1.</p>
-                            <p className="oneId">444444</p>
-                            <p className="oneDate">23 Sep 2020</p>
-                            <p className="oneStatus">Delivered</p>
-                            <p className="oneQuantity">15</p>
-                            <p className="oneUsertype">Customer</p>
-                            <p className="oneName">Mohit Gopal</p>
-                            <p className="oneTotal">3000.00</p>
-                            <p className="onePayment">Net Banking</p>
-                        </div>
-                        <div className="productDetailsAdminBilling">
-                            <p className="oneSerial">1.</p>
-                            <p className="oneId">444444</p>
-                            <p className="oneDate">23 Sep 2020</p>
-                            <p className="oneStatus">Delivered</p>
-                            <p className="oneQuantity">15</p>
-                            <p className="oneUsertype">Customer</p>
-                            <p className="oneName">Mohit Gopal</p>
-                            <p className="oneTotal">3000.00</p>
-                            <p className="onePayment">Net Banking</p>
-                        </div>
-                    </div>
+                    <Table>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>Sr. No.</Table.HeaderCell>
+                                <Table.HeaderCell>Ordered ID</Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Ordered Date
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>Status</Table.HeaderCell>
+                                <Table.HeaderCell>User Name</Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Phone Number
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Total Amount
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
+                                    Payment Method
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>View</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
 
+                        <Table.Body>
+                            {resellerDetails &&
+                                resellerDetails.orders &&
+                                resellerDetails.orders.length > 0 &&
+                                resellerDetails.orders
+                                    .slice()
+                                    .reverse()
+                                    .map((order, index) => (
+                                        <Table.Row key={index}>
+                                            <Table.Cell>{index + 1}</Table.Cell>
+                                            <Table.Cell>
+                                                {
+                                                    order.orderId.paymentData
+                                                        .orderId
+                                                }
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {dayjs(order.orderId.createdAt)
+                                                    .format(`DD
+                                            MMMM YYYY`)}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {order.orderId.paymentStatus}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {
+                                                    order.orderId.billingAddress
+                                                        .name
+                                                }
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {
+                                                    order.orderId.billingAddress
+                                                        .mobileNumber
+                                                }
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {order.orderId.paymentData
+                                                    .currency +
+                                                    " " +
+                                                    order.orderId.totalAmount}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {order.orderId.paymentType}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <AdminViewOrderDetails
+                                                    order={order.orderId}
+                                                />
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
+                        </Table.Body>
+                    </Table>
                 </div>
-
             </div>
-            <hr className='endLine' />
+            <hr className="endLine" />
             <Footer />
+            <ToastContainer />
         </div>
-    )
+    );
 }
 
-export default ResellerOrder
+export default ResellerOrder;

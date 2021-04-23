@@ -5,7 +5,7 @@ import { Button, Form, Input, Icon } from "semantic-ui-react";
 import { addCategory, getAllProducts } from "../../actions";
 import { addInventory, updateInventory } from "../../actions/inventory.action";
 
-export default function AdminEditInventory(props) {
+export default function AdminEditInventory({ toBeEdited, closeProduct }) {
     const { categories } = useSelector((state) => state.category);
     const { products, loading: prodLoading } = useSelector(
         (state) => state.product
@@ -26,7 +26,11 @@ export default function AdminEditInventory(props) {
         dispatch(getAllProducts());
     }, []);
 
-    console.log(inventoryDetails);
+    useEffect(() => {
+        console.log("inventory changed");
+    }, [dispatch, inventoryDetails]);
+
+    console.log("inventoryDetails", inventoryDetails);
 
     let options = [];
 
@@ -44,7 +48,7 @@ export default function AdminEditInventory(props) {
         <div>
             <div className="SmallBlogUp">
                 <div className="headingPopUp">
-                    <div className="adminClose" onClick={props.closeProduct}>
+                    <div className="adminClose" onClick={closeProduct}>
                         +
                     </div>
                     <p className="adminPopHeading">Edit Inventory</p>
@@ -53,6 +57,7 @@ export default function AdminEditInventory(props) {
                     <div className="productDetailsCol">
                         {inventoryDetails._id && (
                             <Formik
+                                inventoryDetails={inventoryDetails}
                                 initialValues={{
                                     name: inventoryDetails.name,
                                     thumbnail: inventoryDetails.thumbnail,
@@ -130,7 +135,6 @@ export default function AdminEditInventory(props) {
                                                                 <Form.Input
                                                                     label="Style Name"
                                                                     placeholder="Style Name"
-                                                                    label="Style Name"
                                                                     name={`styles[${index}].styleName`}
                                                                     onChange={
                                                                         handleChange
