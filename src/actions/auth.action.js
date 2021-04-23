@@ -29,7 +29,7 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
 
         dispatch({ type: authConstants.USER_REGISTER_FAILURE, payload: error });
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
@@ -55,7 +55,7 @@ export const loginUser = (email, password, history) => async (dispatch) => {
         });
     } catch (error) {
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {

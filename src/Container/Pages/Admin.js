@@ -135,7 +135,6 @@ const Admin = () => {
     useEffect(() => {
         // getAllProducts();
 
-        // console.log("HAHAHHAHAH ADMIN");
         dispatch(getAllProducts());
     }, []);
 
@@ -202,7 +201,7 @@ const Admin = () => {
                     </div>
                     <div className="categoryProductBtn">
                         <button className="categoryBtn" onClick={openCategory}>
-                            ADD CATEOGRY
+                            ADD CATEGORY
                         </button>
                         <button className="productBtn" onClick={openProduct}>
                             ADD PRODUCT
@@ -316,9 +315,11 @@ const Admin = () => {
                                                 </p>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {dayjs(product.createdAt)
-                                                    .format(`DD
-                                            MMMM YYYY`)}
+                                                {product.createdAt
+                                                    ? dayjs(product.createdAt)
+                                                          .format(`DD
+                                          MMMM YYYY`)
+                                                    : ""}
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <MdEdit

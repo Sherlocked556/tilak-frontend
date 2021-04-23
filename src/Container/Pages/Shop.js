@@ -72,101 +72,86 @@ const Shop = (props) => {
                 }}
             >
                 {inventory.length > 0 && product.products.length > 0 ? (
-                    inventory.map((product) => (
-                        <div
-                            style={{
-                                display: "grid",
-                                height: "30vw",
-                                width: "24.158vw",
-                                marginLeft: "1vw",
-                                marginBottom: " 3.5vw",
-                            }}
-                            key={product._id}
-                        >
-                            <Link
-                                // to={`/${product.slug}/${product.styles[0].items[0].products[0].product}/p`}
+                    inventory.map((product) => {
+                        console.log(product.styles, product.name);
+                        return (
+                            <div
                                 style={{
-                                    display: "block",
+                                    display: "grid",
+                                    height: "30vw",
+                                    width: "24.158vw",
+                                    marginLeft: "1vw",
+                                    marginBottom: " 3.5vw",
                                 }}
-                                to={{
-                                    pathname: `/${product._id}/${product.styles[0].items[0].products[0].product}/p`,
-                                    inventory: product,
-                                }}
+                                key={product._id}
                             >
-                                <div className="product1">
-                                    {/* {product.productPictures.map((picture) => ( */}
-                                    <img
-                                        src={`http://localhost:2000/public/${product.thumbnail}`}
-                                        key={product.thumbnail}
-                                        alt="HR"
-                                    />
-                                    {/* ))} */}
-                                    {/* <div
-                                    style={{
-                                        position: "absolute",
-                                        display: "flex",
-                                        left: "18.409vw",
-                                        top: "0.366vw",
-                                    }}
-                                >
-                                    <div className="ii2">
-                                        <TiHeartFullOutline id="iii2" />
-                                    </div>
-                                    <div
-                                        className="ii1"
-                                        onClick={() => handleAddToCart(product)}
+                                {product.styles.length > 0 && (
+                                    <Link
+                                        style={{
+                                            display: "block",
+                                        }}
+                                        to={{
+                                            pathname: `/${product._id}/${product.styles[0].items[0].products[0].product}/p`,
+                                            inventory: product,
+                                        }}
                                     >
-                                        <BiCartAlt id="iii1" />
-                                    </div>
-                                </div> */}
+                                        <div className="product1">
+                                            <img
+                                                src={`http://localhost:2000/public/${product.thumbnail}`}
+                                                key={product.thumbnail}
+                                                alt="HR"
+                                            />
+                                        </div>
+                                    </Link>
+                                )}
+
+                                <div className="p1info">
+                                    <Link
+                                        to={`/${product._id}/${product.styles[0].items[0].products[0].product}/p`}
+                                        style={{
+                                            display: "block",
+                                        }}
+                                    >
+                                        <p
+                                            style={{ color: "#4D4D4D" }}
+                                            id="product1i"
+                                        >
+                                            {product.name}
+                                        </p>
+                                    </Link>
+                                    {currency === "INR" && (
+                                        <h2 id="price1">
+                                            Rs.{" "}
+                                            {getProductPrice(
+                                                product.styles[0].items[0]
+                                                    .products[0].product
+                                            )}
+                                            /-
+                                        </h2>
+                                    )}
+
+                                    {currency !== "INR" && (
+                                        <p id="price1">
+                                            {currency}.
+                                            <CurrencyConverter
+                                                from={"INR"}
+                                                to={currency}
+                                                value={
+                                                    getProductPrice(
+                                                        product.styles[0]
+                                                            .items[0]
+                                                            .products[0].product
+                                                    ) * 1.05
+                                                }
+                                                precision={2}
+                                            />
+                                            /-
+                                        </p>
+                                    )}
                                 </div>
-                            </Link>
-
-                            <div className="p1info">
-                                <Link
-                                    to={`/${product._id}/${product.styles[0].items[0].products[0].product}/p`}
-                                    style={{
-                                        display: "block",
-                                    }}
-                                >
-                                    <p
-                                        style={{ color: "#4D4D4D" }}
-                                        id="product1i"
-                                    >
-                                        {product.name}
-                                    </p>
-                                </Link>
-                                {currency === "INR" && (
-                                    <h2 id="price1">
-                                        Rs.{" "}
-                                        {getProductPrice(
-                                            product.styles[0].items[0]
-                                                .products[0].product
-                                        )}
-                                        /-
-                                    </h2>
-                                )}
-
-                                {currency !== "INR" && (
-                                    <p id="price1">
-                                        {currency}.
-                                        <CurrencyConverter
-                                            from={"INR"}
-                                            to={currency}
-                                            value={
-                                                getProductPrice(
-                                                    product.styles[0].items[0]
-                                                        .products[0].product
-                                                ) * 1.05
-                                            }
-                                            precision={2}
-                                        />
-                                        /-
-                                    </p>
-                                )}
                             </div>
-                        </div>
-                    ))
+                        );
+                    })
                 ) : (
                     <div className="nullProducts">
                         {query.get("cat") && (

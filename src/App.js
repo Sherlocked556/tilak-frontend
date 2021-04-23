@@ -7,6 +7,7 @@ import {
     Switch,
     Route,
     Redirect,
+    useLocation,
 } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import Shop from "./Container/Pages/Shop";
@@ -38,6 +39,7 @@ import LoginNextPage from "./Container/Pages/LoginNextPage";
 import ScrollToTop from "./Container/scrollToTop";
 import AdminBlogs from "./Container/Pages/AdminBlogs";
 import AdminInventory from "./Container/Pages/AdminInventory";
+import ResellerQuery from "./Container/ResellerQuery";
 
 const isLoggedIn = () => {
     if (localStorage.getItem("access-token")) {
@@ -107,10 +109,10 @@ function App() {
         dispatch(getInitialData());
     }, []);
 
-
     return (
         <Router>
             <ScrollToTop />
+            <ResellerQuery />
 
             <Switch>
                 <Route path="/" exact component={Home}></Route>
@@ -161,18 +163,18 @@ function App() {
                     path="/orderSummary"
                     component={orderSummary}
                 ></PrivateRoute>
-                <AdminRoute
+                <PrivateRoute
                     path="/resellerOrder"
                     component={ResellerOrder}
-                ></AdminRoute>
-                <AdminRoute
+                ></PrivateRoute>
+                <PrivateRoute
                     path="/resellerEarning"
                     component={ResellerEarning}
-                ></AdminRoute>
-                <AdminRoute
+                ></PrivateRoute>
+                <PrivateRoute
                     path="/ResellerNotification"
                     component={ResellerNotification}
-                ></AdminRoute>
+                ></PrivateRoute>
                 <PrivateRoute path="/result" component={result}></PrivateRoute>
                 <Route path="/privacypolicy" component={PrivacyPolicy}></Route>
                 <Route

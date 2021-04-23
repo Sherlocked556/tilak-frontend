@@ -1,11 +1,125 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Button, Dropdown, Icon, Tab, Table } from "semantic-ui-react";
+import {
+    deleteReseller,
+    fetchAllRequest,
+    fetchAllReseller,
+} from "../../actions/reseller.action";
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
+import AdminAddResellerModal from "./AdminAddResellerModal";
 import AdminProfile from "./AdminProfile";
 import "./AdminReseller.css";
+import AdminViewResellerModal from "./AdminViewResellerModal";
+import { ResellerRequestTable } from "./ResellerRequestTable";
+
+const ResellerTable = ({ resellers, loading }) => {
+    const dispatch = useDispatch();
+
+    console.log("from tab ", resellers);
+
+    return (
+        <Tab.Pane loading={loading}>
+            <Table>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>S. No.</Table.HeaderCell>
+                        <Table.HeaderCell>Reseller ID</Table.HeaderCell>
+                        <Table.HeaderCell>Reseller Name</Table.HeaderCell>
+                        <Table.HeaderCell>Email</Table.HeaderCell>
+                        <Table.HeaderCell>Code</Table.HeaderCell>
+                        <Table.HeaderCell>Due Pay</Table.HeaderCell>
+                        <Table.HeaderCell>Products Sold</Table.HeaderCell>
+                        <Table.HeaderCell>View / Delete</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    {resellers &&
+                        resellers
+                            .slice()
+                            .reverse()
+                            .map((reseller, index) => (
+                                <Table.Row key={index}>
+                                    <Table.Cell>{index}</Table.Cell>
+                                    <Table.Cell>
+                                        {reseller._id.substr(
+                                            reseller._id.length - 5
+                                        )}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.userId.firstName}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.userId.email}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.resellerCode}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.due
+                                            ? reseller.due.points * 100
+                                            : 0}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.orders.length}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <AdminViewResellerModal
+                                            reseller={reseller}
+                                        />
+
+                                        <Button
+                                            icon
+                                            onClick={() =>
+                                                dispatch(
+                                                    deleteReseller(reseller._id)
+                                                )
+                                            }
+                                        >
+                                            <Icon name="delete" />
+                                        </Button>
+                                    </Table.Cell>
+                                </Table.Row>
+                            ))}
+                </Table.Body>
+            </Table>
+        </Tab.Pane>
+    );
+};
 
 function AdminReseller() {
+    const dispatch = useDispatch();
+    let { adminResellers, loading, requests } = useSelector(
+        (state) => state.reseller
+    );
+
+    useEffect(() => {
+        dispatch(fetchAllReseller());
+        dispatch(fetchAllRequest());
+    }, []);
+
+    const panes = [
+        {
+            menuItem: "Resellers",
+            render: () => (
+                <ResellerTable resellers={adminResellers} loading={loading} />
+            ),
+        },
+        {
+            menuItem: "Requests",
+            render: () => (
+                <ResellerRequestTable requests={requests} loading={loading} />
+            ),
+        },
+    ];
+
+    console.log(adminResellers);
+    console.log("request", requests);
+
     return (
         <div>
             <Header></Header>
@@ -48,173 +162,24 @@ function AdminReseller() {
                     <hr id="AdminResellerLine4" />
                 </div>
                 <div className="categoryProductBtn">
-                    <button className="categoryBtn">ADD A RESELLER</button>
+                    <AdminAddResellerModal />
                     <p className="ResellerNumber">230 resellers</p>
                 </div>
                 <div className="SearchBilling"></div>
                 <div className="AdminProductDetails">
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "70px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "182px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "323px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "456px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "649px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "751px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "848px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <hr
-                        style={{
-                            border: "1px solid #707070",
-                            width: "0px",
-                            height: "620px",
-                            marginLeft: "973px",
-                            position: "absolute",
-                            marginTop: "0",
-                        }}
-                    ></hr>
-                    <div className="adminResellerNav">
-                        <p className="serialNo">S. No.</p>
-                        <p className="ResellerId">Reseller ID</p>
-                        <p className="ResellerName">Reseller Name</p>
-                        <p className="ResellerPhoneNumber">Phone Number</p>
-                        <p className="ResellerEmail">Email</p>
-                        <p className="ResellerDiscount">Discount %</p>
-                        <p className="ResellerDuePay">Due Pay</p>
-                        <p className="ResellerProductsSold">Products Sold</p>
-                    </div>
-                    <hr id="AdminLine"></hr>
-                    <div className="AdminBillingOuterBox">
-                        <div className="ResellerInnerBox">
-                            <p className="oneSerial">1.</p>
-                            <p className="IDdetail">MG2298</p>
-                            <p className="NameResellerDetail">abc</p>
-                            <p className="PhoneNoResellerDetail">9876543210</p>
-                            <p className="emailResellerDetail">
-                                abcdmail@gmail.com
-                            </p>
-                            <p className="dicountResellerDetail">25%</p>
-                            <p className="PayResellerDetail">5000.00</p>
-                            <p className="soldResellerDetail">45</p>
-                            <p className="detailView">See details</p>
-                        </div>
-                        <div className="ResellerInnerBox">
-                            <p className="oneSerial">1.</p>
-                            <p className="IDdetail">MG2298</p>
-                            <p className="NameResellerDetail">abc</p>
-                            <p className="PhoneNoResellerDetail">9876543210</p>
-                            <p className="emailResellerDetail">
-                                abcdmail@gmail.com
-                            </p>
-                            <p className="dicountResellerDetail">25%</p>
-                            <p className="PayResellerDetail">5000.00</p>
-                            <p className="soldResellerDetail">45</p>
-                            <p className="detailView">See details</p>
-                        </div>
-                        <div className="ResellerInnerBox">
-                            <p className="oneSerial">1.</p>
-                            <p className="IDdetail">MG2298</p>
-                            <p className="NameResellerDetail">abc</p>
-                            <p className="PhoneNoResellerDetail">9876543210</p>
-                            <p className="emailResellerDetail">
-                                abcdmail@gmail.com
-                            </p>
-                            <p className="dicountResellerDetail">25%</p>
-                            <p className="PayResellerDetail">5000.00</p>
-                            <p className="soldResellerDetail">45</p>
-                            <p className="detailView">See details</p>
-                        </div>
-                        <div className="ResellerInnerBox">
-                            <p className="oneSerial">1.</p>
-                            <p className="IDdetail">MG2298</p>
-                            <p className="NameResellerDetail">abc</p>
-                            <p className="PhoneNoResellerDetail">9876543210</p>
-                            <p className="emailResellerDetail">
-                                abcdmail@gmail.com
-                            </p>
-                            <p className="dicountResellerDetail">25%</p>
-                            <p className="PayResellerDetail">5000.00</p>
-                            <p className="soldResellerDetail">45</p>
-                            <p className="detailView">See details</p>
-                        </div>
-                        <div className="ResellerInnerBox">
-                            <p className="oneSerial">1.</p>
-                            <p className="IDdetail">MG2298</p>
-                            <p className="NameResellerDetail">abc</p>
-                            <p className="PhoneNoResellerDetail">9876543210</p>
-                            <p className="emailResellerDetail">
-                                abcdmail@gmail.com
-                            </p>
-                            <p className="dicountResellerDetail">25%</p>
-                            <p className="PayResellerDetail">5000.00</p>
-                            <p className="soldResellerDetail">45</p>
-                            <p className="detailView">See details</p>
-                        </div>
-                    </div>
+                    {adminResellers && (
+                        <Tab
+                            panes={panes}
+                            resellers={adminResellers}
+                            requests={requests}
+                            loading={loading}
+                        />
+                    )}
                 </div>
             </div>
             <hr className="endLine" />
             <Footer />
+            <ToastContainer />
         </div>
     );
 }

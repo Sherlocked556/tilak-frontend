@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { inventoryConstant } from "../actions/constants";
 
 const initState = {
@@ -82,6 +83,7 @@ export default (state = initState, action) => {
             return {
                 ...state,
                 loading: true,
+                inventoryDetails: {},
             };
 
         case inventoryConstant.FETCH_SINGLE_INVENTORY_SUCCESS:

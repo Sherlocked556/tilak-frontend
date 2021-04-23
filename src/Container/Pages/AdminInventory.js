@@ -29,7 +29,9 @@ function closeAddInventory() {
 }
 
 const AdminInventory = () => {
-    const { inventory } = useSelector((state) => state.inventory);
+    const { inventory, inventoryDetails } = useSelector(
+        (state) => state.inventory
+    );
     const [toBeEdited, setToBeEdited] = useState({});
     const dispatch = useDispatch();
 
@@ -42,17 +44,21 @@ const AdminInventory = () => {
     };
 
     const openEditInventory = (inventory) => {
-        dispatch(fetchOneInventory(inventory._id));
+        console.log("sending single inventory request", inventory.name);
 
+        setToBeEdited(inventory);
+
+        dispatch(fetchOneInventory(inventory._id));
         document.querySelector(".AdminEditInventoryPopUp").style.display =
             "flex";
     };
+
     const closeEditInventory = () => {
         document.querySelector(".AdminEditInventoryPopUp").style.display =
             "none";
     };
 
-    console.log(toBeEdited);
+    console.log("toBeEdited", toBeEdited);
 
     return (
         <div>

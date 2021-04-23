@@ -36,7 +36,7 @@ export const addInventory = (data) => async (dispatch) => {
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
@@ -85,7 +85,7 @@ export const updateInventory = (data, inventoryId) => async (dispatch) => {
         });
 
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {

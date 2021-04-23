@@ -53,7 +53,7 @@ export const addCategory = (name, categoryImg) => async (dispatch) => {
             payload: { error },
         });
         if (error.response) {
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.msg, {
                 position: toast.POSITION.BOTTOM_LEFT,
             });
         } else {
