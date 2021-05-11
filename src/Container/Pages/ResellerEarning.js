@@ -73,14 +73,20 @@ const ResellerEarning = () => {
                     <hr id="billingLine2" />
                     <hr id="billingLine3" />
                 </div>
-                <div className="categoryProductBtn">
+                <div className="categoryResellerBtn">
                     <p className="CouponCode">
                         Your earnings being a reseller to Tilak Shringar.
                     </p>
                     {resellerDetails && (
-                        <p className="CouponCodeValue">
-                            Coupon Code: {resellerDetails.resellerCode}
-                        </p>
+                        <>
+                            <p className="CouponCodeValue">
+                                Coupon URL:{" "}
+                                {`http://localhost:3000/?reseller=${resellerDetails.resellerCode}`}
+                            </p>
+                            <p className="CouponCodeValue">
+                                Coupon Code: {resellerDetails.resellerCode}
+                            </p>
+                        </>
                     )}
                 </div>
                 <div className="SearchDrop"></div>
@@ -93,13 +99,13 @@ const ResellerEarning = () => {
                         </p>
                     )}
                     <p className="TotalEarnings">
-                        Total earnings: Rs {resellerDetails.totalPoints * 100}
+                        Total earnings: Rs {resellerDetails.totalPoints}
                     </p>
                     <div className="newEarningOuterBox">
                         <div className="newEarningInnerBox">
                             <p className="CostNewEarning">
                                 New earnings: Rs{" "}
-                                {resellerDetails.requestablePoints * 100}
+                                {resellerDetails.requestableAmount}
                             </p>
                             <button
                                 className="sendRequestButton"
@@ -115,13 +121,6 @@ const ResellerEarning = () => {
                     </div>
                     <p className="Previouspayments">Previous payments:</p>
                     <div className="dataRecievedBox">
-                        {/* <div className="headingofDataBox">
-                            <p className="dataSerial">S. No.</p>
-                            <p className="dataRecieved">Date recieved</p>
-                            <p className="dataStatus">Status</p>
-                            <p className="dataEarningPrice">Earnings</p>
-                        </div> */}
-
                         <Table>
                             <Table.Header>
                                 <Table.Row>
@@ -150,59 +149,12 @@ const ResellerEarning = () => {
                                                 {request.status}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {request.points * 100}
+                                                {request.amount}
                                             </Table.Cell>
                                         </Table.Row>
                                     ))}
                             </Table.Body>
                         </Table>
-
-                        {/* <hr
-                            style={{
-                                marginLeft: "0",
-                                width: "413px",
-                                border: "2px solid #707070",
-                                marginTop: "23px",
-                            }}
-                        ></hr>
-                        <div className="OuterBigofRecievedBox">
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                            <div className="detailofRecievedBox">
-                                <p className="detailsSerial">1.</p>
-                                <p className="detailsRecieved">23 Sep 2020</p>
-                                <p className="detailsStatus">Received</p>
-                                <p className="detailsEarningPrice">750.00</p>
-                            </div>
-                        </div> */}
                     </div>
                     <p className="RequestAdmin">
                         Kindly request admin for due payments

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { clearFromCart, fetchCart } from "../../actions/cart.action";
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
@@ -11,6 +12,8 @@ const Cart = (props) => {
     const cart = useSelector((state) => state.cart);
     const { currency } = useSelector((state) => state.currency);
 
+    const [resellerRef, setResellerRef] = useState("");
+
     const { cartItems } = cart.cartItems;
 
     const dispatch = useDispatch();
@@ -19,6 +22,20 @@ const Cart = (props) => {
         dispatch(fetchCart());
     }, []);
 
+    const handleReseller = () => {
+        if (resellerRef !== "") {
+            localStorage.setItem("tilak-reseller-code", resellerRef);
+
+            toast.success("Reference Code added successfully", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.warning("Add a Reference Code First.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
+    };
+
     let totalPrice = 0;
 
     if (cartItems) {
@@ -26,6 +43,7 @@ const Cart = (props) => {
     }
 
     console.log(cartItems);
+    console.log(resellerRef);
 
     return (
         <div>
@@ -56,7 +74,7 @@ const Cart = (props) => {
                                             maxWidth: "100%",
                                         }}
                                         src={`http://localhost:2000/public/${item.product.productPictures[0].img}`}
-                                        alt="Product Image"
+                                        alt="Product"
                                     />
                                 </div>
                                 <div className="detailsoftheProduct1">
@@ -145,8 +163,11 @@ const Cart = (props) => {
                             className="RefCodeInput"
                             type="text"
                             placeholder="Enter Here"
+                            onChange={(e) => setResellerRef(e.target.value)}
                         ></input>
-                        <button className="RefButton">APPLY</button>
+                        <button className="RefButton" onClick={handleReseller}>
+                            APPLY
+                        </button>
                     </div>
                     <div className="DiscountBox">
                         <p className="DiscountHeading">Discount:</p>
@@ -193,6 +214,7 @@ const Cart = (props) => {
             </div>
 
             <Footer />
+            <ToastContainer />
         </div>
     );
 };

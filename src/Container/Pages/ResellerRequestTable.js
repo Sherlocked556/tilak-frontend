@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { Button, Dropdown, Icon, Tab, Table } from "semantic-ui-react";
 import { updateResellerRequest } from "../../actions/reseller.action";
 
@@ -14,10 +15,14 @@ export const ResellerRequestTable = ({ requests, loading }) => {
 
     const [status, setStatus] = useState({});
 
-    const handleUpdateRequest = (requestId, status) => {
-        console.log("button clicked!!");
-
-        dispatch(updateResellerRequest({ requestId, status }));
+    const handleUpdateRequest = (requestId, status, prevStatus) => {
+        if (prevStatus === "processing") {
+            dispatch(updateResellerRequest({ requestId, status }));
+        } else {
+            toast.error("Request has been accepted/declined.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
     };
 
     console.log("status", status);
@@ -29,7 +34,7 @@ export const ResellerRequestTable = ({ requests, loading }) => {
                     <Table.Row>
                         <Table.HeaderCell>S. No.</Table.HeaderCell>
                         <Table.HeaderCell>Request ID</Table.HeaderCell>
-                        <Table.HeaderCell>Reseller Name</Table.HeaderCell>
+                        <Table.HeaderCell>Reseller Email</Table.HeaderCell>
                         <Table.HeaderCell>Points</Table.HeaderCell>
                         <Table.HeaderCell>Amount</Table.HeaderCell>
                         <Table.HeaderCell>Accept / Reject</Table.HeaderCell>
@@ -47,10 +52,10 @@ export const ResellerRequestTable = ({ requests, loading }) => {
                                     {request._id.substr(request._id.length - 5)}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {request.resellerId.userId.firstName}
+                                    {request.resellerId.userId.email}
                                 </Table.Cell>
                                 <Table.Cell>{request.points}</Table.Cell>
-                                <Table.Cell>{request.points * 100}</Table.Cell>
+                                <Table.Cell>{request.amount}</Table.Cell>
                                 <Table.Cell>
                                     <Dropdown
                                         options={options}
@@ -73,11 +78,13 @@ export const ResellerRequestTable = ({ requests, loading }) => {
                                                 onClick={() =>
                                                     handleUpdateRequest(
                                                         request._id,
-                                                        status[request._id]
+                                                        status[request._id],
+                                                        request.status
                                                     )
                                                 }
+                                                icon
                                             >
-                                                Apply
+                                                <Icon name="check" />
                                             </Button>
                                         )}
                                 </Table.Cell>
