@@ -35,7 +35,7 @@ const Payment = (props) => {
         amount = cart.cartItems.totalAmount;
     }
 
-    console.log(orderAddress);
+    // console.log(orderAddress);
 
     const changePaymentMethod = (e) => {
         const { name } = e.target;
@@ -102,7 +102,7 @@ const Payment = (props) => {
             });
         }
 
-        console.log(result.data);
+        // console.log(result.data);
 
         if (!result) {
             console.error("Server error.");
@@ -114,7 +114,7 @@ const Payment = (props) => {
             paymentData: { orderId: order_id, currency: currencyRes },
         } = result.data.order;
 
-        console.log(amount, order_id, currencyRes);
+        // console.log(amount, order_id, currencyRes);
 
         if (currencyRes != "INR") {
             amount = await fx.convert(amount, {
@@ -192,12 +192,12 @@ const Payment = (props) => {
             });
         }
 
-        console.log(result.data);
+        // console.log(result.data);
 
         window.location.replace(result.data.redirect_uri);
     };
 
-    console.log(orderAddress);
+    // console.log(orderAddress);
 
     return (
         <div>

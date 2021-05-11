@@ -19,7 +19,7 @@ export default function AdminAddProduct(props) {
     const dispatch = useDispatch();
     const [isVariant, setIsVarient] = useState(false);
 
-    console.log(isVariant);
+    // console.log(isVariant);
 
     return (
         <div>
@@ -51,7 +51,7 @@ export default function AdminAddProduct(props) {
                             }}
                             onSubmit={
                                 (data) => dispatch(addProduct(data, isVariant))
-                                // console.log(data)
+                                // // console.log(data)
                             }
                         >
                             {({

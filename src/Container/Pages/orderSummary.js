@@ -39,7 +39,7 @@ function OrderSummary() {
         cartItems = cart.cartItems.cartItems;
         totalPrice = cart.cartItems.totalAmount;
     }
-    console.log(userAddress);
+    // console.log(userAddress);
 
     return (
         <div>

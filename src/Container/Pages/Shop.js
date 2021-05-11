@@ -55,7 +55,7 @@ const Shop = (props) => {
     }
 
     if (query.get("cat") && inventory.length > 0) {
-        // console.log(query.get("cat"));
+        // // console.log("cat"));
 
         inventory = inventory.filter(
             (prod) => prod.category._id === query.get("cat")
@@ -73,7 +73,7 @@ const Shop = (props) => {
             >
                 {inventory.length > 0 && product.products.length > 0 ? (
                     inventory.map((product) => {
-                        console.log(product.styles, product.name);
+                        // console.log(product.styles, product.name);
                         return (
                             <div
                                 style={{
@@ -165,7 +165,7 @@ const Shop = (props) => {
         );
     };
 
-    console.log(product.loading);
+    // console.log(product.loading);
 
     if (inventory.loading) {
         return (

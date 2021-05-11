@@ -24,7 +24,7 @@ export default class CurrencyConverter extends React.Component {
     }
 
     getCurrency() {
-        console.log(this.props.to);
+        // console.log(this.props.to);
 
         const codes = [
             "CAD",

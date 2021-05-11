@@ -205,11 +205,11 @@ const Product = (props) => {
     };
 
     const getProductName = (productId) => {
-        // console.log(product.products);
+        // // console.log(product.products);
 
         let prod = product.products.filter((item) => item._id === productId)[0];
         if (prod) {
-            // console.log(prod);
+            // // console.log(prod);
 
             return prod.name;
         } else {
@@ -222,7 +222,7 @@ const Product = (props) => {
         window.location.reload();
     };
 
-    // console.log(inventoryDetails);
+    // // console.log(inventoryDetails);
 
     let prodDetails = {
         name: "",
@@ -234,7 +234,7 @@ const Product = (props) => {
 
     if (inventoryDetails._id && product.productDetails._id) {
         inventoryDetails.styles.forEach((style) => {
-            // console.log(style);
+            // // console.log(style);
             style.items.forEach((item) => {
                 item.products.forEach((prod) => {
                     if (prod.product === product.productDetails._id) {
@@ -255,7 +255,7 @@ const Product = (props) => {
         }
     }
 
-    console.log(prodDetails);
+    // console.log(prodDetails);
 
     return (
         <div>

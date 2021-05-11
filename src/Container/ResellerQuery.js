@@ -9,7 +9,7 @@ export default function ResellerQuery() {
     const reseller = useQuery().get("reseller");
 
     if (reseller) {
-        console.log("reseller", reseller);
+        // console.log("reseller", reseller);
         localStorage.setItem("tilak-reseller-code", reseller);
     }
 

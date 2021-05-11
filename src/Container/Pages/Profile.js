@@ -24,7 +24,7 @@ const Profile = () => {
     }, []);
 
     if (userOrders) {
-        console.log(userOrders);
+        // console.log(userOrders);
     }
 
     return (

@@ -10,7 +10,7 @@ const AddNewAddressModal = () => {
     const { loading } = useSelector((state) => state.address);
 
     const addNewAddress = (data) => {
-        console.log(data);
+        // console.log(data);
 
         dispatch(addAddress(data));
         setOpen(false);

@@ -22,7 +22,7 @@ export default function AdminEditProduct(props) {
     const { productDetails: product } = useSelector((state) => state.product);
     const { products } = useSelector((state) => state.product);
 
-    console.log("edit products", products);
+    // console.log("edit products", products);
 
     const dispatch = useDispatch();
 
@@ -40,12 +40,12 @@ export default function AdminEditProduct(props) {
         delete values.variant;
         delete values.areVariants;
 
-        console.log(values);
+        // console.log(values);
 
         dispatch(updateProductById(values));
     };
 
-    console.log("productDetails", product);
+    // console.log("productDetails", product);
 
     return (
         <div>

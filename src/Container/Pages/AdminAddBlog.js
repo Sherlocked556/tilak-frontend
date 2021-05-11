@@ -22,7 +22,7 @@ export default function AdminAddBlog(props) {
         dispatch(addBlog({ title, coverImg, content, description }));
     };
 
-    console.log(blog);
+    // console.log(blog);
 
     return (
         <div>

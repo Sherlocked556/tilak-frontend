@@ -30,7 +30,7 @@ export const addBlog = ({ title, coverImg, content, description }) => async (
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: blogConstant.ADD_BLOG_FAILURE,
@@ -70,7 +70,7 @@ export const updateBlog = ({ title, content, description, blogId }) => async (
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: blogConstant.UPDATE_BLOG_FAILURE,
@@ -100,7 +100,7 @@ export const deleteBlog = (blogId) => async (dispatch) => {
             payload: blogId,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: blogConstant.DELETE_BLOG_FAILURE,
@@ -120,7 +120,7 @@ export const fetchBlogs = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: blogConstant.FETCH_BLOG_FAILURE,

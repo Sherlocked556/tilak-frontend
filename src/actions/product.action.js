@@ -23,16 +23,16 @@ export const GetProductDetailsById = (payload) => {
         dispatch({ type: productConstants.GET_PRODUCT_DETAILS_BY_ID_REQUEST });
         let res;
         try {
-            console.log(payload);
+            // console.log(payload);
             const { productId } = payload.params;
             res = await axios.get(`/product/${productId}`);
-            console.log(res);
+            // console.log(res);
             dispatch({
                 type: productConstants.GET_PRODUCT_DETAILS_BY_ID_SUCCESS,
                 payload: { productDetails: res.data.product },
             });
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             dispatch({
                 type: productConstants.GET_PRODUCT_DETAILS_BY_ID_FAILURE,
                 payload: { error: res.data.error },
@@ -46,14 +46,14 @@ export const getAllProducts = () => async (dispatch) => {
     try {
         const response = await axios.post("/product/getProducts");
 
-        console.log("fetch product", response.data);
+        // console.log("fetch product", response.data);
 
         dispatch({
             type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: productConstants.GET_ALL_PRODUCTS_FAILURE,
@@ -75,7 +75,7 @@ export const deleteProductById = (id) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: productConstants.DELETE_PRODUCT_FAILURE,
@@ -103,7 +103,7 @@ export const updateProducts = (updateProducts) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: productConstants.UPDATE_PRODUCT_FAILURE,
@@ -135,7 +135,7 @@ export const addProduct = (data, areSizes) => async (dispatch) => {
             sizeVariants: data.variant,
         };
 
-        console.log(data);
+        // console.log(data);
 
         formData.append("name", data.name);
         formData.append("basePrice", data.basePrice);
@@ -193,7 +193,7 @@ export const updateProductById = (data) => async (dispatch) => {
     try {
         const formData = new FormData();
 
-        console.log(data);
+        // console.log(data);
 
         formData.append("_id", data._id);
         formData.append("name", data.name);
@@ -225,7 +225,7 @@ export const updateProductById = (data) => async (dispatch) => {
             },
         });
 
-        console.log(response);
+        // console.log(response);
 
         dispatch({
             type: productConstants.UPDATE_BY_ID_PRODUCT_SUCCESS,
@@ -236,7 +236,7 @@ export const updateProductById = (data) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: productConstants.UPDATE_BY_ID_PRODUCT_FAILURE,

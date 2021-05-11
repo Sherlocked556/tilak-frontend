@@ -7,7 +7,8 @@ export const createReseller = (data) => async (dispatch) => {
 
     try {
         const response = await axios.post("/reseller", {
-            email: data,
+            email: data.email,
+            percent: data.percent,
         });
 
         dispatch({
@@ -19,10 +20,47 @@ export const createReseller = (data) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.ADD_RESELLER_FAILURE,
+            payload: { error: error },
+        });
+
+        if (error.response) {
+            toast.error(error.response.data.msg, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in adding Reseller", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
+    }
+};
+
+export const updateReseller = (data) => async (dispatch) => {
+    dispatch({ type: resellerConstant.UPDATE_RESELLER_REQUEST });
+
+    try {
+        const response = await axios.patch("/reseller", {
+            resellerId: data.resellerId,
+            percent: data.percent,
+        });
+
+        dispatch({
+            type: resellerConstant.UPDATE_RESELLER_SUCCESS,
+            payload: response.data,
+        });
+
+        toast.success("Reseller Updated Successfully", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
+    } catch (error) {
+        // console.log(error);
+
+        dispatch({
+            type: resellerConstant.UPDATE_RESELLER_FAILURE,
             payload: { error: error },
         });
 
@@ -44,7 +82,7 @@ export const deleteReseller = (resellerId) => async (dispatch) => {
     try {
         const response = await axios.delete(`/reseller/${resellerId}`);
 
-        console.log(response.data);
+        // console.log(response.data);
 
         dispatch({
             type: resellerConstant.DELETE_RESELLER_SUCCESS,
@@ -55,7 +93,7 @@ export const deleteReseller = (resellerId) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.DELETE_RESELLER_FAILURE,
@@ -85,7 +123,7 @@ export const fetchResellerById = (resellerId) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.FETCH_SINGLE_RESELLER_FAILURE,
@@ -105,7 +143,7 @@ export const fetchAllReseller = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.FETCH_ALL_RESELLERS_FAILURE,
@@ -131,7 +169,7 @@ export const createResellerRequest = (resellerId) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.CREATE_RESELLER_REQUEST_FAILURE,
@@ -168,7 +206,7 @@ export const updateResellerRequest = (data) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.UPDATE_RESELLER_REQUEST_FAILURE,
@@ -198,7 +236,7 @@ export const fetchResellerRequest = (requestId) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.FETCH_REQUEST_FAILURE,
@@ -218,7 +256,7 @@ export const fetchRequestByReseller = (resellerId) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: resellerConstant.FETCH_RESELLER_REQUEST_FAILURE,
@@ -238,7 +276,7 @@ export const fetchAllRequest = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         dispatch({
             type: resellerConstant.FETCH_ALL_REQUEST_FAILURE,
             payload: { error: error },

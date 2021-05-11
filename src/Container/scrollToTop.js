@@ -10,7 +10,7 @@ export default function ScrollToTop() {
 
         ReactGA.initialize("UA-192129269-1");
         ReactGA.pageview(pathname + search);
-        console.log(pathname + search);
+        // console.log(pathname + search);
     }, [pathname]);
 
     return null;

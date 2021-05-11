@@ -28,7 +28,7 @@ export const addInventory = (data) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: inventoryConstant.ADD_INVENTORY_FAILURE,
@@ -77,7 +77,7 @@ export const updateInventory = (data, inventoryId) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: inventoryConstant.UPDATE_INVENTORY_FAILURE,
@@ -107,7 +107,7 @@ export const fetchInventory = () => async (dispatch) => {
             payload: response.data.inventory,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: inventoryConstant.FETCH_INVENTORY_FAILURE,
@@ -127,7 +127,7 @@ export const fetchOneInventory = (inventoryId) => async (dispatch) => {
             payload: response.data.inventory,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: inventoryConstant.FETCH_SINGLE_INVENTORY_FAILURE,
@@ -147,7 +147,7 @@ export const deleteInventory = (inventoryId) => async (dispatch) => {
             payload: response.data.inventory,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: inventoryConstant.DELETE_INVENTORY_FAILURE,

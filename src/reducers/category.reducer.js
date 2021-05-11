@@ -80,7 +80,7 @@ export default (state = initState, action) => {
                 state.categories,
                 action.payload.category
             );
-            console.log("updated categories", updatedCategories);
+            // console.log("updated categories", updatedCategories);
             state = {
                 ...state,
                 categories: updatedCategories,

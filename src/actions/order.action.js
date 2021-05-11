@@ -14,7 +14,7 @@ export const fetchAllAdminOrders = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         dispatch({
             type: orderConstants.FETCH_ALL_ORDERS_ADMIN_FAILURE,
             error: error,
@@ -35,7 +35,7 @@ export const fetchUserOrders = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         dispatch({
             type: orderConstants.FETCH_ALL_USER_ORDERS_FAILURE,
             error: error,

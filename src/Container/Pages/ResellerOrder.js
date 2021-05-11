@@ -24,7 +24,7 @@ function ResellerOrder() {
         }
     }, []);
 
-    console.log("resellerDetails", resellerDetails);
+    // console.log("resellerDetails", resellerDetails);
 
     return (
         <div>
@@ -61,15 +61,21 @@ function ResellerOrder() {
                     <hr id="ResellerOrderLine2" />
                     <hr id="adminLine" />
                 </div>
-                <div className="categoryProductBtn">
+                <div className="categoryResellerBtn">
                     <p className="CouponCode">
                         List of orders who applied your coupon code. For any
                         query contact the Admin.
                     </p>
                     {resellerDetails && (
-                        <p className="CouponCodeValue">
-                            Coupon Code: {resellerDetails.resellerCode}
-                        </p>
+                        <>
+                            <p className="CouponCodeValue">
+                                Coupon URL:{" "}
+                                {`https://tilakshringar.com/?reseller=${resellerDetails.resellerCode}`}
+                            </p>
+                            <p className="CouponCodeValue">
+                                Coupon Code: {resellerDetails.resellerCode}
+                            </p>
+                        </>
                     )}
                 </div>
                 <div className="SearchDrop"></div>
@@ -93,6 +99,8 @@ function ResellerOrder() {
                                 <Table.HeaderCell>
                                     Payment Method
                                 </Table.HeaderCell>
+                                <Table.HeaderCell>Requested</Table.HeaderCell>
+                                <Table.HeaderCell>Claimed</Table.HeaderCell>
                                 <Table.HeaderCell>View</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -141,6 +149,12 @@ function ResellerOrder() {
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {order.orderId.paymentType}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {order.requested ? "Yes" : "No"}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {order.claimed ? "Yes" : "No"}
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <AdminViewOrderDetails

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, Header, Icon, Modal } from "semantic-ui-react";
-import { createReseller } from "../../actions/reseller.action";
+import { updateReseller } from "../../actions/reseller.action";
 
-function AdminAddResellerModal() {
-    const [resellerEmail, setResellerEmail] = useState("");
+function AdminEditResellerModal({ resellerId }) {
     const [resellerPercent, setResellerPercent] = useState(0);
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
@@ -12,15 +11,10 @@ function AdminAddResellerModal() {
     // // console.log(resellerEmail);
 
     const handleSubmit = () => {
-        // // console.log({
-        //     email: resellerEmail,
-        //     percent: resellerPercent / 100,
-        // });
-
         setOpen(false);
         dispatch(
-            createReseller({
-                email: resellerEmail,
+            updateReseller({
+                resellerId,
                 percent: resellerPercent / 100,
             })
         );
@@ -29,7 +23,11 @@ function AdminAddResellerModal() {
     return (
         <Modal
             open={open}
-            trigger={<button className="categoryBtn">ADD A RESELLER</button>}
+            trigger={
+                <Button icon>
+                    <Icon name="edit" />
+                </Button>
+            }
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
@@ -37,15 +35,9 @@ function AdminAddResellerModal() {
             <Modal.Content>
                 <Form>
                     <Form.Input
-                        label="Enter Reseller's Email ID"
-                        type="email"
-                        placeholder="Enter Reseller's Email ID"
-                        onChange={(e) => setResellerEmail(e.target.value)}
-                    />
-                    <Form.Input
-                        label="Enter Reseller's Pecentage"
+                        label="Enter Reseller's New Pecentage"
                         type="number"
-                        placeholder="Enter Reseller's Pecentage"
+                        placeholder="Enter Reseller's New Pecentage"
                         onChange={(e) =>
                             setResellerPercent(parseInt(e.target.value))
                         }
@@ -64,4 +56,4 @@ function AdminAddResellerModal() {
     );
 }
 
-export default AdminAddResellerModal;
+export default AdminEditResellerModal;

@@ -26,7 +26,7 @@ const AdminBilling = () => {
         dispatch(fetchAllAdminOrders());
     }, []);
 
-    // console.log(orders.adminOrders);
+    // // console.log(orders.adminOrders);
 
     // if (orders.adminOrders[0]) {
     //     orders.adminOrders = [...orders.adminOrders].reverse();

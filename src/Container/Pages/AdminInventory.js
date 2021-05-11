@@ -44,7 +44,7 @@ const AdminInventory = () => {
     };
 
     const openEditInventory = (inventory) => {
-        console.log("sending single inventory request", inventory.name);
+        // console.log("sending single inventory request", inventory.name);
 
         setToBeEdited(inventory);
 
@@ -58,7 +58,7 @@ const AdminInventory = () => {
             "none";
     };
 
-    console.log("toBeEdited", toBeEdited);
+    // console.log("toBeEdited", toBeEdited);
 
     return (
         <div>

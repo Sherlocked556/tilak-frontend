@@ -39,10 +39,10 @@ const LoginSign = (props) => {
     }
 
 
-    console.log(
-        localStorage.getItem("access-token") &&
-            localStorage.getItem("access-token") === ""
-    );
+    // console.log(
+    //     localStorage.getItem("access-token") &&
+    //         localStorage.getItem("access-token") === ""
+    // );
 
     return (
         <div>
@@ -132,7 +132,7 @@ const LoginSign = (props) => {
                                             values.password
                                         )
                                     );
-                                    console.log(values);
+                                    // console.log(values);
                                     setSubmitting(false);
                                 }}
                             >
@@ -241,7 +241,7 @@ const LoginSign = (props) => {
                                             history
                                         )
                                     );
-                                    console.log(values);
+                                    // console.log(values);
                                     setSubmitting(false);
                                 }}
                             >

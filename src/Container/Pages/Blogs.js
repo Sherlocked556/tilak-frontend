@@ -19,11 +19,11 @@ function Blogs() {
             const response = await axios.get("/blog/all");
 
             if (response.data) {
-                console.log("hello");
+                // console.log("hello");
                 setBlogs([...blogs, ...response.data]);
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 
@@ -40,7 +40,7 @@ function Blogs() {
         fetchBlogs();
     }, []);
 
-    console.log(blogs);
+    // console.log(blogs);
 
     return (
         <div>

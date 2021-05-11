@@ -14,7 +14,7 @@ export const addAddress = (data) => async (dispatch) => {
             payload: response.data.address,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: addressConstant.ADD_ADDRESS_FAILURE,
@@ -34,7 +34,7 @@ export const fetchAddress = () => async (dispatch) => {
             payload: response.data.userAddress,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: addressConstant.FETCH_ADDRESS_FAILURE,
@@ -54,7 +54,7 @@ export const deleteAddress = (addressId) => async (dispatch) => {
             payload: response.data.address,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({
             type: addressConstant.DELETE_ADDRESS_FAILURE,

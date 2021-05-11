@@ -9,7 +9,7 @@ export default function AdminEditBlog(props) {
     const dispatch = useDispatch();
     const blog = useSelector((state) => state.blogs);
 
-    console.log(props);
+    // console.log(props);
 
     const [title, setTitle] = useState("");
     const [coverImg, setCoverImg] = useState("");
@@ -29,11 +29,11 @@ export default function AdminEditBlog(props) {
     };
 
     const handleBlogSubmit = (blogId) => {
-        // console.log(content);
+        // // console.log(content);
         dispatch(updateBlog({ title, content, blogId, description }));
     };
 
-    console.log(description);
+    // console.log(description);
 
     return (
         <div>

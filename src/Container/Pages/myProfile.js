@@ -10,13 +10,13 @@ import jwt from "jsonwebtoken";
 const myProfile = () => {
     let user = jwt.decode(localStorage.getItem("access-token"));
 
-    console.log(user, "USER PRINT");
+    // console.log(user, "USER PRINT");
 
     let name = user.fullName;
     let email = user.email;
     let type = user.role;
 
-    console.log(name);
+    // console.log(name);
 
     return (
         <div>

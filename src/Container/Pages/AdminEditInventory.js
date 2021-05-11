@@ -17,7 +17,7 @@ export default function AdminEditInventory({ toBeEdited, closeProduct }) {
     const dispatch = useDispatch();
 
     const handleInventoryEdit = (data, inventoryId) => {
-        // console.log(data);
+        // // console.log(data);
 
         dispatch(updateInventory(data, inventoryId));
     };
@@ -27,10 +27,10 @@ export default function AdminEditInventory({ toBeEdited, closeProduct }) {
     }, []);
 
     useEffect(() => {
-        console.log("inventory changed");
+        // console.log("inventory changed");
     }, [dispatch, inventoryDetails]);
 
-    console.log("inventoryDetails", inventoryDetails);
+    // console.log("inventoryDetails", inventoryDetails);
 
     let options = [];
 

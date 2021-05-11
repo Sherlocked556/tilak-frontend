@@ -15,7 +15,7 @@ export default function AdminAddInventory(props) {
     const dispatch = useDispatch();
 
     const handleInventorySubmit = (data) => {
-        // console.log(data);
+        // // console.log(data);
         dispatch(addInventory(data));
     };
 
@@ -23,7 +23,7 @@ export default function AdminAddInventory(props) {
         dispatch(getAllProducts());
     }, []);
 
-    console.log(products);
+    // console.log(products);
 
     let options = [];
 
@@ -245,7 +245,7 @@ export default function AdminAddInventory(props) {
                                                                                         type="button"
                                                                                         icon
                                                                                         onClick={() => {
-                                                                                            // console.log(
+                                                                                            // // console.log(
                                                                                             //     values
                                                                                             //         .styles[
                                                                                             //         index
@@ -281,7 +281,7 @@ export default function AdminAddInventory(props) {
                                                                                         type="button"
                                                                                         icon
                                                                                         onClick={() => {
-                                                                                            // console.log(
+                                                                                            // // console.log(
                                                                                             //     idx,
                                                                                             //     "Deletion Index"
                                                                                             // );

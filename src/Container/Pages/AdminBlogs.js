@@ -42,7 +42,7 @@ const AdminBlogs = () => {
         document.querySelector(".AdminEditBlogPopUp").style.display = "none";
     };
 
-    console.log(toBeEdited);
+    // console.log(toBeEdited);
 
     return (
         <div>

@@ -72,7 +72,7 @@ class MyUploadAdapter {
                     })
                     .then((response) => {
                         if (response.data.url) {
-                            console.log(response.data.url);
+                            // console.log(response.data.url);
 
                             resolve({
                                 default: response.data.url,

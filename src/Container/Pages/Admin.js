@@ -138,7 +138,7 @@ const Admin = () => {
         dispatch(getAllProducts());
     }, []);
 
-    console.log(updateList);
+    // console.log(updateList);
 
     if (updateList.length > 0) {
         products = updateList;

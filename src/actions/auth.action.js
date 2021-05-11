@@ -6,7 +6,12 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
     dispatch({ type: authConstants.USER_REGISTER_REQUEST });
 
     let firstName = fullName.split(" ")[0];
-    let lastName = fullName.split(" ").slice(-1)[0];
+
+    let lastName = "";
+
+    if (fullName.split(" ") > 1) {
+        lastName = fullName.split(" ").slice(-1)[0];
+    }
 
     try {
         const response = await axios.post("user/signup", {
@@ -25,7 +30,7 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
             position: toast.POSITION.BOTTOM_LEFT,
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         dispatch({ type: authConstants.USER_REGISTER_FAILURE, payload: error });
         if (error.response) {
