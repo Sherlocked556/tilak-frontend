@@ -152,7 +152,7 @@ const Admin = () => {
         );
     } else {
         return (
-            <div>
+            <div >
                 <Header />
                 <h2 className="heading">my profile...</h2>
                 <div className="Aboutttt">
@@ -213,7 +213,6 @@ const Admin = () => {
                             </p>
                         )}
                     </div>
-                    <div className="SearchDrop"></div>
                     <div className="categoryProductBtn">
                         <button
                             className="productBtn"

@@ -30,16 +30,7 @@
     color: #8d8d8d;
 }
 
-.AdminBlogPopUp {
-    position: absolute;
-    -webkit-position: sticky;
-    width: 100vw;
-    height: 142vw;
-    background-color: rgba(0, 0, 0, 0.9);
-    top: 0;
-    z-index: 1046;
-    display: none;
-}
+
 
 .AdminEditBlogPopUp {
     position: absolute;

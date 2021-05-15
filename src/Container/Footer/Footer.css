@@ -8,15 +8,15 @@
     height: 36.553vw;
     background-image: linear-gradient(#8e0072, #f5004e);
     display: grid;
-    grid-template-rows: 230px 179px 60px;
+    grid-template-rows: 16.837vw 13.104vw 4.392vw;
 }
 .firstbox {
     display: flex;
-    width: 1262px;
-    height: 180px;
+    width: 92.387vw;
+    height: 13.177vw;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 3.660vw;
 }
 .f1 {
     z-index: 1001;
@@ -52,7 +52,7 @@
     margin-left: 17.789vw;
     color: white;
     font: normal normal normal 1.098vw/1.684vw Poppins;
-    width: 454px;
+    width: 33.236vw;
 }
 .f2 a {
     color: white;
@@ -200,39 +200,39 @@
 }
 .secondbox {
     display: flex;
-    width: 1262px;
+    width: 92.387vw;
     margin-left: auto;
     margin-right: auto;
-    height: 149px;
-    margin-top: 30px;
+    height: 10.908vw;
+    margin-top: 2.196vw;
 }
 .paymentmethod {
-    width: 230px;
-    height: 149px;
+    width: 16.837vw;
+    height: 10.908vw;
     display: grid;
-    grid-template-rows: 15px 134px;
+    grid-template-rows: 1.098vw 9.810vw;
 }
 .paymentmethod p {
-    width: 230px;
-    height: 15px;
-    font: normal normal medium 10px/20px Poppins;
+    width: 16.837vw;
+    height: 1.098vw;
+    font: normal normal medium 0.732vw/1.464vw Poppins;
     color: #ffffff;
 }
 .logo {
-    width: 230px;
-    height: 114px;
-    margin-top: 20px;
+    width: 16.837vw;
+    height: 8.346vw;
+    margin-top: 1.464vw;
 }
 .logo ul {
     display: flex;
     list-style-type: none;
-    margin-left: -72px;
+    margin-left: -5.271vw;
 }
 .logo ul li {
-    width: 40px;
-    height: 40px;
-    box-shadow: 0px 3px 6px #00000029;
-    margin-left: 30px;
+    width: 2.928vw;
+    height: 2.928vw;
+    box-shadow: 0 0.220vw 0.439vw #00000029;
+    margin-left: 2.196vw;
     cursor: pointer;
     border-radius: 100%;
 }
@@ -243,29 +243,29 @@
     border-radius: 100%;
 }
 .followUs {
-    height: 77px;
-    width: 222px;
-    margin-left: 810px;
+    height: 5.637vw;
+    width: 16.252vw;
+    margin-left: 59.297vw;
 }
 .followUs p {
-    width: 218px;
-    height: 15px;
+    width: 15.959vw;
+    height: 1.098vw;
     text-align: right;
-    font: normal normal medium 10px/20px Poppins;
+    font: normal normal medium 0.732vw/1.464vw Poppins;
     color: #ffffff;
 }
 .social ul {
     display: flex;
     list-style-type: none;
-    margin-left: 60px;
+    margin-left: 4.392vw;
     margin-top: 0;
 }
 .social ul li {
-    margin-left: 20px;
-    margin-top: 20px;
-    padding: 8px;
-    font-size: 16px;
-    width: 37px;
+    margin-left: 1.464vw;
+    margin-top: 1.464vw;
+    padding: 0.586vw;
+    font-size: 1.171vw;
+    width: 2.709vw;
     text-align: center;
     text-decoration: none;
     border-radius: 50%;
@@ -286,8 +286,8 @@
 .f4 {
     z-index: 1001;
     color: white;
-    margin-top: 20px;
-    margin-left: 500px;
+    margin-top: 1.464vw;
+    margin-left: 36.603vw;
     font: normal normal normal 0.878vw/1.318vw Poppins;
     display: flex;
 }

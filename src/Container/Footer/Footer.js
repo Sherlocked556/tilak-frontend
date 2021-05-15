@@ -47,7 +47,7 @@ function Footer() {
                         <div className="social">
                             <ul>
                                 <a href="https://www.facebook.com/tilakshringar" target="#"><li style={{ background: '#3B5998', color: 'white' }}><FaFacebookF /></li></a>
-                                <li className="instagram"><FaInstagram /></li>
+                                <a href="https://instagram.com/tilakshringar?igshid=rgba13aufzj4" target="#"><li className="instagram"><FaInstagram /></li></a>
                             </ul>
                         </div>
                     </div>
