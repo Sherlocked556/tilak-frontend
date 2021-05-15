@@ -70,7 +70,6 @@
     color: #8d8d8d;
 }
 
-
 .adminInventory {
     width: 7.028vw;
     height: 2.05vw;
@@ -107,6 +106,13 @@
     width: 79.795vw;
     height: 2.855vw;
     display: flex;
+    margin-top: 2.489vw;
+    margin-left: 6.369vw;
+}
+
+.categoryResellerBtn {
+    width: 79.795vw;
+    height: 2.855vw;
     margin-top: 2.489vw;
     margin-left: 6.369vw;
 }
@@ -401,7 +407,6 @@
     z-index: 1046;
     display: none;
 }
-
 
 .SmallUp {
     width: 79.649vw;

@@ -7,7 +7,8 @@ export const createReseller = (data) => async (dispatch) => {
 
     try {
         const response = await axios.post("/reseller", {
-            email: data,
+            email: data.email,
+            percent: data.percent,
         });
 
         dispatch({
@@ -23,6 +24,43 @@ export const createReseller = (data) => async (dispatch) => {
 
         dispatch({
             type: resellerConstant.ADD_RESELLER_FAILURE,
+            payload: { error: error },
+        });
+
+        if (error.response) {
+            toast.error(error.response.data.msg, {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        } else {
+            toast.error("Error in adding Reseller", {
+                position: toast.POSITION.BOTTOM_LEFT,
+            });
+        }
+    }
+};
+
+export const updateReseller = (data) => async (dispatch) => {
+    dispatch({ type: resellerConstant.UPDATE_RESELLER_REQUEST });
+
+    try {
+        const response = await axios.patch("/reseller", {
+            resellerId: data.resellerId,
+            percent: data.percent,
+        });
+
+        dispatch({
+            type: resellerConstant.UPDATE_RESELLER_SUCCESS,
+            payload: response.data,
+        });
+
+        toast.success("Reseller Updated Successfully", {
+            position: toast.POSITION.BOTTOM_LEFT,
+        });
+    } catch (error) {
+        console.log(error);
+
+        dispatch({
+            type: resellerConstant.UPDATE_RESELLER_FAILURE,
             payload: { error: error },
         });
 

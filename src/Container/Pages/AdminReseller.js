@@ -11,6 +11,7 @@ import {
 import Header from "../../Container/Top Nav Bar/Header";
 import Footer from "../Footer/Footer";
 import AdminAddResellerModal from "./AdminAddResellerModal";
+import AdminEditResellerModal from "./AdminEditResellerModal";
 import AdminProfile from "./AdminProfile";
 import "./AdminReseller.css";
 import AdminViewResellerModal from "./AdminViewResellerModal";
@@ -31,9 +32,11 @@ const ResellerTable = ({ resellers, loading }) => {
                         <Table.HeaderCell>Reseller Name</Table.HeaderCell>
                         <Table.HeaderCell>Email</Table.HeaderCell>
                         <Table.HeaderCell>Code</Table.HeaderCell>
+                        <Table.HeaderCell>Percent</Table.HeaderCell>
                         <Table.HeaderCell>Due Pay</Table.HeaderCell>
                         <Table.HeaderCell>Products Sold</Table.HeaderCell>
                         <Table.HeaderCell>View / Delete</Table.HeaderCell>
+                        <Table.HeaderCell>Edit</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
@@ -44,7 +47,7 @@ const ResellerTable = ({ resellers, loading }) => {
                             .reverse()
                             .map((reseller, index) => (
                                 <Table.Row key={index}>
-                                    <Table.Cell>{index}</Table.Cell>
+                                    <Table.Cell>{index + 1}</Table.Cell>
                                     <Table.Cell>
                                         {reseller._id.substr(
                                             reseller._id.length - 5
@@ -60,9 +63,10 @@ const ResellerTable = ({ resellers, loading }) => {
                                         {reseller.resellerCode}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {reseller.due
-                                            ? reseller.due.points * 100
-                                            : 0}
+                                        {reseller.percent * 100}%
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {reseller.due ? reseller.due.amount : 0}
                                     </Table.Cell>
                                     <Table.Cell>
                                         {reseller.orders.length}
@@ -82,6 +86,11 @@ const ResellerTable = ({ resellers, loading }) => {
                                         >
                                             <Icon name="delete" />
                                         </Button>
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <AdminEditResellerModal
+                                            resellerId={reseller._id}
+                                        />
                                     </Table.Cell>
                                 </Table.Row>
                             ))}
@@ -163,7 +172,9 @@ function AdminReseller() {
                 </div>
                 <div className="categoryProductBtn">
                     <AdminAddResellerModal />
-                    <p className="ResellerNumber">230 resellers</p>
+                    <p className="ResellerNumber">
+                        {adminResellers.length} resellers
+                    </p>
                 </div>
                 <div className="SearchBilling"></div>
                 <div className="AdminProductDetails">

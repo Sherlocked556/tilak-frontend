@@ -19,6 +19,12 @@ export const resellerReducer = (state = initState, action) => {
                 loading: true,
             };
 
+        case resellerConstant.UPDATE_RESELLER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
         case resellerConstant.DELETE_RESELLER_REQUEST:
             return {
                 ...state,
@@ -72,6 +78,13 @@ export const resellerReducer = (state = initState, action) => {
         }
 
         case resellerConstant.ADD_RESELLER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error,
+            };
+
+        case resellerConstant.UPDATE_RESELLER_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -145,6 +158,34 @@ export const resellerReducer = (state = initState, action) => {
                     ...state.adminResellers,
                     action.payload.reseller,
                 ],
+                loading: false,
+                error: null,
+            };
+        }
+
+        case resellerConstant.UPDATE_RESELLER_SUCCESS: {
+            return {
+                ...state,
+                adminResellers: state.adminResellers.map((reseller) => {
+                    console.log(
+                        "reseller._id",
+                        reseller._id,
+                        "action.payload.reseller._id",
+                        action.payload.reseller._id
+                    );
+
+                    if (
+                        String(reseller._id) ===
+                        String(action.payload.reseller._id)
+                    ) {
+                        console.log("ahahah");                        
+
+                        return action.payload.reseller;
+                    } else {
+                        console.log("nononono");
+                        return reseller;
+                    }
+                }),
                 loading: false,
                 error: null,
             };
