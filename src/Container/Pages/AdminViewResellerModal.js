@@ -41,12 +41,7 @@ const AdminViewResellerModal = ({ reseller }) => {
                     </div>
                     <div className="">
                         <span>
-                            Total Points Redeemed: {reseller.totalPoints}
-                        </span>
-                    </div>
-                    <div className="">
-                        <span>
-                            Total Amount Redeemed: {reseller.totalPoints * 100}
+                            Total Amount Redeemed: {reseller.totalPoints}
                         </span>
                     </div>
                     <div className="">

@@ -173,7 +173,7 @@
     grid-template-rows: auto;
 }
 .itemNoHeading {
-    width: 4.026vw;
+    /* width: 4.026vw; */
     height: 1.537vw;
     font: normal normal normal 1.098vw/1.684vw Poppins;
     color: #4d4d4d;

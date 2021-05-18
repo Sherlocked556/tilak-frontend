@@ -9,9 +9,11 @@ export const registerUser = (fullName, email, password) => async (dispatch) => {
 
     let lastName = "";
 
-    if (fullName.split(" ") > 1) {
+    if (fullName.split(" ").length > 1) {
         lastName = fullName.split(" ").slice(-1)[0];
     }
+
+    console.log(lastName, fullName.split(" ").length);
 
     try {
         const response = await axios.post("user/signup", {
