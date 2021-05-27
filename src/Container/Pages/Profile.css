@@ -377,3 +377,77 @@
         font: normal normal normal 2.562vw/3.88vw Poppins;
     }
 }
+@media (max-width:425px) {
+    .Aaboutme {
+        margin-left: 13.089vw;
+    }
+    .headerr {
+        height: auto;
+        width: 53.411vw;
+        display: flex;
+    }
+    .myImage {
+        position: relative;
+        height: 11vw;
+        width: 11vw;
+    }
+    .MyDescription h2 {
+        font: normal normal normal 2.3vw/2.8vw Poppins;
+        color: #2D2D2D;
+    }
+    .MyDescription p {
+        color: #8D8D8D;
+        font: normal normal normal 1.7vw/3.684vw Poppins;
+    }
+    
+    .boxNav {
+        width: auto;
+    }
+    .myProfile {
+        width: auto;
+        height: auto;
+        font: normal normal normal 1.9vw/2.196vw Poppins;
+        color: #4d4d4d;
+        margin-top: 0vw;
+    }
+    .myOrders {
+        width: auto;
+        /* height: 2.05vw; */
+        font: normal normal normal 1.9vw/2.196vw Poppins;
+        color: #4d4d4d;
+        margin-left: 5.004vw;
+        margin-top: 0vw;
+    }
+    .myAddress {
+        font: normal normal normal 1.9vw/2.196vw Poppins;
+        color: #4d4d4d;
+        margin-left: 6.078vw;
+        width: auto;
+        height: 2.05vw;
+        margin-top: 0vw;
+    }
+    
+    .profileBox {
+        display: grid;
+        grid-template-rows: auto;
+        border: 0.073vw solid #707070;
+        width: 67.35vw;
+        margin-top: 4vw;
+        height: auto;
+        margin-left: 16.474vw;
+        overflow: auto;
+    }
+    .allABoutMe {
+        margin-top: 1.459vw;
+        display: flex;
+        height: auto;
+        width: 62.958vw;
+    }
+    #line00 {
+        margin-right: 0vw;
+        margin-left: -3vw;
+        width: 12.906vw;
+        margin-top: 1.611vw;
+        border: 0.073vw solid rgb(119, 118, 118);
+    }
+}

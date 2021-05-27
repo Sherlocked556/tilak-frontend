@@ -150,3 +150,78 @@
     font: normal normal normal 2.562vw/3.88vw Poppins;
   }
 }
+@media (max-width:425px){
+  .queryheadlineeee {
+    margin-top: 17px;
+    height: auto;
+    width: auto;
+    margin-left: 21px;
+}
+.textView {
+  margin-left: 5vw;
+  margin-top: 2vw;
+  width: 88vw;
+  font: normal normal normal 1.6vw/2.684vw Poppins;
+}
+.details {
+  display: flex;
+  margin-top: 3.684vw;
+  margin-left: 16.401vw;
+  height: auto;
+  flex-direction: column;
+  width: 71.526vw;
+}
+.userdetails {
+  font: normal normal normal 1.7vw/3.684vw Poppins;
+  height: 35.286vw;
+  width: 34.846vw;
+}
+.userdetails {
+  font: normal normal normal 1.7vw/3.684vw Poppins;
+  height: auto;
+  width: 55vw;
+}
+.userdetails input {
+  margin: 0.439vw;
+  font: normal normal normal 1.5vw/1.684vw Poppins;
+  margin-left: 2.745vw;
+  border: none;
+  height: auto;
+  width: 46vw;
+}
+.send {
+  margin-top: 4.392vw;
+  margin-left: 23.376vw;
+  height: 4vw;
+  font: normal normal normal 1.8vw/1.684vw Poppins;
+}
+.emailadd {
+  width: auto;
+  height: auto;
+  margin-top: 7.419vw;
+  margin-left: -9.089vw;
+  text-align: center;
+}
+.emailadd p {
+  color: #2d2d2d;
+    font: normal normal normal 1.7vw/2.684vw Poppins;
+    margin: 0;
+}
+.emailadd span {
+  margin-top: 0;
+  margin-left: 0.611vw;
+  font: normal normal normal 1.6vw/2.684vw Poppins;
+}
+.quend {
+  margin-top: 7.321vw;
+  margin-left: 28.849vw;
+  width: 43.817vw;
+}
+.cardss {
+  display: flex;
+  margin-top: 7.321vw;
+  margin-left: 29.283vw;
+  height: 21.23vw;
+  width: 61.387vw;
+}
+}

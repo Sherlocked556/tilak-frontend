@@ -10,6 +10,13 @@
     width: 14.06vw;
     height: 5.053vw;
 }
+.category_card1{
+    margin-left: 22vw;
+    width: 76vw;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
 .containerr {
     display: grid;
     margin-top: 1.464vw;
@@ -453,5 +460,39 @@
     }
     #button {
         font: normal normal bold 1.952vw/1.171vw poppins;
+    }
+}
+@media (max-width:425px) {
+    .blogHeadline {
+        margin-top: 2.143vw;
+        margin-left: 6.286vw;
+        width: auto;
+        height: 7vw;
+        font: normal normal normal 4vw/7.571vw Poppins;
+    }
+    .category_card1 {
+        margin-left: 2%;
+        width: auto;
+        justify-content: space-around;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .carrd {
+        width: 34.255vw;
+        margin: 6vw;
+        height: 52.65vw;
+    }
+    .contentt h1 {
+        font: normal normal bold 3vw/1.857vw Montserrat;    margin-top: 6vw;
+    }
+    .loadMoreButton {
+        width: 16.299vw;
+        height: 7.514vw;
+        margin-left: 45.552vw;
+        font: normal normal normal 2.098vw/2.684vw Poppins;
+    }
+    #dressDate {
+        width: auto;
     }
 }

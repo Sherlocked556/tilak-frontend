@@ -142,7 +142,7 @@
   -moz-text-fill-color: transparent;
 }
 
-.cards {
+/* .cards {
   display: flex;
   margin-top: 7.321vw;
   margin-left: 3.807vw;
@@ -200,7 +200,7 @@
   margin-top: 8.858vw;
   margin-left: 6.515vw;
   font: normal normal normal 2.489vw/3.734vw Poppins;
-}
+} */
 
 @media (max-width: 700px) {
   .bheadandadd {
@@ -234,4 +234,82 @@
     width: 18vw;
     height: 5vw;
   }
+}
+@media (max-width: 425px) {
+  .bheadandadd {
+    margin-top: 4vw;
+    display: flex;
+    width: auto;
+    margin-left: 20px;
+    height: auto;
+}
+.imageAboutUs {
+  width: 48.29vw;
+  height: 26.742vw;
+  margin-top: 1.171vw;
+  margin-left: 27.821vw;
+}
+.aboutheadline {
+  /* margin-top: 3.953vw; */
+  margin-top: 0.953vw;
+  width: auto;
+  margin-left: 8.889vw;
+  font: normal normal normal 3.124vw/4.88vw Acme;
+  background-image: linear-gradient(#f5004e, #8e0072);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+.aboutUsPara {
+  width: 66.984vw;
+  height: auto;
+  margin-top: 2.171vw;
+  margin-left: 17.474vw;
+  text-align: justify;
+  font: normal normal normal 1.6vw/2.484vw Poppins;
+  color: #2d2d2d;
+}
+.memoryOf {
+  margin-left: 8.889vw;
+  margin-bottom: 0;
+  margin-top: 2.928vw;
+  width: auto;
+  height: auto;
+  font: normal normal normal 3.124vw/4.88vw Acme;
+  background-image: linear-gradient(#f5004e, #8e0072);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+.memoryImage {
+  margin-left: 43.852vw;
+  width: 21.302vw;
+  height: 26.742vw;
+  margin-top: 1.171vw;
+}
+.yearMemory {
+  margin-left: 21.474vw;
+  width: 61%;
+  height: auto;
+  margin-top: 2.171vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.nameBold {
+  width: auto;
+  height: auto;
+  margin-left: 5.5vw;
+  font: normal normal bold 1.6vw/1.03vw Poppins;
+  color: #2d2d2d;
+}
+.yearofMemory {
+  margin-left: 6.795vw;
+  width: auto;
+  height: auto;
+  font: normal normal normal 1.6vw/1.903vw Poppins;
+  color: #2d2d2d;
+}
 }

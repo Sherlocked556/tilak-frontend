@@ -1,64 +1,63 @@
 .loginOuterBox {
-    width: 839px;
-    height: 584px;
-    margin-left: 299px;
-    margin-top: 32px;
+    width: 61.420vw;
+    height: 42.753vw;
+    margin-left: 21.889vw;
+    margin-top: 2.343vw;
     border: 1px solid #dddddd;
     display: flex;
 }
 .firstSignBox {
-    width: 279px;
-    height: 422px;
-    margin-left: 75px;
-    margin-top: 37px;
+    width: 20.425vw;
+    height: 30.893vw;
+    margin-left: 5.490vw;
+    margin-top: 2.709vw;
     display: grid;
-    /* grid-template-rows: 21px 38px 50px 50px 50px 50px 33px 30px 50px 50px; */
     grid-template-rows: auto;
 }
 .betweenOR {
-    width: 15px;
-    height: 21px;
-    font: normal normal normal 15px/23px Poppins;
+    width: 1.098vw;
+    height: 1.537vw;
+    font: normal normal normal 1.098vw/1.684vw Poppins;
     color: #3d3d3d;
-    margin-left: 58px;
-    margin-top: 37px;
+    margin-left: 4.246vw;
+    margin-top: 2.709vw;
 }
 .firstLoginBox {
-    width: 279px;
-    height: 266px;
-    margin-left: 108px;
-    margin-top: 37px;
-    display: grid;
-    grid-template-rows: 21px 38px 50px 50px 30px 76px;
+    width: 20.425vw;
+    height: 19.473vw;
+    margin-left: 7.906vw;
+    margin-top: 2.709vw;
+    display: flex;
+    flex-direction: column;
 }
 .neworalready {
-    width: 211px;
-    height: 21px;
-    font: normal normal normal 15px/23px Poppins;
+    width: 15.447vw;
+    height: 1.537vw;
+    font: normal normal normal 1.098vw/1.684vw Poppins;
     color: #3d3d3d;
 }
 .filldetailHead {
-    width: 186px;
-    height: 17px;
-    margin-top: 21px;
-    font: normal normal normal 12px/18px Poppins;
+    width: 13.616vw;
+    height: 1.245vw;
+    margin-top: 1.537vw;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     color: #ac06d4;
 }
 .fillouterBoxborder {
     /* width: 279px; */
-    height: 38px;
-    margin-top: 12px;
+    height: 2.782vw;
+    margin-top: 0.878vw;
     border: 1px solid #08e5a9;
-    margin-bottom: 12px;
-    padding-left: 10px;
-    width: 251px;
-    font: normal normal normal 12px/18px Poppins;
+    margin-bottom: 0.878vw;
+    padding-left: 0.732vw;
+    width: 18.375vw;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
 }
 .fillouterBoxborder input {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    width: 251px;
-    font: normal normal normal 12px/18px Poppins;
+    margin-top: 0.878vw;
+    margin-bottom: 0.878vw;
+    width: 18.375vw;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     border: none;
 }
 .fillouterBoxborder input::placeholder {
@@ -74,26 +73,26 @@ select {
     font-weight: 500;
 }
 .orHeading {
-    margin-left: 132px;
+    margin-left: 9.663vw;
     /* margin-top: 12px; */
     /* width: 15px;
     height: 21px; */
-    font: normal normal normal 15px/23px Poppins;
+    font: normal normal normal 1.098vw/1.684vw Poppins;
     color: #3d3d3d;
 }
 .containerCheck {
     display: block;
     position: relative;
 
-    margin-top: 12px;
+    margin-top: 0.878vw;
     cursor: pointer;
-    font: normal normal normal 12px/18px Poppins;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding-left: 27px;
-    margin-left: 10px;
+    padding-left: 1.977vw;
+    margin-left: 0.732vw;
 }
 .containerCheck input {
     position: absolute;
@@ -107,8 +106,8 @@ select {
     position: absolute;
     top: 0;
     left: 0;
-    height: 18px;
-    width: 18px;
+    height: 1.318vw;
+    width: 1.318vw;
     background-color: #eee;
 }
 .containerCheck:hover input ~ .checkMark {
@@ -126,9 +125,9 @@ select {
     display: block;
 }
 .containerCheck .checkMark::after {
-    left: 5px;
-    top: 0px;
-    width: 8px;
+    left: 0.366vw;
+    top: 0;
+    width: 0.586vw;
     height: 13px;
     border: solid white;
     border-width: 0 2px 2px 0;
@@ -136,39 +135,39 @@ select {
 }
 .SignGoogle {
     display: flex;
-    width: 162px;
-    height: 35px;
-    margin-left: 59px;
-    margin-top: 15px;
+    width: 11.859vw;
+    height: 2.562vw;
+    margin-left: 4.319vw;
+    margin-top: 1.098vw;
     border: 0.1px solid white;
     background-color: #df4a32;
     cursor: pointer;
 }
 .googleIcon {
     color: white;
-    height: 32px;
-    width: 25px;
-    margin-left: 5px;
+    height: 2.343vw;
+    width: 1.830vw;
+    margin-left: 0.366vw;
 }
 .SignGoogle p {
-    height: 20px;
-    width: 120px;
-    margin-top: 7px;
-    margin-left: 6px;
+    height: 1.464vw;
+    width: 8.785vw;
+    margin-top: 0.512vw;
+    margin-left: 0.439vw;
     color: white;
     font-family: "Poppins";
-    font-size: 12px;
+    font-size: 0.878vw;
 }
 .continueButton {
-    width: 93px;
-    height: 38px;
+    width: 6.808vw;
+    height: 2.782vw;
     margin-top: 2em;
-    margin-left: 93px;
+    margin-left: 6.808vw;
     box-shadow: 0px 3px 6px #00000029;
     background-image: linear-gradient(#f5004e, #8e0072);
     border: none;
     cursor: pointer;
-    font: normal normal normal 12px/18px Poppins;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     color: white;
 }
 .continueButton:focus {
@@ -176,11 +175,11 @@ select {
 }
 .forgetPass {
     text-decoration: underline;
-    font: normal normal normal 12px/18px Poppins;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     color: #f80000;
-    width: 142px;
-    height: 18px;
-    margin-top: 12px;
+    width: 10.395vw;
+    height: 1.318vw;
+    margin-top: 0.878vw;
     cursor: pointer;
 }
 .loginButton {
@@ -188,13 +187,100 @@ select {
     background-image: linear-gradient(#f5004e, #8e0072);
     border: none;
     cursor: pointer;
-    font: normal normal normal 12px/18px Poppins;
+    font: normal normal normal 0.878vw/1.318vw Poppins;
     color: white;
-    width: 68px;
-    height: 38px;
-    margin-top: 49px;
-    margin-left: 123px;
+    width: 4.978vw;
+    height: 2.782vw;
+    margin-top: 3.587vw;
+    margin-left: 9.004vw;
 }
 .loginButton:focus {
     outline: none;
+}
+@media (max-width:425px){
+    .headlineew {
+        margin-top: 4%;
+        margin-left: 6%;
+        font: normal normal normal 4.124vw/7.88vw Acme;
+        height: auto;
+        width: auto;
+    }
+    .loginOuterBox {
+        width: 56.42vw;
+        height: auto;
+        margin-left: 20%;
+        margin-top: 4%;
+        border: 1px solid #dddddd;
+        flex-direction: column;
+        display: flex;
+    }
+    .firstSignBox {
+        width: 51.425vw;
+        height: auto;
+        margin-left: 8%;
+        margin-top: 8%;
+        display: flex;
+        flex-direction: column;
+    }
+    .neworalready {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2.098vw/1.684vw Poppins;
+        color: #3d3d3d;
+    }
+    .filldetailHead {
+        width: auto;
+        height: auto;
+        margin-top: 0.537vw;
+        font: normal normal normal 1.5vw/1.318vw Poppins;
+        color: #ac06d4;
+    }
+    .fillouterBoxborder {
+        /* width: 279px; */
+        height: 3.782vw;
+        margin-top: 0.878vw;
+        border: 1px solid #08e5a9;
+        margin-bottom: 0.878vw;
+        padding-left: 0.732vw;
+        width: 45vw;
+        font: normal normal normal 1.5vw/1.318vw Poppins;
+    }
+    .continueButton {
+        width: 10.808vw;
+        height: 3.782vw;
+        margin-top: 3%;
+        margin-left: 33%;
+        font: normal normal normal 1.5vw/1.318vw Poppins;
+    }
+    .betweenOR {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2.098vw/0.684vw Poppins;
+        color: #3d3d3d;
+        margin-left: 46%;
+    }
+    .firstLoginBox {
+        width: 48.425vw;
+        height: auto;
+        margin-left: 4.906vw;
+        margin-top: 2.709vw;
+        display: flex;
+        flex-direction: column;
+    }
+    .forgetPass {
+        text-decoration: underline;
+        font: normal normal normal 1.5vw/1.318vw Poppins;
+        color: #f80000;
+        width: auto;
+        height: auto;
+        margin-top: 0.878vw;
+        cursor: pointer;
+    }
+    .loginButton {
+        font: normal normal normal 1.5vw/1.318vw Poppins;
+        width: 7.978vw;
+        height: 3.782vw;
+        margin-top: 3.587vw;
+        margin-left: 19.004vw;
+    }
 }

@@ -141,7 +141,7 @@ const LoginSign = (props) => {
                                 }}
                             >
                                 {({ isSubmitting }) => (
-                                    <Form style={{ marginBottom: "1em" }}>
+                                    <Form style={{ marginBottom: "1em" ,display:"flex" , flexDirection:"column"}}>
                                         <Field
                                             type="text"
                                             name="fullName"
@@ -250,7 +250,7 @@ const LoginSign = (props) => {
                                 }}
                             >
                                 {({ isSubmitting }) => (
-                                    <Form style={{ marginBottom: "1em" }}>
+                                    <Form style={{ marginBottom: "1em" , display:"flex" , flexDirection:"column" }}>
                                         <Field
                                             className="fillouterBoxborder"
                                             type="email"

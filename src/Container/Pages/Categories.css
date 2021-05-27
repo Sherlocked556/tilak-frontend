@@ -388,9 +388,9 @@
         margin-left: 6.286vw;
         font: normal normal normal 2.562vw/3.88vw Poppins;
     }
-    .cardsl1 {
+    /* .cardsl1 {
         margin-left: 8vw;
-    }
+    } */
     .card1 {
         width: 25vw;
         height: 33vw;
@@ -444,5 +444,32 @@
         width: 24.25vw;
         height: 4vw;
         font: normal normal bold 1.8577vw/2.9718vw Poppins;
+    }
+}
+@media (max-width:425px){
+    .categoryheadlinee {
+        margin-top: 6%;
+        margin-left: 8%;
+        font: normal normal normal 4vw/4.88vw Acme;
+        width: auto;
+        height: auto;
+    }
+    .category_card {
+        margin-left: 2%;
+    justify-content: space-around;
+    width: 93vw;
+    }
+    .cardNew1 {
+        width: 27.255vw;
+        height: 36.65vw;
+        position: relative;
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        margin: 4vw;
+        cursor: pointer;
+    }
+    .abcard {
+        margin-left: 28.944vw;
     }
 }

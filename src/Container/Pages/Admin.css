@@ -368,21 +368,20 @@
 
 .AdminPopUp {
     position: absolute;
-    -webkit-position: sticky;
     width: 100vw;
     height: 142vw;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: transparent;
     top: 0;
     z-index: 1046;
     display: none;
+
 }
 
 .AdminBlogPopUp {
     position: absolute;
-    -webkit-position: sticky;
     width: 100vw;
     height: 142vw;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: transparent;
     top: 0;
     z-index: 1046;
     display: none;
@@ -390,10 +389,9 @@
 
 .AdminCategoryPopUp {
     position: absolute;
-    -webkit-position: sticky;
     width: 100vw;
     height: 142vw;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: transparent;
     top: 0;
     z-index: 1046;
     display: none;
@@ -412,21 +410,26 @@
 
 .SmallUp {
     width: 79.649vw;
-    height: 100%;
-    margin-top: 7.321vw;
-    margin-left: 10.176vw;
+    height: 42vw;
+    margin-top: 45.321vw;
+    margin-left: 12.176vw;
     background-color: white;
     z-index: 1046;
+    overflow: auto;
     display: grid;
     grid-template-rows: 4.1vw 22.035vw;
     border-radius: 1.464vw;
+    box-shadow: 3px 7px 26px 11px #00000029;
 }
 
 .SmallBlogUp {
-    width: 79.649vw;
-    height: 45%;
-    margin-top: 7.321vw;
-    margin-left: 10.176vw;
+    width: auto;
+    box-shadow:3px 7px 26px 11px #00000029;
+    padding-right: 10px;
+    overflow: auto;
+    height: 40vw;
+    margin-top: 38.321vw;
+    margin-left: 14.176vw;
     background-color: white;
     z-index: 1046;
     display: grid;

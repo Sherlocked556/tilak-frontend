@@ -10,7 +10,6 @@
 }
 
 
-
 .mycartLineTo {
   border: 2px solid #cdcdcd;
   margin-left: 0.805vw;
@@ -134,3 +133,102 @@
 .RefProceedButton:focus {
   outline: none;
 }
+@media (max-width:425px){
+  .paymentWay {
+    width: auto;
+    height: auto;
+    margin-top: 5%;
+    margin-left: 6%;
+    display: flex;
+}
+.orderPaymentChange {
+  color: #cdcdcd;
+  width: auto;
+  height: auto;
+  font: normal normal normal 2.5vw/3.196vw Poppins;
+  margin-left: 0.805vw;
+}
+.myCartHeadline {
+  width: auto;
+  height: auto;
+  margin-left: 7%;
+  margin-top: 2%;
+  font: normal normal normal 4.124vw/4.88vw Acme;
+}
+.myCartMainBox {
+  display: flex;
+  margin-top: 4%;
+  margin-left: 8%;
+  height: auto;
+  width: 80.307vw;
+  flex-direction: column;
+}
+.CartBox {
+  width: auto;
+  height: auto;
+  display: grid;
+  grid-template-rows: 1.537vw 14.967vw 15.739vw;
+  margin-top: 1.191vw;
+}
+.referenceCodeBox {
+  width: auto;
+  height: auto;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+.ReferenceCodeHeading {
+  width: auto;
+  height: auto;
+  font: normal normal normal 2.5vw/1.684vw Poppins;
+  color: #4d4d4d;
+  padding-top: 2%;
+}
+.RefCodeBoxWithButton {
+  width: auto;
+  margin-top: 1%;
+  height: auto;
+  display: flex;
+}
+.RefCodeInput {
+  width: auto;
+  height: auto;
+  font: normal normal normal 2.3vw/1.684vw Poppins;
+  padding-left: 1%;
+}
+.RefButton {
+  width: auto;
+  height: auto;
+  font: normal normal normal 2vw/3.684vw Poppins;
+}
+.DiscountBox {
+  width: auto;
+  height: auto;
+  margin-top: 3%;
+  display: flex;
+}
+.DiscountHeading {
+  width: auto;
+  height: auto;
+  font: normal normal normal 2.5vw/1.684vw Poppins;
+}
+.discountMoney {
+  width: auto;
+  height: auto;
+  font: normal normal normal 2.5vw/1.684vw Poppins;
+}
+.bagTotalPrice {
+  height: auto;
+  width: auto;
+  margin-top: 1%;
+  display: flex;
+}
+.RefProceedButton {
+  font: normal normal normal 2.098vw/4.684vw Poppins;
+  width: auto;
+  height: auto;
+  margin-top: 2%;
+  border: white;
+}
+}
+
