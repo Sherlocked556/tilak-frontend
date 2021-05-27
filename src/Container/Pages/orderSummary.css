@@ -205,7 +205,27 @@
     font: normal normal normal 1.098vw/1.684vw Poppins;
     color: #2d2d2d;
 }
+.bagTotalPrice1 {
+    height: 1.537vw;
+    width: 18.448vw;
+    margin-top: 0.586vw;
+    margin-left: 1.245vw;
+    display: flex;
+}
+#bagTotal1 {
+    width: 11.493vw;
+    height: 1.537vw;
+    font: normal normal normal 1.098vw/1.684vw Poppins;
+    color: #8d8d8d;
+}
 
+#bagTotalValue1 {
+    width: 7vw;
+    height: 1.537vw;
+    font: normal normal normal 1.098vw/1.684vw Poppins;
+    color: #4d4d4d;
+    text-align: right;
+}
 .priceoftheGivenProduct {
     width: 22.589vw;
     height: 2.05vw;
@@ -233,4 +253,71 @@
     height: 14.275vw;
     margin-top: 1.485vw;
     display: flex;
+}
+@media (max-width: 425px) {
+    .orderSummaryfinalPayment {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2.5vw/4.196vw Poppins;
+        color: #cdcdcd;
+        margin-left: 0.805vw;
+    }
+    .orderSummaryHeadline {
+        width: auto;
+        height: 4vw;
+        margin-left: 6%;
+        margin-top: 2%;
+        font: normal normal normal 4.124vw/2.88vw Acme;
+    }
+    .selectDeliveryBox {
+        width: 80.307vw;
+        height: auto;
+        margin-top: 4%;
+        margin-left: 10%;
+        display: flex;margin-bottom: 7vw;
+        flex-direction: column;
+    }
+    .deliveryAddressBox {
+        height: auto;
+        width: 63%;
+        display: flex;
+        flex-direction: column;
+    }
+    .selectDeliveryHeading {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2.098vw/1.684vw Poppins;
+    }
+    .priceOrderSummaryBox {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        margin-top: 4%;
+    }
+    .bagTotalPrice1 {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2vw/1.684vw Poppins;
+        color: #8d8d8d;
+    }
+    #bagTotal1 {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2vw/1.684vw Poppins;
+        color: #8d8d8d;
+    }
+    #bagTotalValue1 {
+        width: 23vw;
+        height: auto;
+        font: normal normal normal 2vw/1.684vw Poppins;
+        color: #4d4d4d;
+        text-align: right;
+    }
+    .itemNoHeading {
+        width: auto;
+        height: auto;
+        font: normal normal normal 2vw/1.684vw Poppins;
+        color: #4d4d4d;
+    }
 }

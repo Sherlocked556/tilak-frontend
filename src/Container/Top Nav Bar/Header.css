@@ -256,3 +256,40 @@
     margin-left: 0.45vw;
   }
 }
+@media (max-width:425px){
+  .right {
+    margin-top: 0;
+    margin-left: 3vw;
+    margin-right: 0;
+    height: 6.429vw;
+    width: auto;
+}
+.cart {
+  display: flex;
+  margin-top: 0vw;
+  margin-left: 3.366vw;
+  height: auto;
+  width: auto;
+}
+.cartname {
+  font: normal normal normal 2.5vw/1.83vw Poppins;
+  padding-top: 2.6vw;}
+  .user {
+    margin-right: 0.366vw;
+    margin-left: 4.586vw;
+    margin-top: 1vw;
+    width: 5vw;
+    height: 5vw;
+    border: solid;
+    border-width: 0.14vw;
+    border-color: #cdcdcd;
+    border-radius: 50%;
+    background-color: #cdcdcd;
+}
+.user img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+}

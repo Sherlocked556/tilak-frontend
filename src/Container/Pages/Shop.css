@@ -18,6 +18,21 @@
     width: 17.649vw;
     height: 5.053vw;
 }
+.box_shop{
+    margin-left: 21.474vw;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: auto;
+}
+.shop_card{
+    display: flex;
+    height: auto;
+    width: 24.158vw;
+    flex-direction: column;
+    margin-left: 1vw;
+    margin-bottom: 3.5vw;justify-content: space-around;
+}
 
 .product1 {
     width: 24.158vw;
@@ -411,13 +426,13 @@
 .shoploadMore:focus {
     outline: none;
 }
-.cards {
+/* .cards {
     display: flex;
     margin-top: 7.321vw;
     margin-left: 3.807vw;
     height: 21.23vw;
     width: 92.387vw;
-}
+} */
 
 .rrcard3 {
     margin-left: 35.286vw;
@@ -772,5 +787,39 @@
         width: 29.714vw;
         height: 2.714vw;
         font: normal normal normal 1.7vw/2.857vw Poppins;
+    }
+}
+@media(max-width:425px){
+    .shopheadlinee {
+        margin-top: 6%;
+        margin-left: 8%;
+        font: normal normal normal 4vw/4.88vw Acme;
+        width: auto;
+        height: auto;
+    }
+    .box_shop {
+        margin-left: 6%;}
+    .shop_card{
+        width: auto;
+        
+    }
+    .p1info {
+        display: grid;
+        width: auto;
+        height: auto;
+    }
+    #product1i {
+        width: 29.429vw;
+        height: 6.286vw;
+        font: normal normal normal 2.5vw/3.286vw Poppins;
+    }
+    #price1 {
+        width: 29.714vw;
+        height: 2.714vw;
+        font: normal normal normal 2.7vw/2.857vw Poppins;
+    }
+    .rrcard3 {
+        margin-left: 28.286vw;
+       
     }
 }
