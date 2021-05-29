@@ -331,12 +331,12 @@
     }
     .f1 {
         z-index: 1001;
-    color: white;
-    font: normal normal normal 1.9vw/0.684vw Poppins;
-    width: 40%;
-    margin-left: 29vw;
-    text-align: center;
-    height: auto;
+        color: white;
+        font: normal normal normal 1.9vw/1.684vw Poppins;
+        width: auto;
+        margin-left: 0;
+        text-align: center;
+        height: auto;
     }
     .email {
         z-index: 1001;
