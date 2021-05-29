@@ -64,25 +64,13 @@ const Shop = (props) => {
 
     const renderProducts = () => {
         return (
-            <div
-                style={{
-                    marginLeft: " 21.474vw",
-                    display: " flex",
-                    flexWrap: "wrap",
-                }}
-            >
+            <div className='box_shop'>
                 {inventory.length > 0 && product.products.length > 0 ? (
                     inventory.map((product) => {
                         // console.log(product.styles, product.name);
                         return (
-                            <div
-                                style={{
-                                    display: "grid",
-                                    height: "30vw",
-                                    width: "24.158vw",
-                                    marginLeft: "1vw",
-                                    marginBottom: " 3.5vw",
-                                }}
+                            <div className="shop_card"
+                                
                                 key={product._id}
                             >
                                 {product.styles.length > 0 && (

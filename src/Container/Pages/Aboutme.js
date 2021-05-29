@@ -53,7 +53,7 @@ function Aboutme() {
                     cursor: "pointer",
                     border: "none",
                     textDecoration: "underline",
-                    background: "none",
+                    background: "none",fontSize: '1.9vw'
                 }}
                 onClick={() => dispatch(logoutUser(user._id))}
             >

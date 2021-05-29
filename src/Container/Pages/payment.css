@@ -345,3 +345,63 @@ div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:before,
 div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:after {
     margin: 0 !important;
 }
+@media (max-width:425px){
+    .paymentWay {
+      width: auto;
+      height: auto;
+      margin-top: 5%;
+      margin-left: 14%;
+      display: flex;
+  }
+  .mycartPayment {
+    width: auto;
+    height: auto;
+    font: normal normal normal 2.5vw/2.83vw Poppins;
+}
+.bagTotalPrice {
+    height: auto;
+    width: auto;
+    margin-top: 1%;
+    display: flex;
+  }
+  #bagTotal {
+    width: auto;
+    height: auto;
+    font: normal normal normal 2.5vw/1.684vw Poppins;
+    color: #8d8d8d;
+}
+.orderPayment {
+    width: auto;
+    height: auto;
+    font: normal normal normal 2.5vw/3.196vw Poppins;
+}
+#priceSummaryHeading {
+    width: auto;
+    height: auto;
+    font: normal normal normal 2vw/1.684vw Poppins;
+    color: #4d4d4d;
+}.discountPrice {
+    height: auto;
+    width: 40vw;
+    display: flex;
+}
+#discountName {
+    width: 35.051vw;
+    height: 1.537vw;
+    font: normal normal normal 1.9vw/1 Poppins;
+    color: #8d8d8d;
+}#discountPriceValue {
+    width: auto;
+    height: auto;
+    font: normal normal normal 1.9vw/1.684vw Poppins;
+}
+#bagTotalValue {
+    width: 7vw;
+    height: auto;
+    font: normal normal normal 2.5vw/1.684vw Poppins;
+    color: #4d4d4d;
+    text-align: right;
+}
+  }
+  
+  

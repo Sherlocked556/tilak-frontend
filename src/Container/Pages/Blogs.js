@@ -50,7 +50,7 @@ function Blogs() {
                 <Search />
             </div>
             <h2 className="blogHeadline">our blogs...</h2>
-            <div className="category_card">
+            <div className="category_card1">
                 
                     {blogs &&
                         blogs.map((blog, index) => (
@@ -173,7 +173,7 @@ function Blogs() {
                                 style={{
                                     paddingRight: "4em",
                                     marginRight: "4em",
-                                    paddingLeft: "4em",
+                                    paddingLeft: "0",
                                     marginLeft: "4em",
                                 }}
                             >

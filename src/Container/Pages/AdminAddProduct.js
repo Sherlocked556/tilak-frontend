@@ -12,7 +12,8 @@ import {
 } from "semantic-ui-react";
 import { addProduct } from "../../actions/product.action";
 import axios from "../../helpers/axios";
-
+import '../scrollToTop'
+import ScrollToTop from "../scrollToTop";
 export default function AdminAddProduct(props) {
     // const { categories } = useSelector((state) => state.category);
     const { loading } = useSelector((state) => state.product);
@@ -22,7 +23,7 @@ export default function AdminAddProduct(props) {
     // console.log(isVariant);
 
     return (
-        <div>
+        
             <div className="SmallUp">
                 <div className="headingPopUp">
                     <div className="adminClose" onClick={props.closeProduct}>
@@ -279,6 +280,5 @@ export default function AdminAddProduct(props) {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }

@@ -8,15 +8,15 @@
     height: 36.553vw;
     background-image: linear-gradient(#8e0072, #f5004e);
     display: grid;
-    grid-template-rows: 230px 179px 60px;
+    grid-template-rows: 16.837vw 13.104vw 4.392vw;
 }
 .firstbox {
     display: flex;
-    width: 1262px;
-    height: 180px;
+    width: 92.387vw;
+    height: 13.177vw;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 3.66vw;
 }
 .f1 {
     z-index: 1001;
@@ -52,7 +52,7 @@
     margin-left: 17.789vw;
     color: white;
     font: normal normal normal 1.098vw/1.684vw Poppins;
-    width: 454px;
+    width: 33.236vw;
 }
 .f2 a {
     color: white;
@@ -200,39 +200,39 @@
 }
 .secondbox {
     display: flex;
-    width: 1262px;
+    width: 92.387vw;
     margin-left: auto;
     margin-right: auto;
-    height: 149px;
-    margin-top: 30px;
+    height: 10.908vw;
+    margin-top: 2.196vw;
 }
 .paymentmethod {
-    width: 230px;
-    height: 149px;
+    width: 16.837vw;
+    height: 10.908vw;
     display: grid;
-    grid-template-rows: 15px 134px;
+    grid-template-rows: 1.098vw 9.81vw;
 }
 .paymentmethod p {
-    width: 230px;
-    height: 15px;
-    font: normal normal medium 10px/20px Poppins;
+    width: 16.837vw;
+    height: 1.098vw;
+    font: normal normal medium 0.732vw/1.464vw Poppins;
     color: #ffffff;
 }
 .logo {
-    width: 230px;
-    height: 114px;
-    margin-top: 20px;
+    width: 16.837vw;
+    height: 8.346vw;
+    margin-top: 1.464vw;
 }
 .logo ul {
     display: flex;
     list-style-type: none;
-    margin-left: -72px;
+    margin-left: -5.271vw;
 }
 .logo ul li {
-    width: 40px;
-    height: 40px;
-    box-shadow: 0px 3px 6px #00000029;
-    margin-left: 30px;
+    width: 2.928vw;
+    height: 2.928vw;
+    box-shadow: 0 0.22vw 0.439vw #00000029;
+    margin-left: 2.196vw;
     cursor: pointer;
     border-radius: 100%;
 }
@@ -243,29 +243,29 @@
     border-radius: 100%;
 }
 .followUs {
-    height: 77px;
-    width: 222px;
-    margin-left: 810px;
+    height: 5.637vw;
+    width: 16.252vw;
+    margin-left: 59.297vw;
 }
 .followUs p {
-    width: 218px;
-    height: 15px;
+    width: 15.959vw;
+    height: 1.098vw;
     text-align: right;
-    font: normal normal medium 10px/20px Poppins;
+    font: normal normal medium 0.732vw/1.464vw Poppins;
     color: #ffffff;
 }
 .social ul {
     display: flex;
     list-style-type: none;
-    margin-left: 60px;
+    margin-left: 4.392vw;
     margin-top: 0;
 }
 .social ul li {
-    margin-left: 20px;
-    margin-top: 20px;
-    padding: 8px;
-    font-size: 16px;
-    width: 37px;
+    margin-left: 1.464vw;
+    margin-top: 1.464vw;
+    padding: 0.586vw;
+    font-size: 1.171vw;
+    width: 2.709vw;
     text-align: center;
     text-decoration: none;
     border-radius: 50%;
@@ -286,8 +286,8 @@
 .f4 {
     z-index: 1001;
     color: white;
-    margin-top: 20px;
-    margin-left: 500px;
+    margin-top: 1.464vw;
+    margin-left: 36.603vw;
     font: normal normal normal 0.878vw/1.318vw Poppins;
     display: flex;
 }
@@ -309,63 +309,189 @@
     max-width: 100%;
     margin-left: 0.5vw;
 }
-/* @media (max-width: 700px) {
-  .footer {
-    width: 768px;
-    height: 570px;
-  }
-  .f1 {
-    font: normal normal normal 15px/23px Poppins;
-    margin-top: 76px;
-    margin-left: 39px;
-    width: 275px;
-    height: 78px;
-  }
-  .emaildiv {
-    display: flex;
-    font: normal normal normal 12px/18px Poppins;
-  }
-  .email {
+
+@media (max-width: 425px) {
+    .footer {
+        z-index: 1001;
+        display: flex;
+        position: absolute;
+        margin-top: 2.5vw;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        background-image: linear-gradient(#8e0072, #f5004e);
+    }
+    .firstbox {
+        display: flex;
+        width: 92.387vw;
+        height: auto;
+        flex-direction: column;
+        margin: auto;
+        margin-top: 3.66vw;
+    }
+    .f1 {
+        z-index: 1001;
+    color: white;
+    font: normal normal normal 1.9vw/0.684vw Poppins;
+    width: 40%;
+    margin-left: 29vw;
+    text-align: center;
+    height: auto;
+    }
+    .email {
+        z-index: 1001;
+        outline: none;
+        font: normal normal normal 1.9vw/0.684vw Poppins;
+        margin-top: 1.562vw;
+        width: auto;
+        height: auto;
+        border: 0vw;
+    }
+    .ok {
+        z-index: 1001;
     outline: none;
+    color: #4d4d4d;
+    border: 0vw;
+    background-color: white;
+    height: 3.3vw;
+    margin-top: 2.1vw;
+    }
+    .f2 {
+        z-index: 1001;
+        margin-top: 4vw;
+        margin-left: 21vw;
+        color: white;
+        text-align: center;
+        font: normal normal normal 1.7vw/2.684vw Poppins;
+        width: 60%;
+    }
+    .f3 {
+        width: 50%;
+    height: auto;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 6vw 24vw;
+    align-items: center;
+    }
+    .f3a {
+        width: auto;
+        height: auto;
+        font: normal normal normal 1.7vw/2.684vw Poppins;
+        color: white;
+        cursor: pointer;
+        position: relative;
+    }
+    .f3b {
+        width: auto;
+        height: auto;
+        font: normal normal normal 1.7vw/2.684vw Poppins;
+        color: white;
+        margin-left: 5vw;
+        cursor: pointer;
+        position: relative;
+    }
+    .f3c {
+        width: auto;
+        height: auto;
+        font: normal normal normal 1.7vw/2.2vw Poppins;
+        color: white;
+        cursor: pointer;margin-left: 5vw;
+        position: relative;
+    }
+    .f3d {
+        width: auto;margin-left: 5vw;
+        height: auto;
+        font: normal normal normal 1.7vw/2.684vw Poppins;
+        color: white;
+        cursor: pointer;
+        position: relative;
+    }
+    .paymentmethod {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .secondbox {
+        display: flex;
+    width: 92.387vw;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    height: auto;
+    margin-top: 0;
+    }
+    .paymentmethod p {
+        margin-left: 5vw;
+        font-size: 1.7vw;
+        font-family: "Poppins";
+        width: auto;
+        height: auto;
+    }
+    .logo {
+        width: 18vw;
+        height: 8vw;
+    }
+    .logo ul {
+        display: flex;
+        list-style-type: none;
+        margin-left: -6vw;
+        justify-content: space-between;
+        width: auto;
+        margin-top: 0;
+    }
+    .logo ul li {
+        width: 2.928vw;
+        height: 2.928vw;
+        box-shadow: 0 0.22vw 0.439vw #00000029;
+        cursor: pointer;
+        border-radius: 100%;
+    }
+    .followUs {
+        height: auto;
+        width: 16.252vw;
+        align-items: center;
+        margin-left:39.297vw;
+    }
+    .followUs p {
+        font-size: 1.7vw;
+        font-family: "Poppins";
+    }
+    .social ul {
+        display: flex;
+        list-style-type: none;
+        margin-left: -6vw;
+        width: auto;
+        justify-content: space-between;
+        height: auto;
+    }
+    #fafacebook{
+        font-size: 2vw;
+    }
+    #fainsta{
+        font-size: 2.5vw;
+    }
+    .social ul li {
+        padding-left: 0.5vw;
+        margin-top: 1.464vw;
+        text-align: center;
+        text-decoration: none;
+        height: 4vw;
+        width: 4vw;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .f4 {
+        z-index: 1001;
+        color: white;
+        margin-top: 1.464vw;
+        width: auto;
+        margin-left: 26.603vw;
+        font: normal normal normal 1.3vw/1.318vw Poppins;
+        display: flex;
+    }
+}
 
-    margin-top: 35px;
-    margin-left: 0;
-    width: 180px;
-    height: 1.708vw;
-    border: 0;
-    border-bottom: 0.073vw solid #cdcdcd;
-  }
-  .ok {
-    height: 2.429vw;
-    width: 2.429vw;
-    font: normal normal normal 1.4vw/2.2vw Poppins;
-    margin-left: 0vw;
-    margin-top: 2.41vw;
-  }
-  .f2 {
-    width: 307px;
-    height: 204px;
-    font: normal normal normal 15px/23px Poppins;
-    margin-top: 249px;
-    margin-left: -276px;
-  }
-  .f3 {
-    width: 132px;
-    height: 173px;
-    font: normal normal normal 15px/23px Poppins;
-    margin-left: 307px;
-    margin-top: 76px;
-  }
-
-  .f4 {
-    width: 310px;
-    height: 21px;
-    margin-top: 526px;
-    margin-left: 229px;
-    font: normal normal normal 15px/23px Poppins;
-  }
-} */
-
-/* @media (max-width:700px){
-   
-} */

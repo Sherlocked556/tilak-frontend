@@ -151,7 +151,7 @@ function OrderSummary() {
                     </div>
                     <div
                         className="discountPrice"
-                        style={{ marginTop: "2.5em", marginBottom: "2em" }}
+                        // style={{ marginTop: "2.5em", marginBottom: "2em" }}
                     >
                         <p id="discountName">Total Amount(in {currency}):</p>
                         {currency === "INR" && (
@@ -169,14 +169,14 @@ function OrderSummary() {
                             </p>
                         )}
                     </div>
-                    <div className="bagTotalPrice">
-                        <p id="bagTotal">Bag Total(in {currency}):</p>
+                    <div className="bagTotalPrice1">
+                        <p id="bagTotal1">Bag Total(in {currency}):</p>
                         {currency === "INR" && (
-                            <p id="bagTotalValue">{totalPrice + 50}</p>
+                            <p id="bagTotalValue1">{totalPrice + 50}</p>
                         )}
 
                         {currency !== "INR" && (
-                            <p id="bagTotalValue">
+                            <p id="bagTotalValue1">
                                 <CurrencyConverter
                                     from={"INR"}
                                     to={currency}

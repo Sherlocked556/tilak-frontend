@@ -95,3 +95,39 @@
 #passwordEdit:focus{
     outline: none;
 }
+@media (max-width:425px){
+  #aboutEnd {
+    margin-left: 25.783vw;
+    width: 5.836vw;
+    margin-top: 8.411vw;
+    border: 0.073vw solid #cdcdcd;
+}
+#line2 {
+  margin-left: 5.051vw;
+  margin-top: 1.611vw;
+  width: 10.906vw;
+  border: 0.073vw solid rgb(119, 118, 118);
+}
+#line3 {
+  margin-left: 0vw;
+  margin-top: 1.611vw;
+  width: 49.78vw;
+  border: 0.073vw solid rgb(196, 196, 196);
+}
+
+.profileBox2 {
+  margin-left: 15.474vw;
+  display: grid;
+  width: 67.35vw;
+  margin-top: 6vw;
+  height: auto;
+  border: 0.073vw solid #707070;
+  grid-template-rows: 4.539vw 1.684vw 8.641vw 2.485vw 13.915vw;
+}
+.aboutText {
+  width: 43.924vw;
+  margin-left: 6.808vw;
+  font: normal normal normal 1.9vw/1.684vw Poppins;
+  color: #8d8d8d;
+}
+}

@@ -1,39 +1,39 @@
 .outerboxprivacy {
-  width: 68.375vw;
-  height: 1737px;
-  margin-top: 100px;
-  margin-left: 299px;
-  display: grid;
-  grid-template-rows: 63px 106px 67px 106px 67px 129px 67px 106px 67px 60px 67px 179px 67px 198px 67px 152px 67px 106px;
+  width: 100%;
+  height: auto;
+  margin-top: 7.321vw;
+  margin-left: 21.889vw;
+  display: flex;
+  flex-direction: column;
 }
 .privacyHeading {
-  width: 313px;
-  height: 63px;
+  width: 22.914vw;
+  height: 4.612vw;
   background-image: linear-gradient(#f5004e, #8e0072);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
-  font: normal normal normal 45px/68px Acme;
+  font: normal normal normal 3.294vw/4.978vw Acme;
 }
 .content1privacy {
   width: 68.375vw;
-  height: 90px;
+  height: 6.589vw;
   margin-top: 1.171vw;
   font: normal normal normal 1.098vw/1.684vw Poppins;
   color: #4d4d4d;
 }
 .consentHeading {
-  width: 163px;
-  height: 35px;
+  width: 11.933vw;
+  height: auto;
   font: normal normal normal 1.830vw/2.782vw Poppins;
   margin-top: 2.343vw;
   color: #4d4d4d;
 }
 .cmHeading {
-  width: 392px;
-  height: 35px;
-  font: normal normal normal 21.830vw5px/2.782vw Poppins;
+  width: auto;
+  height: auto;
+  font: normal normal normal 1.9vw/2.782vw Poppins;
   color: #4d4d4d;
   margin-top: 2.343vw;
 }
@@ -42,49 +42,49 @@
   font: normal normal normal 1.098vw/1.684vw Poppins;
   color: #4d4d4d;
   width: 68.375vw;
-  height: 113px;
+  height: 8.272vw;
 }
 .cookiesHeading {
-  width: 95px;
-  height: 35px;
+  width: 6.955vw;
+  height: 2.562vw;
   font: normal normal normal 1.830vw/2.782vw Poppins;
   color: #4d4d4d;
-  margin-top: 32px;
+  margin-top: 2.343vw;
 }
 .protectingHeading {
-  width: 298px;
-  height: 35px;
+  width: 21.816vw;
+  height: 2.562vw;
   font: normal normal normal 1.830vw/2.782vw Poppins;
   color: #4d4d4d;
-  margin-top: 32px;
+  margin-top: 2.343vw;
 }
 .content3privacy {
   margin-top: 1.171vw;
   font: normal normal normal 1.098vw/1.684vw Poppins;
   color: #4d4d4d;
   width: 68.375vw;
-  height: 44px;
+  height: 3.221vw;
 }
 .disclosureHeading {
   font: normal normal normal 1.830vw/2.782vw Poppins;
   color: #4d4d4d;
   margin-top: 2.343vw;
-  width: 386px;
-  height: 35px;
+  width: 28.258vw;
+  height: 2.562vw;
 }
 .content4privacy {
   margin-top: 1.171vw;
   font: normal normal normal 1.098vw/1.684vw Poppins;
   color: #4d4d4d;
   width: 68.375vw;
-  height: 159px;
+  height: 11.640vw;
 }
 .usageHeading {
   font: normal normal normal 1.830vw/2.782vw Poppins;
   color: #4d4d4d;
   margin-top: 2.343vw;
-  width: 496px;
-  height: 35px;
+  width: 36.310vw;
+  height: 2.562vw;
 }
 .content5privacy {
   width: 68.375vw;
@@ -106,4 +106,108 @@
   color: #4d4d4d;
   width: 68.375vw;
   height: 9.956vw;
+}
+@media (max-width:425px){
+  .outerboxprivacy {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-left: 0;
+}
+.privacyHeading {
+  width: 50%;margin-bottom: auto;
+  height: auto;
+  margin-left: 6vw;
+  font: normal normal normal 4vw/10vw Acme;
+}
+.content1privacy {
+  width: 82.375vw;
+  height: auto;
+  margin-top: 1.171vw;
+  margin-left: 6vw;
+  text-align: justify;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+}
+.consentHeading {
+  width: 50%;
+  height: auto;
+  font: normal normal normal 2.83vw/2.782vw Poppins;
+  margin-left: 6%;
+  margin-top: 2%;
+}
+.cmHeading {
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-left: 6%;
+  margin-top: 2%;
+}
+.content2privacy {
+  text-align: justify;
+  margin-left: 6%;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+  width: 82.375vw;
+  height: auto;
+}
+.cookiesHeading {
+  width: 50%;
+  height: auto;
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-top: 2%;
+  margin-left: 6%;
+}
+.protectingHeading {
+  width: 50%;
+  height: auto;
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-top: 2%;
+  margin-left: 6%;
+}
+.content3privacy {
+  text-align: justify;
+  margin-left: 6%;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+  width: 82.375vw;
+  height: auto;
+}
+.disclosureHeading {
+  width: 50%;
+  height: auto;
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-top: 2%;
+  margin-left: 6%;
+}
+.content4privacy {
+  text-align: justify;
+  margin-left: 6%;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+  width: 82.375vw;
+  height: auto;
+}
+.usageHeading {
+  width: 64%;
+  height: auto;
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-top: 2%;
+  margin-left: 6%;
+}
+.content5privacy {
+  text-align: justify;
+  margin-left: 6%;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+  width: 82.375vw;
+  height: auto;
+}
+.thirdHeading {
+  width: 64%;
+  height: auto;
+  font: normal normal normal 2.8vw/2.782vw Poppins;
+  margin-top: 2%;
+  margin-left: 6%;
+}
+.content6privacy {
+  text-align: justify;
+  margin-left: 6%;
+  font: normal normal normal 1.7vw/2.684vw Poppins;
+  width: 82.375vw;
+  height: auto;
+}
 }
