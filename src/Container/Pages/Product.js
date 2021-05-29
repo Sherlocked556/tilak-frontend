@@ -279,7 +279,9 @@ const Product = (props) => {
                             )}
                         />
                     </div>
-                    <div className="productdes" style={{ marginLeft: "150px" }}>
+                    <div className="productdes" 
+                    // style={{ marginLeft: "150px" }}
+                    >
                         <p>{product.productDetails.name}</p>
                         {/* <div className="icon2">
                             <TiHeartFullOutline id="iconn2" />
