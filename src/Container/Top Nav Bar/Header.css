@@ -264,6 +264,13 @@
     height: 6.429vw;
     width: auto;
 }
+.hamburg {
+  width: 45vw;
+  height: 157.143vw;
+  z-index: 1040;
+  background-color: white;
+  flex-flow: column nowrap;
+}
 .cart {
   display: flex;
   margin-top: 0vw;
