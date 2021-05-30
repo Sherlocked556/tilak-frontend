@@ -464,6 +464,7 @@
         width: 30.454vw;
         flex-direction: column;
         height: auto;
+        margin-top: 15%;
     }
     .productdes p {
         color: #2d2d2d;
@@ -485,5 +486,20 @@
     .descriptions span {
         color: #2d2d2d;
         font: normal normal normal 2.098vw/4.684vw Poppins;
+    }
+    .icon1 {
+        margin-top: -0.634vw;
+        margin-left: 27.937vw;
+        width: 4vw;
+        height: 4vw;
+        background: #cdcdcd 0% 0% no-repeat padding-box;
+        opacity: 1;
+    }
+    #iconn1 {
+        margin-left: 6%;
+        opacity: 0.4;
+        height: auto;
+        width: auto;
+        font-size: 3.5vw;
     }
 }
